@@ -6,17 +6,21 @@ This program is novel approach for detecting recombinant sequences and correspon
 
 
 ### Required softwares
-- MAFFT used to align the third partial sequence to another two aligned partial sequences(https://mafft.cbrc.jp/alignment/software/)
+- MAFFT used to align one sequence to another two pre_aligned sequences (https://mafft.cbrc.jp/alignment/software/)
 - seqkit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
-- Msprime used to generate arbitrary phylogenetic tree.(optional, only used for simulation section)(https://msprime.readthedocs.io/en/stable/installation.html)
-- Python modules
-* Python2 user:
-* Python 3 user:
+- Python 
+-- Require modules for Python 2 user:
+-- Require modules for Python 3 user:
 
+### Optional softwares (only used for simulation section)
+- Msprime [optional, only used for simulation section] used to generate one arbitrary phylogenetic tree (https://msprime.readthedocs.io/en/stable/installation.html)
+- Snakemake
+- INDELible
+- Python modules  
 
 ### Required Input File 
 - Patial alignment produced by JHMM (please see MZmosaic folder)
-- Patial alignment produced by JHMM (please see MZmosaic folder)
+- Input fasta format biological sequences
 
 ### Creating Input File
 #### Required
