@@ -10,12 +10,12 @@ This program is a novel approach for detecting recombinant sequences and corresp
 - SeqKit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
 - Python  
 -- Require modules for Python 2 user:  
-mungo(pip install git+https://github.com/PapenfussLab/Mungo)  
+mungo `<addr>` (pip install git+https://github.com/PapenfussLab/Mungo)  
 Bio  
 pandas  
 scipy  
 numpy  
--- Require modules for Python 3 user:
+-- Require modules for Python 3 user:  
 Bio  
 pandas  
 scipy  
