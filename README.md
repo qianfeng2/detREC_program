@@ -26,8 +26,8 @@ numpy
 - INDELible used for simulation of biological sequences when considering indel events (Fletcher et al., 2009)
 - Python module  
 Pyvolve used for simulating biological sequences given a tree topology (Spielman et al. 2015) 
-sklearn
-statistics
+sklearn  
+statistics  
 csv
 - [Snakemake](https://snakemake.readthedocs.io/en/stable/) for reproducible research pipeline 
 
@@ -59,7 +59,7 @@ Iterate until convergence:
 4) Update -> 1) 
 5) Stop when the major parameters del and eps change by less than 1%.
 
-The empirical Ghana pilot DBL$\alpha$ dataset analyzed in manuscript contain more than 17000 sequences, the detailed code for generating partial alignment results are displayed in [Empirical_script](https://github.com/qianfeng2/detREC_program/tree/master/Empirical_script) sub folder.
+The empirical Ghana pilot DBL_&alpha dataset analyzed in manuscript contain more than 17000 sequences, the detailed code for generating partial alignment results are displayed in [Empirical_script](https://github.com/qianfeng2/detREC_program/tree/master/Empirical_script) sub folder.
 
 
 ### Running recombination detection program
