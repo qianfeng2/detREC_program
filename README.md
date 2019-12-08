@@ -2,13 +2,21 @@ A Program to Detect Recombinants From Unaligned Sequences
 -----------------------
 
 ### About
-Meltos is a novel approach to estimate the variant allele frequency of somatic SVs from whole genome sequencing (WGS) signals and using these VAFs to identify the phylogenetic relationship between SSVs in a multi-sample cell lineage tree using an SNV-only tree as a basis. Our probabilistic framework allows us to assess multiple types of signals taken from the data simultaneously and more accurately calculate the VAF of SV events. Following the maximum parsimony principle, Meltos uses a novel combinatorial algorithm to assign SV clusters on the branches of the given lineage tree, while modestly augmenting the tree topology if needed.
+This program is novel approach for detecting recombinant sequences and corresponding statistical support values from unaligned sequences. This framework develops on the basis of the paritial alignments from jumping hidden markov model(JHMM), after that, by partitionning them into multiple equal-length triples, on which we uses a novel distance-based procedure to identify recombinant from each triple. Statistical support values calculated from Bootstrap, the bigger, the better, indicating the robustness of identified recombinants.
 
-### Required Files
 
-- SSNV Tree file produced by LICHEE (https://github.com/viq854/lichee)
-- Tab delimited file of SSNVs used to build tree
-- Input file produced by Meltos input preparation script
+### Required softwares
+- MAFFT used to align the third partial sequence to another two aligned partial sequences(https://mafft.cbrc.jp/alignment/software/)
+- seqkit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
+- Msprime used to generate arbitrary phylogenetic tree.(optional, only used for simulation section)(https://msprime.readthedocs.io/en/stable/installation.html)
+- Python modules
+* Python2 user:
+* Python 3 user:
+
+
+### Required Input File 
+- Patial alignment produced by JHMM (please see MZmosaic folder)
+- Patial alignment produced by JHMM (please see MZmosaic folder)
 
 ### Creating Input File
 #### Required
