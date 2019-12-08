@@ -59,7 +59,7 @@ Iterate until convergence:
 4) Update -> 1) 
 5) Stop when the major parameters del and eps change by less than 1%.
 
-The empirical Ghana pilot DBL\alpha dataset analyzed in manuscript contain more than 17000 sequences, the detailed code for generating partial alignment results are displayed in [Empirical_script](https://github.com/qianfeng2/detREC_program/tree/master/Empirical_script) sub folder.
+The empirical Ghana pilot DBL$\alpha$ dataset analyzed in manuscript contain more than 17000 sequences, the detailed code for generating partial alignment results are displayed in [Empirical_script](https://github.com/qianfeng2/detREC_program/tree/master/Empirical_script) sub folder.
 
 
 ### Running recombination detection program
