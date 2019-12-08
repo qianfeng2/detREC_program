@@ -22,10 +22,10 @@ scipy
 numpy 
 
 ### Optional softwares (only used for simulation section)
-- Msprime used to generate one arbitrary phylogenetic tree (https://msprime.readthedocs.io/en/stable/installation.html)
-- INDELible used for simulating of biological sequence evolution when considering indel events (Fletcher et al., 2009)
-- Python module Pyvolve used for general simulating of biological sequences given a tree topology (Spielman et al. 2015)
-- Snakemake for reproducible research pipeline
+- [Msprime](https://msprime.readthedocs.io/en/stable/installation.html) used to generate one phylogenetic tree topology
+- INDELible used for simulation of biological sequences when considering indel events (Fletcher et al., 2009)
+- Python module Pyvolve used for simulating biological sequences given a tree topology (Spielman et al. 2015)
+- [Snakemake](https://snakemake.readthedocs.io/en/stable/) for reproducible research pipeline 
 
 ### Required Input Files 
 - Patial alignment produced by JHMM (please see [MZmosaic](https://github.com/qianfeng2/detREC_program/tree/master/MZmosaic) folder)
