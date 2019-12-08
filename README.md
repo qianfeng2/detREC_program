@@ -19,8 +19,8 @@ This program is a novel approach for detecting recombinant sequences and corresp
 - Python module  
 
 ### Required Input Files 
-- Patial alignment produced by JHMM (please see MZmosaic folder)
-- Input fasta format biological sequences, maximum length for identifiers length is 15.(Zilversimit 2014)
+- Patial alignment produced by JHMM (please see [MZmosaic](https://github.com/qianfeng2/detREC_program/tree/master/MZmosaic) folder)
+- Input fasta format biological sequences, maximum length for identifiers length is 15 (Zilversmit et al., 2013)
 
 ### Creating Input File
 
@@ -46,7 +46,8 @@ Iterate until convergence:
 4) Update -> 1) 
 5) Stop when the major parameters del and eps change by less than 1%.
 
-The empirical Ghana pilot DBLa dataset analyzed in manuscript contain more than 17000 sequences, the detailed code for generating partial alignment results are displayed in empirical_script sub folder.
+The empirical Ghana pilot DBLa dataset analyzed in manuscript contain more than 17000 sequences, the detailed code for generating partial alignment results are displayed in Empirical_script(a) sub folder.
+
 
 ### Running Meltos
 #### Required:
@@ -91,5 +92,5 @@ python integrated_rec_det.py output_align.txt input.fasta output.csv
 ```
 
 ### Reference
-- aa
+- Martine M Zilversmit et al. "Hypervariable antigen genes in malaria have ancient roots". In: BMC evolutionary biology 13.1 (2013), p. 110.
 - bb
