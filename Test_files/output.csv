@@ -1,0 +1,6 @@
+2,seq3,seq5,seq2,seq3,1.0
+5,seq6,seq7,seq1,seq6,1.0
+5,seq6,seq1,seq8,seq6,1.0
+6,seq7,seq6,seq8,seq7,1.0
+6,seq7,seq8,seq1,seq8,0.58
+7,seq8,seq7,seq6,seq8,1.0

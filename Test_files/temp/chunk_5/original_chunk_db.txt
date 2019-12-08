@@ -1,0 +1,3 @@
+           seq7	RNHKGLDVWNAGEFGPYEDHEDHDANDGTNLQWDRPDRLTNCGLKTVNDITNAKPYGRR
+           seq1	                                                           EETTIYCPNKVISRIDFGGRNVGQYWFTDKFVKRGLTFIFEKWNYGQNTFRYTKTNIGPV
+           seq8	                                                                                                                       DLSDQYKKTGKDMKGYEPNRCSVVYYNDICNALTEPICLEVWGRWPETDLEYKNECFNPKRIHIDEPDNLFPPDRGRHAKA

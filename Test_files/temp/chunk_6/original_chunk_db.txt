@@ -1,0 +1,3 @@
+           seq6	RNHKGLDVWNASEFGPYEDHEDHDANDGTKLQWDRPDRLTNCGLKTVNDITNAKPYGRREETTIYCPN
+           seq8	                                                                    EIIKVIQNDFYRTGQWYLTDKLVEKKPKYLYEMFKYGSKQ
+           seq1	                                                                                                            FRYTKTNIGPVGLQFELEDDLVVITGDEPNRFACCQYNGVCNKLPGPGCIHIFAQLAQDDGNSTTKCFRNAKLHWDDKDRLYPTDRDYREAA

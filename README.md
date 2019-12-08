@@ -31,12 +31,12 @@ cd /Users/fengqian/MZmosaic
 ./mosaic -estimate -seq input.fasta  -rec 0 -aa -tag middle_file
 delta=$(grep -o 'Gap initiation: .*$' middle_file_align.txt | cut -c17-)
 epsl=$(grep -o 'Gap extension:  .*$' middle_file_align.txt | cut -c17-)
-./mosaic -seq input.txt -del $delta -eps $epsl -aa -tag output -grid 0.001 0.010 10 1
+./mosaic -seq input.fasta -del $delta -eps $epsl -aa -tag output -grid 0.001 0.010 10 1
 ```
 
 ### Run Example for large number of sequences (>10000 sequences)
 
-Instead of complete and time-consuming Baum-Welch algorithm to estimate gap open and gap extension probabilities, the slightly less accurate but much faster viterbi training algorithm has been used. Each iteration was run as on a high performing computing cluster (Helix)
+Instead of complete and time-consuming Baum-Welch algorithm to estimate gap open and gap extension probabilities, the slightly less accurate but much faster viterbi training algorithm was used. Each iteration was run as on a high performing computing cluster (Helix)
 
 Iterate until convergence:
 
@@ -61,13 +61,18 @@ Typed in above three input parameters in order.
 ### Output
 Produces a series of files based on various stage of the implementation of recombination detection program, and places them in the directory specified by output.
 
-- temp file folder
-
-- complement_chunks file folder
-
+- temp file folder  
+This folder provides all the chunks containing original triple and MAFFT processed fasta files.
+- complement_chunks file folder  
+This folder provides all the equal-length triples, name of each file indicates chunk index, two adjacent segment indices, and identified bkp in this triple.
 - output csv file:
 Each row records the chunk index in partial alignment result, target, db1 and db2 are three sequences ID for each triple, rec is the identified recombinant ID from this specific triple, sv is the support value.  
 eg:  
+
+| chunk        | target  | db1  | db2  | rec  | sv  |
+| ------------|------------|------------|------------|------------|------------|
+|0 | seq3|seq5|seq2|seq3|1|
+|0 | seq3|seq5|seq2|seq3|1|
 
 
 
@@ -77,6 +82,7 @@ eg:
 ```
 python integrated_rec_det.py output_align.txt input.fasta output.csv
 ```
+FYI: [Test_files](https://github.com/qianfeng2/detREC_program/tree/master/Test_files) sub folder provide a test input.fasta and all the middle and final output files.
 
 ### Reference
 - Martine M Zilversmit et al. "Hypervariable antigen genes in malaria have ancient roots". In: BMC evolutionary biology 13.1 (2013), p. 110.
