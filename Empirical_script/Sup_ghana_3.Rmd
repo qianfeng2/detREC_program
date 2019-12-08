@@ -1,0 +1,129 @@
+---
+title: "Sup_ghana_3.Rmd"
+author: "Qian Feng"
+date: "2018/7/24"
+output:
+  pdf_document: default
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=12, fig.height=8,
+                      echo=TRUE, warning=FALSE, message=FALSE,
+                      tidy=TRUE)
+```
+
+
+##Load libraries
+```{r, message=FALSE, warning=FALSE}
+library("reshape2")
+library("ggplot2")
+library(data.table)
+library(stringr)
+library(readr)
+library(ggplot2)
+library(boot)
+library(ggcorrplot)
+library(reshape2)
+library(dplyr)
+```
+
+
+## mosaic non-jump parameters estimation
+
+Iteration stops when the major parameters del and eps change by less than 1%.
+
+```{r}
+del=c(0.025,0.0107708124133,0.00832156475074,0.00818486890568,0.00815061653993,0.00830877280993,0.0081825316222,0.00799300611965,0.00806934718714)#,0.00789335318918)
+eps=c(0.1,0.201061712011,0.222051886792,0.221964782206,0.226181024216,0.221638655462,0.219652036378,0.22626176219,0.2283998284)#,0.230606330807)
+test_data <- data.frame(del=del,eps=eps,iter=seq(0,8,1))
+test_data_long <- melt(test_data, id="iter")  # convert to long format
+test_data_long$variable <- factor(test_data_long$variable, levels=c("del", "eps"), labels=c(expression(delta), expression(epsilon)))
+my.labs <- list(bquote(delta),bquote(epsilon))
+#pdf(file="Ghana_nonjumppar.pdf", height=4, width=6)
+ggplot(data=test_data_long,aes(x=iter, y=value, colour=variable)) + geom_line()+geom_point()+xlab("Iteration")+ylab("Estimated parameter value")+ scale_x_continuous(breaks=seq(0,8,by=1))+scale_y_continuous(breaks=seq(0,0.25,by=0.05))+scale_colour_manual(values=1:2,breaks=c("delta","epsilon"),
+                      labels=my.labs)
+#dev.off()
+
+```
+
+Stop when the major parameters del and eps change by less than 1%. So we finally choose del= 0.00806934718714, eps=0.2283998284.
+
+Now run mosaic for different jump parameters to estimate a likelihood surface. This was also run on a HPC, the commands is given below.
+
+```{bash, eval=FALSE, include=FALSE}
+#!/bin/sh
+
+for FILE in *.fasta; 
+do for jump in $(seq 0.00 0.001 0.1); do
+
+
+echo sbatch -p sysgen --job-name qian.${FILE} --account SG0011 --ntasks=1 --cpus-per-task=1 --mem=25600 --mail-user=fengq2@student.unimelb.edu.au --time=0-2:0:00 -e "slurm-%A_%a.out" --wrap=\"/vlsci/SG0011/qian-feng/MZmosaic/mosaic -seq ${FILE} -aa -group 2 db target -target target -del 0.00806934718714 -eps 0.2283998284 -rec $jump > /vlsci/SG0011/qian-feng/UniMelb_shared-master/project/mosaic_processed_data/results_jump/${FILE}_${jump}_output.log\"
+
+sleep 1
+
+sbatch -p sysgen --job-name qian.${FILE} --account SG0011 --ntasks=1 --cpus-per-task=1 --mem=25600 --mail-user=fengq2@student.unimelb.edu.au --time=0-2:0:00 -e \"slurm-%A_%a.out\" --wrap="/vlsci/SG0011/qian-feng/MZmosaic/mosaic -seq ${FILE} -aa -group 2 db target -target target -del 0.00806934718714 -eps 0.2283998284 -rec $jump > /vlsci/SG0011/qian-feng/UniMelb_shared-master/project/mosaic_processed_data/results_jump/${FILE}_${jump}_output.log"
+
+echo "Job submitted!\n"
+
+sleep 1
+done
+done
+```
+
+
+```{python, eval=FALSE, include=FALSE}
+###collect jump par
+###collect jump par
+import glob
+from collections import defaultdict
+
+jump_llk = defaultdict(list)
+for logfile in glob.glob("/Users/fengqian/Downloads/UniMelb_shared-master/project/mosaic_processed_data/results_jump/*_output.log"):
+    jump = float(logfile.split("_")[-2])
+    with open(logfile, 'rU') as infile:
+        for line in infile:
+            if "Maximum Log likelihood  =" in line:
+                jump_llk[jump].append(float(line.split("=")[1].strip()))
+
+with open("/Users/fengqian/Downloads/UniMelb_shared-master/project/mosaic_processed_data/jump_llk.csv", 'w') as outfile:
+    for j in sorted(jump_llk.keys()):
+        outfile.write(",".join([str(j)]+[str(l) for l in jump_llk[j]]) + "\n")
+```
+
+
+
+
+Lets investigate the jump log-likelihoods:
+
+```{r}
+llk <- read.table("/Users/fengqian/Downloads/UniMelb_shared-master/project/mosaic_processed_data/jump_llk.csv", sep=",", header = FALSE, fill = TRUE)
+
+llk_matrix <- data.matrix(llk[,2:ncol(llk)])
+
+rownames(llk_matrix) <- llk[,1]
+
+sum_stat <- function(x,i){
+  t<-x[i]
+  sum(t, na.rm = TRUE)
+}
+
+llk_df <- data.frame(jump=rownames(llk_matrix),
+           llk=rowSums(llk_matrix, na.rm = TRUE),
+           CI.L=unlist(apply(llk_matrix, 1
+              , function(x){boot.ci(boot(x, sum_stat, 1000),type="perc")$percent[[4]]} )),
+           CI.R=unlist(apply(llk_matrix, 1
+              , function(x){boot.ci(boot(x, sum_stat, 1000),type="perc")$percent[[5]]} )),
+           stringsAsFactors = FALSE)
+
+ggplot(llk_df, aes(x=jump, y=llk, group=1)) +
+    geom_line() +
+    geom_errorbar(width=.1, aes(ymin=CI.L, ymax=CI.R)) +
+    geom_point(shape=21, size=3, fill="white") + 
+    ylim(c(-120000,-90000))+
+  ylab("Composite likelihood")+
+  xlab("Jump parameters")
+
+
+rownames(llk_matrix)[which.max(rowSums(llk_matrix, na.rm = TRUE))]
+```
+
