@@ -2,13 +2,13 @@ A Program to Detect Recombinants From Unaligned Sequences
 -----------------------
 
 ### About
-This program is novel approach for detecting recombinant sequences and corresponding statistical support values from unaligned sequences. This framework develops on the basis of the paritial alignments from jumping hidden markov model (JHMM), after that, by partitionning them into multiple equal-length triples, on which we uses a novel distance-based procedure to identify recombinant from each triple. Statistical support values calculated from Bootstrap, the bigger the better, indicating the robustness of identified recombinants.
+This program is a novel approach for detecting recombinant sequences and corresponding statistical support values from unaligned biological sequences. This framework develops on the basis of the paritial alignment results from jumping hidden markov model (JHMM, or mosaic), after that, by dividing them into multiple equal-length triples, on which we use a new distance-based procedure to identify recombinant from each triple. Statistical support values calculated from Bootstrap, the bigger the better, indicating the robustness of identified recombinants.
 
 
 ### Required softwares
 - MAFFT used to align one sequence to another two pre_aligned sequences (https://mafft.cbrc.jp/alignment/software/)
 - SeqKit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
-- Python 
+- Python \\
 -- Require modules for Python 2 user:
 -- Require modules for Python 3 user:
 
@@ -16,22 +16,34 @@ This program is novel approach for detecting recombinant sequences and correspon
 - Msprime used to generate one arbitrary phylogenetic tree (https://msprime.readthedocs.io/en/stable/installation.html)
 - Snakemake
 - INDELible
-- Python modules  
+- Python module  
 
-### Required Input File 
+### Required Input Files 
 - Patial alignment produced by JHMM (please see MZmosaic folder)
-- Input fasta format biological sequences
+- Input fasta format biological sequences, maximum length for identifiers length is 10.
 
 ### Creating Input File
-#### Required
-- "-i,--input \<filename\>": file path to SV regions in bed file.
-- "-o,--output \<filename\>": output file name.
-- "-b,--bams \<filename(s)\>": list of bam files corresponding to tumor regions.
-- "-f,--frag \<integer(s)\>": comma separated list of average fragment lengths for each bam.
-- "-vcf \<filename(s)\>": comma separated list of vcf tardis files with deletions in each bam.
-- "-vcfbed \<filename(s)\>": comma separated list of bed files associated with tardis vcfs.
 
-### Run Example
+### Run Example 
+
+```
+cd /Users/fengqian/MZmosaic
+./mosaic -estimate -seq input.fasta  -rec 0 -aa -tag middle_file
+delta=$(grep -o 'Gap initiation: .*$' middle_file_align.txt | cut -c17-)
+epsl=$(grep -o 'Gap extension:  .*$' middle_file_align.txt | cut -c17-)
+./mosaic -seq input.txt -del $delta -eps $epsl -aa -tag output -grid 0.001 0.010 10 1
+```
+
+### Run Example for large number of sequences(>10000 sequences)
+
+Instead of complete and time-consuming Baum-Welch algorithm to estimate gap open and gap extension probabilities, the slightly less accurate but much faster viterbi training algorithm has been used.
+
+Iterate until convergence:
+0) Choose an initial set of parameters
+1) Compute the Viterbi paths of all sequences
+2) Count frequencies of events and calculate new parameters
+3) Update -> 1) 
+4) Stop when the major parameters del and eps change by less than 1%.
 
 ```
 cd /Users/fengqian/MZmosaic
