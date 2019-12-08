@@ -10,7 +10,16 @@ This program is a novel approach for detecting recombinant sequences and corresp
 - SeqKit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
 - Python  
 -- Require modules for Python 2 user:  
+mungo(pip install git+https://github.com/PapenfussLab/Mungo) 
+Bio  
+pandas  
+scipy  
+numpy 
 -- Require modules for Python 3 user:
+Bio  
+pandas  
+scipy  
+numpy 
 
 ### Optional softwares (only used for simulation section)
 - Msprime used to generate one arbitrary phylogenetic tree (https://msprime.readthedocs.io/en/stable/installation.html)
@@ -65,15 +74,14 @@ Produces a series of files based on various stage of the implementation of recom
 This folder provides all the chunks containing original triple and MAFFT processed fasta files.
 - complement_chunks file folder  
 This folder provides all the equal-length triples, name of each file indicates chunk index, two adjacent segment indices, and identified bkp in this triple.
-- output csv file:
-Each row records the chunk index in partial alignment result, target, db1 and db2 are three sequences ID for each triple, rec is the identified recombinant ID from this specific triple, sv is the support value.  
-eg:  
+- output csv file:  
+Each row records the chunk index in partial alignment result, target, db1 and db2 are three sequences ID for each triple, rec is the identified recombinant ID from this specific triple, sv is the support value. for instance:  
 
 | chunk        | target  | db1  | db2  | rec  | sv  |
 | ------------|------------|------------|------------|------------|------------|
-|0 | seq3|seq5|seq2|seq3|1|
-|0 | seq3|seq5|seq2|seq3|1|
-
+|2 | seq3|seq5|seq2|seq3|1|
+|6 | seq7|seq8|seq1|seq8|0.58|
+|... | ... |... |... |... |... |
 
 
 
