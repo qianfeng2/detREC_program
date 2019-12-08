@@ -9,7 +9,7 @@ This program is a novel approach for detecting recombinant sequences and corresp
 - MAFFT used to align one sequence to another two pre_aligned sequences (https://mafft.cbrc.jp/alignment/software/)
 - SeqKit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
 - Python  
--- Require modules for Python 2 user:
+-- Require modules for Python 2 user:  
 -- Require modules for Python 3 user:
 
 ### Optional softwares (only used for simulation section)
@@ -66,7 +66,9 @@ Produces a series of files based on various stage of the implementation of recom
 - complement_chunks file folder
 
 - output csv file:
-Each row records the chunk index in partial alignment result, target, db1 and db2 are three sequences ID for each triple, rec is the identified recombinant ID from this specific triple, sv is the support value.  For instance:
+Each row records the chunk index in partial alignment result, target, db1 and db2 are three sequences ID for each triple, rec is the identified recombinant ID from this specific triple, sv is the support value.  
+eg:  
+
 
 
 
@@ -78,4 +80,4 @@ python integrated_rec_det.py output_align.txt input.fasta output.csv
 
 ### Reference
 - Martine M Zilversmit et al. "Hypervariable antigen genes in malaria have ancient roots". In: BMC evolutionary biology 13.1 (2013), p. 110.
-- bb
+
