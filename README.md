@@ -10,11 +10,11 @@ This program is a novel approach for detecting recombinant sequences and corresp
 - SeqKit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
 - Python  
 -- Require modules for Python 2 user:  
-mungo(pip install git+https://github.com/PapenfussLab/Mungo) 
+mungo(pip install git+https://github.com/PapenfussLab/Mungo)  
 Bio  
 pandas  
 scipy  
-numpy 
+numpy  
 -- Require modules for Python 3 user:
 Bio  
 pandas  
@@ -23,9 +23,9 @@ numpy
 
 ### Optional softwares (only used for simulation section)
 - Msprime used to generate one arbitrary phylogenetic tree (https://msprime.readthedocs.io/en/stable/installation.html)
-- Snakemake
-- INDELible
-- Python module  
+- INDELible used for simulating of biological sequence evolution when considering indel events (Fletcher et al., 2009)
+- Python module Pyvolve used for general simulating of biological sequences given a tree topology (Spielman et al. 2015)
+- Snakemake for reproducible research pipeline
 
 ### Required Input Files 
 - Patial alignment produced by JHMM (please see [MZmosaic](https://github.com/qianfeng2/detREC_program/tree/master/MZmosaic) folder)
@@ -75,7 +75,7 @@ This folder provides all the chunks containing original triple and MAFFT process
 - complement_chunks file folder  
 This folder provides all the equal-length triples, name of each file indicates chunk index, two adjacent segment indices, and identified bkp in this triple.
 - output csv file:  
-Each row records the chunk index in partial alignment result, target, db1 and db2 are three sequences ID for each triple, rec is the identified recombinant ID from this specific triple, sv is the support value. for instance:  
+Each row records the chunk index in partial alignment result, target, db1 and db2 are three sequences ID for each triple, rec is the identified recombinant ID from this specific triple, sv is the support value. For instance:  
 
 | chunk        | target  | db1  | db2  | rec  | sv  |
 | ------------|------------|------------|------------|------------|------------|
@@ -90,8 +90,9 @@ Each row records the chunk index in partial alignment result, target, db1 and db
 ```
 python integrated_rec_det.py output_align.txt input.fasta output.csv
 ```
-FYI: [Test_files](https://github.com/qianfeng2/detREC_program/tree/master/Test_files) sub folder provide a test input.fasta and all the middle and final output files.
+[Test_files](https://github.com/qianfeng2/detREC_program/tree/master/Test_files) sub folder, as a toy example, provides a test input.fasta and all the middle and final output files.
 
 ### Reference
 - Martine M Zilversmit et al. "Hypervariable antigen genes in malaria have ancient roots". In: BMC evolutionary biology 13.1 (2013), p. 110.
-
+- Fletcher, W., & Yang, Z. (2009). INDELible: a flexible simulator of biological sequence evolution. Molecular biology and evolution, 26(8), 1879-1888.
+- Spielman, S. J., & Wilke, C. O. (2015). Pyvolve: a flexible Python module for simulating sequences along phylogenies. PloS one, 10(9), e0139047.
