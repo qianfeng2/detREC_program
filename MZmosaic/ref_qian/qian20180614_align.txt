@@ -1,0 +1,134 @@
+#File containing maximum accuracy alignment for each sequences
+#Input parameters = ./mosaic -ma -seq DBLalphas_for_test.txt -aa -tag qian20180614 -psum 
+#Created on Thu Jun 14 14:30:04 2018
+
+
+Target: HB3var16_9R_Tc_upsB1	Length: 313	Llk: -605.678
+HB3var16_9R_Tc_upsB1	PCGNGTEE-----RFSDTKGSECDDRKIEGNKGKTGGACAPFRRLHLCDKNLQNINNYDKINNTHNLLLEVCLAAKYEGQSISLYYPRYQTKYKDSGSTFTMCTMLARSFADIGDIIRGKDLFIGYNQKDRKE-KK-QLQQNLKNIFAKIYE------KL----KD----KEGAETRYGSDTTNYYQLREDWWALNREKVWKAITCRAPKEAKYFRKTACNGGEGT--NG-----QCHCIGGEVPTYFDYVPQFLRWFDEWAEDFCRKRKHKLQNAIKNCRTPNGKDKYCDLNGYNCEETA------------KKEN--------------------------------------------------------------------------------------------------------------------------------------------------------KLFPDSECHKCSVACNPFVPWIDNQKKEFEKQKGKY
+          	||^^^^^|~~~~~||| | | |||  || |  ||  |||||||||||||  |  || ||| ||||||||||| ||| |||||| ||||||||||||||||||||||||||||||||||||||| |||  |^||~||~ || |||||||||||~~~~~~||~~~~| ~~~~|| || ||  |  ||| ||||||||||   ||||||  |    ||| ||| || ||~~ |~~~~~ | || | |||||||||| |||| ||||||| ||||||||||| ||   |  |||||||| |  ||~~~~~~~~~~~~||||~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~||^^^^^||||||||  | ||| ||| |||||||||
+HB3var30_12_C2_upsC1	PC-----EKRSDVRFSYTEGAECDKSKIRGSNGKSEGACAPFRRLHLCDQHLEKINRYDKVNN
+P_reich_Cntg0096	                                                               THNLLLEVCQAAKFEGQSIS
+PFC1120c_Tc_upsB1_3D7varT32	                                                                                   GYYPRYQTKYKDSGST
+P_reich_Cntg0024	                                                                                                   FTMCTMLARSFADIGDIIRGKDLFLGYNETD-KEQKKGKLQDNLKNIFAKIY
+PF08_0142_Tc_upsB	                                                                                                                                                       EELKKHKKLKKHKKKHKKLKEEAEERYKKDGDNYYKLREDWWALNRQEIWKAITCGHPGGGTYFRQTACGGG
+P_reich_Cntg0096	                                                                                                                                                                                                                               TGTYASGTYASRKCTCISGDVPTYFDYVPQYLRWFEEWAEDFCGKRKHKLQNAIKICRGVGGREKYCDLNGYDCKQTARGKERFGESADCKKE
+PFC1120c_Tc_upsB1_3D7varT32	                                                                                                                                                                                                                                                                                                                            NKLKDIFKNIYNELTSTNGKKGKKQALQARYQDDGSGNYYQLREDWWDANRAKVWYAITCGAGTSDKYFRKTCSNDTSDTNEKCRCVSTDPPTYFDYVPQYLRWFEEWTEEFCRKKKKKLEDVIKKCRYDENNERKYCSRNGFDCKDTIRAQEKL-----CHKCSVACDDFEPWIKNQKQEFEKQKGKY
+
+
+Target: PF08_0142_Tc_upsB	Length: 314	Llk: -586.412
+PF08_0142_Tc_upsB	PCNKRSGKRFSEVSGAECANNRIKGNKGSNGDACAPFRRLHVCDRNLEQIDPAKITATHNLLVDVCQAAKFEGQSITQDYPKYLATYNDSPSQICTMLARSFADIGDIVRGKDLFRGYD--D-EEKNRRK------KLEQKLKVIFGHIYEEL-----KKHKKL--KEEAEERYKKDGDNYYKLREDWWALNRQEIWKAITCGHPGGTYFRQTACGGGTTPTPNKCRCATNDVPTYFDYVPQYLRWFEEWAEDFCRKRKYKLENAIEKCRGKTKGEKYCDLNGFDCTQTA-----SG-----E----KKFVKGHNCHNCSVTCIPFGPWIDNQKKEFLKQRNKY
+          	||   | ||||||||||| || ||||||||| |||||||||||||||||| |  |||||||||||| || ||| ||   || |   | || | ||| ||||||||||| |||||  |||~~|~|||^^^|~~~~~~||| ||| ||  || ||~~~~~|| |||~~|| || ||  |  ||| |||||||||||| |||||||  |  ||| |^|| |^|||  ||||| ||||||||||||||||||||||||||||| || |||  |||    |||||||| || |||~~~~~ |~~~~~|~~~~||^^^^^^^^^||| |  |  |||||| ||||| |||
+P_reich_Cntg0024	PCKHKSEKRFSEVSGAECDNNKIKGNKG
+PFC1120c_Tc_upsB1_3D7varT32	                            SNGGACAPFRRLHVCDRNLEQIKPHTITATHNLLVDVCYAAQFEGKSISGYYPRYQTKYKDSGSTICTVLARSFADIGDIIRGKDLYEGYDQKDKE
+HB3var16_9R_Tc_upsB1	                                                                                                                            E
+PFC1120c_Tc_upsB1_3D7varT32	                                                                                                                             K
+HB3var16_9R_Tc_upsB1	                                                                                                                              ---
+PFC1120c_Tc_upsB1_3D7varT32	                                                                                                                                 KDKEQKVKLENKLKDIFKNIYNELTSTNGKKGKK
+HB3var16_9R_Tc_upsB1	                                                                                                                                                                   LKDKEGAETRYGSDTTNYYQLREDWWALN
+PFD1005c_Ct_upsBsh	                                                                                                                                                                                                RQEVWKAITCGAGGSKYFRHT-CGTG-TPTDDKCRCAINDVPTYFDYVPQYLRWFEEWAEDFCRKRKH
+P_reich_Cntg0096	                                                                                                                                                                                                                                                                    KLQNAIKICRGVGGREKYCDLNGYDCKQTARGKERFGKERFGESADCKK---------CSVPCTHFANWIDNQKQEFLKQKNKY
+
+
+Target: P_reich_Cntg0096	Length: 302	Llk: -597.655
+P_reich_Cntg0096	PCEHKKGKRLSEVHGAECDNRKIRG---SK----DK---EGACAPFRRLHVCDKNLEQLDPDKIESTHNLLLEVCQAAKFEGQSISGYHDQYQLT---NSGSQLCTMLARSFADIGDIIRGKDLYGG----DKK----KD-----KLENKLKQYFKEIYNKLREKEAQNYYN---DPQG-NYYKLREDWWALNRKEVWKAITCDAPNDGVQYFRKT--------CS--------NRGT-YA--------SR-------------KCTCISGDVPTYFDYVPQYLRWFEEWAEDFCGKRKHKLQNAIKICRGVGGREKYCDLNGYDCKQTARGKERFGESADCKK---------CSVPCTHFANWIDNQKQEFLKQKNKY
+          	|| ||  || ||| |||||| || |~~~||~~~~ |~~~|||||||||||||| ||||  | ||  | |||  || || |||||||||   ||||~~~ |||  || |||||||||||||||||| |~~~~| |~~~~||~~~~~|||||||  || ||||| |^||   | ~~~|^^|~|||||||||||||| | ||||||  |^^|  ||| |~~~~~~~~  ~~~~~~~~| ||~ |~~~~~~~~ |~~~~~~~~~~~~~|| |   |||||||||||||||||||||||| ||| || |||  |||    |||||||| || ||| |^^^^||^^^^||~~~~~~~~~||| |  |  |||||| ||||| |||
+P_reich_Cntg0024	PCKHKSEKRFSEVSGAECDNNKIKGNKGSKGSKENKENSEGACAPFRRLHVCDRNLEQIQPHKITATDNLLVDVCEAAQFEGQSISG
+PFC1120c_Tc_upsB1_3D7varT32	                                                                                       YYPRYQ
+HB3var30_12_C2_upsC1	                                                                                             L
+PFC1120c_Tc_upsB1_3D7varT32	                                                                                              TKYKDSGSTICTVLARSFADIGDIIRGKDLYEGYDQKDQKDKEQKDKEQKVKLENKLKDIFKNIYN
+PF08_0142_Tc_upsB	                                                                                                                                                                KLKE-EAEERYKKDGD--GDNYYKLREDWWALNRQEIWKAITCGHP--GGTYFRQTACGGGTTPTCGGGTTPTPNGGTTPACGGGTTPTPRQTACGGGTTPTPNKCRCATNDVPTYFDYVPQYLRWFEEWAEDFCRKRKYKLENAIEKCRGKTKGEKYCDLNGFDCTQTASG----GE----KKFVKGHNCHNCSVTCIPFGPWIDNQKKEFLKQRNKY
+
+
+Target: PFC1120c_Tc_upsB1_3D7varT32	Length: 316	Llk: -604.660
+PFC1120c_Tc_upsB1_3D7varT32	PCEHKSVERFSEVSGGECDEKKIKG-------SNG------GACAPFRRLHVCDRNLEQIKPHTITATHNLLVDVCYAAQFEGKSISGYYPRYQTKYKDSGS--TICTVLARSFADIGDIIRGKDLYEGYDQKDKEQKVKLENKLKDIFKNIYNELTSTNGKKGK-----------KQALQARYQDDG-----------SG-------------NYYQLREDWWDANRAKVWYAITCGAGTSD-KYFRKTCS--NDTSDTNE------KCRCVST-DPPTYFDYVPQYLRWFEEWTEEFCRKKKKKLEDVIKKCRYDENNERKYCSRNGFDCKDTIRAQEKLVKGYDCHKCSVACDDFEPWIKNQKQEFEKQKGKY
+          	|| |||  ||||||| |||  ||||~~~~~~~| |~~~~~~||||||||||||||||||| || |||| ||||||| |||||| |||| || || |||| ||~~| || |||||||||||||||||  ||   ||||| ||   || ||  ||  | ^^^ ||||~~~~~~~~~~~|^^^^^^^^^^|~~~~~~~~~~~ |~~~~~~~~~~~~~| ||||||||  ||  || |||||||^||~|||| || ~~|^^^  ||~~~~~~ |||  |~| ||||||||| ||||||| | |||| | |||   | ||  ||||^||| |||  |  ||||     || ||  |  ||  |||||||||||| ||| ||
+P_reich_Cntg0024	PCKHKSEKRFSEVSGAECDNNKIKGNKGSKENSKGSKENSEGACAPFRRLHVCDRNLEQIQPHKITATDNLLVDVCEAAQFEGQSISGHYPQYQQKYKDTGSSFTMCTMLARSFADIGDIIRGKDLFLGYNETDKEQKGKLQDNLKNIFAKIYTDLM---MKKGKGKKVDVEKHYGK----------GKKVDVEKHYGKDGKKVDVEKHYGKDPNFYQLREDWWERNRKTVWKAITCGAG-SDSKYFRQTCGEGN---EGNEAHMTDGQCRCRITNDVPTYFDYVPQFLRWFEEWAEDFCRKRKHKLEVLDKQCRGGENNE-KYCDRNGYNCEETIRAKYIFDKGDDCYNCYIACTNFEPWIKNQKQEFIKQKEKY
+
+
+Target: P_reich_Cntg0024	Length: 321	Llk: -579.844
+P_reich_Cntg0024	PCKHKSEKRFSEVSGAECDNNKIKGNKGSKENSEG-ACAPFRRLHVCDRNLEQIQPHKITATDNLLVDVCEAAQFEGQSISGHYPQYQQKYKDTGSSFTMCTMLARSFADIGDIIRGKDLFLGYNETD-KEQKGKLQDNLKNIFAKIYTDLMKK-----GK---GK-KVD---VEK---------HYGKD-PNFYQLREDWWERNRKTVWKAITCGAGSDSKYFRQTCGEGNEAHMTDGQCRCRITNDVPTYFDYVPQFLRWFEEWAEDFCRKRKHKLEVLDK----QCRGENNE-KYCDRNGYNCEETIRA--KYIFD------------KGDDCYNCYIACTNFEPWIKNQKQEFIKQKEKY
+          	||   | ||||||||||| || |||||||^^|^^|~|||||||||||||||||| | ||||| ||||||| || |||||||  || || |||| || |||||||||||||||||||||||| |||  |~|| |  || ||||||||||  |^^|~~~~~||~~~||~| |~~~ ||~~~~~~~~~ || |~ | ||||||||| ||  |||||||||| ^||||| ||| | ^^^ ||  ||| |^|||||||||||| |||||||||||||||||||^^^^|~~~~ |||||||~||| |||  |  ||||~~|   |~~~~~~~~~~~~|| ||  |  ||  |||||||||||| ||| ||
+PF08_0142_Tc_upsB	PCNKRSGKRFSEVSGAECANNRIKGNKGS--N--GDACAPFRRLHVCDRNLEQIDPAKITATHNLLVDVCQAAKFEG
+HB3var16_9R_Tc_upsB1	                                                                             QSISLYYPRYQTKYKDSGSTFTMCTMLARSFADIGDIIRGKDLFIGYNQKDRKEKKKQLQQNLKNIFAKIYEKL--KLKDKEGKDKEGKDKEDKEGAEKLKDKEGAETRYGSDTTNYYQLREDW
+PFD1005c_Ct_upsBsh	                                                                                                                                                                                                         WEANRQEVWKAITCGAGG-SKYFRHTCGTGT---PTDDKCRCAI-NDVPTYFDYVPQYLRWFEEWAEDFCRKRKHKL----KDVKTNCRGEN
+PFC1120c_Tc_upsB1_3D7varT32	                                                                                                                                                                                                                                                                                                     NERKYCSRNGFDCKDTIRAQEKEKLDCKDTIRAQEKLVKGYDCHKCSVACDDFEPWIKNQKQEFEKQKGKY
+
+
+Target: HB3var30_12_C2_upsC1	Length: 308	Llk: -523.037
+HB3var30_12_C2_upsC1	PCEKRSDVRFSYTEGAECDKSKIRGSNGKSEGACAPFRRLHLCDQHLEKINRYDKVNNNT---LLAEVCLAAKFEAESLEKYRAQYQLTNPGFHTNICTELARSFADIGDIIRGKDLYLGNKKEKENLEKNLRQIFKKIYD-----NL-----NDADVQK---------HYKDDDKGTENYYKLRNAWWEANREKVWKAITCDAVGGIYFRKTCGTGTWTNEKCQCLIGDVPTYFDYVPQFLRWFEEWAEDFCRK---KK---KYVEIVKTNCRGKDKDGKDLYCSGNGLDCQETIRA-----IGKFVLGQHCTKCSFLCGRYKKWINNQKQEFLKQKKKC
+          	||  |  ||||||||||| |||  |  | ||||||| |||| ||| || |^^^^|  | |~~~||  ||||||||||||  ||  ||||| ||||||||||||||||||||||||||| || |||  || ||  |||  | ~~~~~||~~~~~| | ^ |~~~~~~~~~|| |||^^^^||||||||||||||  ||||||| | |  ||| |||||| |  || | | ||||||||||| ||||||||||||||~~~||~~~| ^^ ||||||| ^^ | | |||||||||  ||||~~~~~|| ^^^|  ||||||||| ||||| ||| |||||||||
+PFD1005c_Ct_upsBsh	PCKDRPEVRFSYTEGAECNKSKVKGNEGNSEGACAPYRRLHVCDQNLELI----KPKNITTHNLLVDVCLAAKFEAESLKTYRGKYQLTNHGFHTNICTELARSFADIGDIIRGKDLYRGNNKEKDRLEDNLKKIFKQLYEELTKNNLTKNNKNEAI-IKNNKNEAIKTHYQDDD----NYYKLRNAWWEANRQEVWKAITCGAGGSKYFRHTCGTGTPTDDKCRCAINDVPTYFDYVPQYLRWFEEWAEDFCRKRKHKKHKLKD--DVKTNCRGE--NGTDRYCSGNGLDCTKTIRAKYIYAIGS---GSECTKCSFLCGFYKKWIDNQKKEFLKQKKKC
+
+
+Target: PFD1005c_Ct_upsBsh	Length: 306	Llk: -510.546
+PFD1005c_Ct_upsBsh	PCKDRPEVRFSYTEGAECNKSKVKGNEGNSEGACAPYRRLHVCDQNLELIKPKNIT-THNLLVDVCLAAKFEAESLKTYRGKYQLTNHGFHTNICTELARSFADIGDIIRGKDLYRGNNKEKDRLEDNLKKIFKQLYEELTKNNKNEAI--KTHYQDDD---PNYYKLRNAWWEANRQEVWKAITCGAGGSKYFRHTCGTGTPTDDKCRCAINDVPTYFDYVPQYLRWFEEWAEDFCRKRKHKL--------------KD-----------VKTNCRG--EN--GTDRYCSGNGLDCTKTIRAKYIYAIG-----SE-----CTKCSFLCGFYKKWIDNQKKEFLKQKKKC
+          	||  |  ||||||||||| |||  |  | ||||||| ||||||| ||| |||  ||~|||||||||||||||||||  ||  ||||| ||||||||||||||||||||||||||| || |||  || ||  |||  |  |^^^| | | ~~|^|| |||~~~ ||||||||||||||  ||||||| | |  ||| ||||||||  ||||| ||||||||||||||||||||||||||||| ||~~~~~~~~~~~~~~||~~~~~~~~~~~|||||||~~  ~~| | |||||||||  ||||^^^^|||~~~~~  ~~~~~||||||||| ||||| ||| |||||||||
+HB3var30_12_C2_upsC1	PCEKRSDVRFSYTEGAECDKSKIRGSNGKSEGACAPF
+PFC1120c_Tc_upsB1_3D7varT32	                                     RRLHVCDRNLEQIKPHTITATHNLLVDV
+HB3var30_12_C2_upsC1	                                                                 CLAAKFEAESLEKYRAQYQLTNPGFHTNICTELARSFADIGDIIRGKDLYLGNKKEKENLEKNLRQIFKKIYDNL---NLNDADVQK-HYKDDDKGTENYYKLRNAWWEANREKVWKAITCDAVGGIYFRKTCGTGT
+PF08_0142_Tc_upsB	                                                                                                                                                                                                          PTPNKCRCATNDVPTYFDYVPQYLRWFEEWAEDFCRKRKYKLENAIEKCRGKTKGEK
+HB3var30_12_C2_upsC1	                                                                                                                                                                                                                                                                   DFCRKKKKYVEIVKTNCRGKDKDKDGKDLYCSGNGLDCQETIRA----AIGKFVLGQFVLGQHCTKCSFLCGRYKKWINNQKQEFLKQKKKC
+
+Parameters
+
+Gap initiation: 0.02500
+Gap extension:  0.75000
+Termination:    0.00100
+Recombination:  0.00010
+fMatch:         0.75000
+
+State frequencies:
+?	0.04000
+A	0.04000
+R	0.04000
+N	0.04000
+D	0.04000
+C	0.04000
+Q	0.04000
+E	0.04000
+G	0.04000
+H	0.04000
+I	0.04000
+L	0.04000
+K	0.04000
+M	0.04000
+F	0.04000
+P	0.04000
+S	0.04000
+T	0.04000
+W	0.04000
+Y	0.04000
+V	0.04000
+B	0.04000
+Z	0.04000
+X	0.04000
+.	0.04000
+
+Emission probabilities:
+	?	A	R	N	D	C	Q	E	G	H	I	L	K	M	F	P	S	T	W	Y	V	B	Z	X	.	
+?	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	
+A	0.04000	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+R	0.04000	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+N	0.04000	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+D	0.04000	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+C	0.04000	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+Q	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+E	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+G	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+H	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+I	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+L	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+K	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+M	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+F	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+P	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+S	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+T	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+W	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
+Y	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	
+V	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	
+B	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	
+Z	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	
+X	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	
+.	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	
+

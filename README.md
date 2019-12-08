@@ -20,7 +20,7 @@ This program is a novel approach for detecting recombinant sequences and corresp
 
 ### Required Input Files 
 - Patial alignment produced by JHMM (please see MZmosaic folder)
-- Input fasta format biological sequences, maximum length for identifiers length is 10.
+- Input fasta format biological sequences, maximum length for identifiers length is 15.(Zilversimit 2014)
 
 ### Creating Input File
 
@@ -34,24 +34,19 @@ epsl=$(grep -o 'Gap extension:  .*$' middle_file_align.txt | cut -c17-)
 ./mosaic -seq input.txt -del $delta -eps $epsl -aa -tag output -grid 0.001 0.010 10 1
 ```
 
-### Run Example for large number of sequences(>10000 sequences)
+### Run Example for large number of sequences (>10000 sequences)
 
-Instead of complete and time-consuming Baum-Welch algorithm to estimate gap open and gap extension probabilities, the slightly less accurate but much faster viterbi training algorithm has been used.
+Instead of complete and time-consuming Baum-Welch algorithm to estimate gap open and gap extension probabilities, the slightly less accurate but much faster viterbi training algorithm has been used. Each iteration was run as on a high performing computing cluster (Helix)
 
 Iterate until convergence:
-0) Choose an initial set of parameters
-1) Compute the Viterbi paths of all sequences
-2) Count frequencies of events and calculate new parameters
-3) Update -> 1) 
-4) Stop when the major parameters del and eps change by less than 1%.
 
-```
-cd /Users/fengqian/MZmosaic
-./mosaic -estimate -seq input.fasta  -rec 0 -aa -tag middle_file
-delta=$(grep -o 'Gap initiation: .*$' middle_file_align.txt | cut -c17-)
-epsl=$(grep -o 'Gap extension:  .*$' middle_file_align.txt | cut -c17-)
-./mosaic -seq input.txt -del $delta -eps $epsl -aa -tag output -grid 0.001 0.010 10 1
-```
+1) Choose an initial set of parameters
+2) Compute the Viterbi paths of all sequences
+3) Count frequencies of events and calculate new parameters
+4) Update -> 1) 
+5) Stop when the major parameters del and eps change by less than 1%.
+
+The empirical Ghana pilot DBLa dataset analyzed in manuscript contain more than 17000 sequences, the detailed code for generating partial alignment results are displayed in empirical_script sub folder.
 
 ### Running Meltos
 #### Required:
@@ -94,3 +89,7 @@ Finally, the tree's edges are displayed, with the index of the parent node on th
 ```
 python integrated_rec_det.py output_align.txt input.fasta output.csv
 ```
+
+### Reference
+- aa
+- bb
