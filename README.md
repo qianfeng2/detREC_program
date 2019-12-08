@@ -2,18 +2,18 @@ A Program to Detect Recombinants From Unaligned Sequences
 -----------------------
 
 ### About
-This program is novel approach for detecting recombinant sequences and corresponding statistical support values from unaligned sequences. This framework develops on the basis of the paritial alignments from jumping hidden markov model(JHMM), after that, by partitionning them into multiple equal-length triples, on which we uses a novel distance-based procedure to identify recombinant from each triple. Statistical support values calculated from Bootstrap, the bigger, the better, indicating the robustness of identified recombinants.
+This program is novel approach for detecting recombinant sequences and corresponding statistical support values from unaligned sequences. This framework develops on the basis of the paritial alignments from jumping hidden markov model (JHMM), after that, by partitionning them into multiple equal-length triples, on which we uses a novel distance-based procedure to identify recombinant from each triple. Statistical support values calculated from Bootstrap, the bigger the better, indicating the robustness of identified recombinants.
 
 
 ### Required softwares
 - MAFFT used to align one sequence to another two pre_aligned sequences (https://mafft.cbrc.jp/alignment/software/)
-- seqkit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
+- SeqKit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
 - Python 
 -- Require modules for Python 2 user:
 -- Require modules for Python 3 user:
 
 ### Optional softwares (only used for simulation section)
-- Msprime [optional, only used for simulation section] used to generate one arbitrary phylogenetic tree (https://msprime.readthedocs.io/en/stable/installation.html)
+- Msprime used to generate one arbitrary phylogenetic tree (https://msprime.readthedocs.io/en/stable/installation.html)
 - Snakemake
 - INDELible
 - Python modules  
@@ -34,7 +34,11 @@ This program is novel approach for detecting recombinant sequences and correspon
 ### Run Example
 
 ```
-python prepareMeltosInput.py -i regions.bed -b PD9770A.bam,PD9770C.bam,PD9770D.bam -vcf PD9770A_del.vcf,PD9770C_del.vcf,PD9770D_del.vcf -vcfbed PD9770A_del.bed,PD9770C_del.bed,PD9770D_del.bed -f 375,353,407 -o regions.meltos
+cd /Users/fengqian/MZmosaic
+./mosaic -estimate -seq input.fasta  -rec 0 -aa -tag middle_file
+delta=$(grep -o 'Gap initiation: .*$' middle_file_align.txt | cut -c17-)
+epsl=$(grep -o 'Gap extension:  .*$' middle_file_align.txt | cut -c17-)
+./mosaic -seq input.txt -del $delta -eps $epsl -aa -tag output -grid 0.001 0.010 10 1
 ```
 
 ### Running Meltos
@@ -76,5 +80,5 @@ Finally, the tree's edges are displayed, with the index of the parent node on th
 ### Run Example
 
 ```
-java -jar Meltos.jar -treeFile licheeTestTree.txt -svFile ProcessedSVInput.txt -numSamples 6 -ssnvFile snvVAFFile.txt
+python integrated_rec_det.py output_align.txt input.fasta output.csv
 ```
