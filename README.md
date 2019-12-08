@@ -10,7 +10,7 @@ This program is a novel approach for detecting recombinant sequences and corresp
 - SeqKit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
 - Python  
 -- Require modules for Python 2 user:  
-mungo `<addr>` (pip install git+https://github.com/PapenfussLab/Mungo)  
+mungo (`pip install git+https://github.com/PapenfussLab/Mungo`)  
 Bio  
 pandas  
 scipy  
@@ -28,7 +28,7 @@ numpy
 - [Snakemake](https://snakemake.readthedocs.io/en/stable/) for reproducible research pipeline 
 
 ### Required Input Files 
-- Patial alignment produced by JHMM (please see [MZmosaic](https://github.com/qianfeng2/detREC_program/tree/master/MZmosaic) folder)
+- Patial alignment produced by JHMM (please see [MZmosaic](https://github.com/qianfeng2/detREC_program/tree/master/MZmosaic) sub folder)
 - Input fasta format biological sequences, maximum length for identifiers length is 15 (Zilversmit et al., 2013)
 
 ### Creating Input File
@@ -64,7 +64,7 @@ The empirical Ghana pilot DBLa dataset analyzed in manuscript contain more than 
 - "\<filename\>": name of the file which contains your complete biological sequences, fasta format required.
 - "\<filename\>": name of the file which contains your list of identified recombinants and related statistical support value, csv format required.
 
-Typed in above three input parameters in order.
+Type in above three input parameters in order.
 
 
 ### Output
