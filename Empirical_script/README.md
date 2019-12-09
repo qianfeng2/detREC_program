@@ -3,10 +3,10 @@ Mosaic Program to Detect Mosaic From Large Unaligned Sequences
 
 ### Step 1: Estimate major parameters del and eps
 Scripts for this step are shown in *_nd_mosaic_est_par.sh. 
-Initial del and eps are dexcirbed in 1nd__mosaic_est_par.sh, same setting with previous pipeline when dealing with DBLa sequences collected from 10 countries (Tonkin-Hill, unpublished).
+Initial del and eps are descirbed in 1nd__mosaic_est_par.sh, same setting with previous pipeline when dealing with DBLa sequences collected from 10 countries (Tonkin-Hill, unpublished).
 
 
-### Step 2: Estimate recombination parameters
+### Step 2: Estimate recombination parameter
 A grid of numbers are used to get the optimal recombination par with maximum likelihood. The script is in Sup_ghana_2.Rmd
 
 
