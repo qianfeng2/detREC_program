@@ -14,7 +14,7 @@ python codes/msprime_tree.py data/simulated_tree.txt
 
 ### Step 2: Evolve sequences
 
-Note that equ frequencies for all amino acids are from the empirical data Protein_translateable_pilot_upper_centroids.fasta, you can custom it for your purpose.
+Note that equilibrium frequencies for amino acids are from the empirical Ghana pilot DBLa datasets Protein_translateable_pilot_upper_centroids.fasta, you can customize it for your purpose.
 
 #### Run Example 
 
@@ -32,4 +32,4 @@ Four parameters are needed in this script, requirements for them are illustrated
 python codes/recombined_seqs.py 0 50 0 data/simulated_seqs.fasta
 ```
 
-
+Now you have simulated a number of sequences, sequence ID starts with "r_" are all generated recombinants, starts with "seq" are non-recombinants. Afterwards you are able to proceed to the general recombination detection step with the help of [manual](https://github.com/qianfeng2/detREC_program).
