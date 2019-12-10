@@ -32,4 +32,4 @@ Four parameters are needed in this script, requirements for them are illustrated
 python codes/recombined_seqs.py 0 50 0 data/simulated_seqs.fasta
 ```
 
-Now you have simulated a number of sequences, sequence ID starts with "r_" are all generated recombinants, starts with "seq" are non-recombinants. Afterwards you are able to proceed to the general recombination detection step with the help of [manual](https://github.com/qianfeng2/detREC_program).
+Now you have simulated a number of sequences, sequence IDs start with "r_" are all generated recombinants, start with "seq" are non-recombinants. Afterwards you are able to proceed to the general recombination detection step with the help of [manual](https://github.com/qianfeng2/detREC_program).
