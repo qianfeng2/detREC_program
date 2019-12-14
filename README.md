@@ -1,6 +1,7 @@
 A Program to Detect Recombinants From Unaligned Sequences
 -----------------------
-[![Python 2.7](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/downloads/release/python-360/)
+[![Python 2.7](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/download/releases/2.7/)
+[![Python 3.6](https://img.shields.io/pypi/pyversions/Django)](https://www.python.org/downloads/release/python-360/)
 [![License: GPL-3.0](https://img.shields.io/cran/l/devtools)](https://opensource.org/licenses/GPL-3.0)
 ### About
 This program is a novel approach for detecting recombinant sequences and corresponding statistical support values from unaligned biological sequences. This framework develops on the basis of the paritial alignment results from jumping hidden markov model (JHMM, or mosaic), after that, by dividing them into multiple equal-length triples, on which we use a new distance-based procedure to identify recombinant from each triple. Statistical support values calculated from Bootstrap, the bigger the better, indicating the robustness of identified recombinants.
