@@ -1,5 +1,13 @@
 Simulate Sequences for Evaluating Performance of Proposed Recombination Detection Program
 -----------------------
+[![Python 2.7](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/download/releases/2.7/)
+[![Python 3.6](https://img.shields.io/pypi/pyversions/Django)](https://www.python.org/downloads/release/python-360/)
+
+-- Require modules for Python 3 user:  
+Bio  
+pandas  
+scipy  
+numpy 
 
 ### Step 1: Simuate one tree topology
 One option in script msprime_tree.py is sample_size=200, providing the number of tip leaves in this tree.
