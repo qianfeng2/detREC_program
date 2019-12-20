@@ -1,8 +1,8 @@
 ---
-title: "Untitled"
+title: "breakpoints accuracy analysis for all simulated datasets"
 author: "Qian Feng"
 date: "11/12/2019"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
@@ -126,11 +126,12 @@ abline(0,1,col="red")
 
 
 ```{r}
-
+#pdf(file="/Users/fengqian/Downloads/cabios-template/figures/bkp.pdf", height=4, width=8)
 par(mfrow=c(1,2))
 plot(simulation_50_50_output$identified_bkp,simulation_50_50_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint")
 abline(0,1,col="red")
-hist(abs(simulation_50_50_output$bkp_error),xlab="Absolute difference between identified and actual breakpoint",breaks=seq(0,200,5),col="black",border="white",main="")
+hist(abs(simulation_50_50_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="")
+#dev.off()
 ```
 
 
