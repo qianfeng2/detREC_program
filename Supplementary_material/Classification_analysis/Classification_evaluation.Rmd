@@ -1,0 +1,105 @@
+---
+title: "Supporting Figures about Classification Evaluation"
+author: "Qian Feng"
+date: "22/12/2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r include=FALSE}
+library(data.table)
+library(stringr)
+library(ggplot2)
+library(ggpubr)
+```
+
+There are six biologically realistic senarios in the simulation datasets.  
+1. different recombination proportions  
+2. different mutation rates  
+3. different indel rates  
+4. different indel sizes  
+5. different sequence lengths  
+6. different amino acid models.
+
+Classification results for each scenario are summarized by accuracy, sensivity, specifity, support value mean, estimated recombination rate. So there are five plots for each case. This file provides all the supplementary figures for the manuscript in terms of classification evluation section.
+
+Therefore, all the folowing figures present sensivity, specifity, estimated recombination rate and support value mean for last five scenarios. 
+
+Legends for all the following plots include once-only, twice only, indicating the two-parent and three-parent cases respectively.
+
+## 2. Different mutation rates
+
+```{r echo=FALSE, warning=FALSE}
+result <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_mutation/results_all/simulation_50-50/result.csv"
+                            , header=TRUE
+                          , data.table = FALSE)
+result_sd <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_mutation/results_all/simulation_50-50/result_sd.csv"
+                            , header=TRUE
+                          , data.table = FALSE)
+#se
+mutation_rate  <-seq(1,9,by=1)
+once_only <- result$sensitivity[1:9];twice_only <- result$sensitivity[10:18]
+df <- data.frame(mutation_rate, once_only, twice_only)
+df2 <- melt(data = df, id.vars = "mutation_rate")# melt the data to a long format
+once_only <- result_sd$sensitivity[1:9];twice_only <- result_sd$sensitivity[10:18]
+df <- data.frame(mutation_rate, once_only, twice_only)
+df3 <- melt(data = df, id.vars = "mutation_rate")# melt the data to a long format
+df2$CI.L=df2$value-qnorm(.975)*df3$value/10
+df2$CI.R=df2$value+qnorm(.975)*df3$value/10
+# plot, using the aesthetics argument 'colour'
+sensivity=ggplot(data = df2, aes(x = mutation_rate, y = value,colour=variable)) + geom_line()+geom_point()+geom_errorbar(width=.001, aes(ymin=CI.L, ymax=CI.R))+scale_x_continuous(breaks=c(1,2,3,4,5,6,7,8,9),labels=c("0.2","0.4", "0.6","0.8","1","2","3","4","5"))+scale_y_continuous(breaks=seq(0.48,0.96,by=0.03),limits=c(0.48,0.96))+ylab("Sensitivity")+xlab("Branch length multiplier")+theme(legend.position = "none")
+#sp
+mutation_rate  <-seq(1,9,by=1)
+once_only <- result$specifity[1:9]
+twice_only <- result$specifity[10:18]
+df <- data.frame(mutation_rate, once_only, twice_only)
+df2 <- melt(data = df, id.vars = "mutation_rate")# melt the data to a long format
+once_only <- result_sd$specifity[1:9]
+twice_only <- result_sd$specifity[10:18]
+df <- data.frame(mutation_rate, once_only, twice_only)
+df3 <- melt(data = df, id.vars = "mutation_rate")# melt the data to a long format
+df2$CI.L=df2$value-qnorm(.975)*df3$value/10
+df2$CI.R=df2$value+qnorm(.975)*df3$value/10
+# plot, using the aesthetics argument 'colour'
+sp <- ggplot(data = df2, aes(x = mutation_rate, y = value,colour=variable)) + geom_line()+geom_point()+geom_errorbar(width=.001, aes(ymin=CI.L, ymax=CI.R))+scale_x_continuous(breaks=c(1,2,3,4,5,6,7,8,9),labels=c("0.2","0.4", "0.6","0.8","1","2","3","4","5"))+scale_y_continuous(breaks=seq(0.64,0.91,by=0.02),limits=c(0.64,0.91))+ylab("Specifity")+xlab("Branch length multiplier")+theme(legend.position = "none")
+#sv
+mutation_rate  <-seq(1,9,by=1)
+once_only_rec <- result$sv_rec[1:9];once_only_nonrec <- result$sv_nonrec[1:9];
+twice_only_rec <- result$sv_rec[10:18];twice_only_nonrec <- result$sv_nonrec[10:18];
+df <- data.frame(mutation_rate, once_only_rec, once_only_nonrec,twice_only_rec,twice_only_nonrec)
+df2 <- melt(data = df, id.vars = "mutation_rate")# melt the data to a long format
+once_only_rec <- result_sd$sv_rec[1:9];once_only_nonrec <- result_sd$sv_nonrec[1:9];
+twice_only_rec <- result_sd$sv_rec[10:18];twice_only_nonrec <- result_sd$sv_nonrec[10:18];
+df <- data.frame(mutation_rate, once_only_rec, once_only_nonrec,twice_only_rec,twice_only_nonrec)
+df3 <- melt(data = df, id.vars = "mutation_rate")# melt the data to a long format
+df2$CI.L=df2$value-qnorm(.975)*df3$value/10
+df2$CI.R=df2$value+qnorm(.975)*df3$value/10
+# plot, using the aesthetics argument 'colour'
+sv <- ggplot(data = df2, aes(x = mutation_rate, y = value,colour=variable)) + geom_line()+geom_point()+geom_errorbar(width=.001, aes(ymin=CI.L, ymax=CI.R))+scale_x_continuous(breaks=c(1,2,3,4,5,6,7,8,9),labels=c("0.2","0.4", "0.6","0.8","1","2","3","4","5"))+scale_y_continuous(breaks=seq(0.64,0.90,by=0.02),limits=c(0.64,0.90))+ylab("Support value mean")+xlab("Branch length multiplier")
+#rec
+mutation_rate  <-seq(1,9,by=1)
+once_only <- result$rho[1:9]
+twice_only <- result$rho[10:18]
+df <- data.frame(mutation_rate, once_only, twice_only)
+df2 <- melt(data = df, id.vars = "mutation_rate")# melt the data to a long format
+once_only <- result_sd$rho[1:9]
+twice_only <- result_sd$rho[10:18]
+df <- data.frame(mutation_rate, once_only, twice_only)
+df3 <- melt(data = df, id.vars = "mutation_rate")# melt the data to a long format
+df2$CI.L=df2$value-qnorm(.975)*df3$value/10
+df2$CI.R=df2$value+qnorm(.975)*df3$value/10
+# plot, using the aesthetics argument 'colour'
+rec=ggplot(data = df2, aes(x = mutation_rate, y = value,colour=variable)) + geom_line()+geom_point()+geom_errorbar(width=.001, aes(ymin=CI.L, ymax=CI.R))+scale_x_continuous(breaks=c(1,2,3,4,5,6,7,8,9),labels=c("0.2","0.4", "0.6","0.8","1","2","3","4","5"))+scale_y_continuous(breaks=seq(0.002,0.01,by=0.002),limits=c(0.002,0.01))+ylab(expression("Estimated"~rho))+xlab("Branch length multiplier")
+sv
+```
+
+```{r echo=FALSE}
+ggarrange(ggarrange(sensivity,sp,ncol=2,nrow=1),rec,nrow=2)
+```
+
+
+## Different indel rates
+
