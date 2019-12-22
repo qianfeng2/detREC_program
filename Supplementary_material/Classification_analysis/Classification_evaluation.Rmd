@@ -19,7 +19,7 @@ library(ggplot2)
 library(ggpubr)
 ```
 
-There are six biologically realistic senarios in the simulation datasets.  
+There are six biologically realistic senarios in the simulation datasets,  
 1. different recombination proportions  
 2. different mutation rates  
 3. different indel rates  

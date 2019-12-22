@@ -1,27 +1,41 @@
 ---
-title: "breakpoints accuracy analysis for all simulated datasets"
+title: "Supporting Figures about Breakpoints Accuracy"
 author: "Qian Feng"
 date: "11/12/2019"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.width=12, fig.height=8,
+                      echo=TRUE, warning=FALSE, message=FALSE,
+                      tidy=TRUE)
 ```
-
 #######################################################################
-# Section 1 ; rec proportions
-**Step 1**: Load libraries
 
-```{r message=FALSE, warning=FALSE, paged.print=FALSE}
+There are six biologically realistic senarios in the simulation datasets,  
+1. different recombination proportions  
+2. different mutation rates  
+3. different indel rates  
+4. different indel sizes  
+5. different sequence lengths  
+6. different amino acid models.
+
+Breakpoints' accuracy evaluation for each scenario is summarized by two plots, one is scatter plot between identified breakpoint and real breakpoint positions, second is the histogram for the absolute values of the difference between identified breakpoint and real breakpoint positions. So there are two plots for each case. Manuscript only offers related results when recombination proportion is equal to 50\%. This file provides all the supplementary figures for the manuscript in terms of breakpoints' accuracy evaluation section.
+
+Therefore, all the folowing figures present scatter plot and histogram for each scenario. 
+
+
+
+```{r include=FALSE}
 library(data.table)
 library(stringr)
 library(ggplot2)
 library(ggpubr)
 ```
 
-**Step 2**: Read results into R
-```{r}
+#### Section 1: Different recombination proportions
+
+```{r echo=FALSE}
 simulation_30_70_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results/jump_once_only/simulation_30-70_output_error.csv"
                             , header=FALSE
                             , data.table = FALSE)
@@ -48,8 +62,9 @@ colnames(simulation_70_30_output ) <- c("chunk","target","db1","db2",	"rec","sv"
 
 
 
-**Step 3**: organize the dataframe and draw the violin plot
-```{r}
+
+```{r eval=FALSE, include=FALSE}
+#violin plots are not that informative, so we decide to remove them.
 bkp_data <- list()
 bkp_data[[1]] = data.frame(rec = rep(30,length(simulation_30_70_output[,2])), bkp= simulation_30_70_output[,7], group = c(rep("jump_once",length(simulation_30_70_output[,2]))))
 bkp_data[[2]] = data.frame(rec = rep(40,length(simulation_40_60_output[,2])), bkp= simulation_40_60_output[,7], group = c(rep("jump_once",length(simulation_40_60_output[,2]))))
@@ -58,11 +73,6 @@ bkp_data[[4]] = data.frame(rec = rep(60,length(simulation_60_40_output[,2])), bk
 bkp_data[[5]] = data.frame(rec = rep(70,length(simulation_70_30_output[,2])), bkp= simulation_70_30_output[,7], group = c(rep("jump_once",length(simulation_70_30_output[,2]))))
 df=do.call(rbind, bkp_data)
 df$rec<- as.factor(df$rec)
-#head(df)
-```
-
-##draw a vioplots
-```{r}
 df_once <- df[df$group=="jump_once",]
 p<-ggplot(df_once, aes(x=rec, y=bkp)) +
   geom_violin()
@@ -71,19 +81,21 @@ p
 
 
 
-#hist
-```{r}
-par(mfrow=c(1,5))
-hist(simulation_30_70_output$bkp_error,breaks=50)
-hist(simulation_40_60_output$bkp_error,breaks=50)
-hist(simulation_50_50_output$bkp_error,breaks=50)
-hist(simulation_60_40_output$bkp_error,breaks=50)
-hist(simulation_70_30_output$bkp_error,breaks=50)
+
+
+##### histograms
+```{r echo=FALSE}
+par(mfrow=c(1,4))
+hist(abs(simulation_30_70_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="rec=30")
+hist(abs(simulation_40_60_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="rec=40")
+hist(abs(simulation_60_40_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="rec=60")
+hist(abs(simulation_70_30_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="rec=70")
 ```
 
+
+```{r eval=FALSE, warning=TRUE, include=FALSE}
 # hist for comparing different replicates at only one setting
 ## take the example of jump once + 30% rec proportion, conclusion is different replicates show different distributions, but they all have biggest frequency at position 0.
-```{r eval=FALSE, warning=TRUE, include=FALSE}
 par(mfrow=c(2,5))
 hist(simulation_30_70_output[which(simulation_30_70_output$replicate==0),]$bkp_error)
 hist(simulation_30_70_output[which(simulation_30_70_output$replicate==1),]$bkp_error)
@@ -95,10 +107,7 @@ hist(simulation_30_70_output[which(simulation_30_70_output$replicate==6),]$bkp_e
 hist(simulation_30_70_output[which(simulation_30_70_output$replicate==7),]$bkp_error)
 hist(simulation_30_70_output[which(simulation_30_70_output$replicate==8),]$bkp_error)
 hist(simulation_30_70_output[which(simulation_30_70_output$replicate==9),]$bkp_error)
-```
 
-
-```{r eval=FALSE, include=FALSE}
 summary(simulation_30_70_output$bkp_error)
 summary(simulation_40_60_output$bkp_error)
 summary(simulation_50_50_output$bkp_error)
@@ -106,26 +115,28 @@ summary(simulation_60_40_output$bkp_error)
 summary(simulation_70_30_output$bkp_error)
 ```
 
-## draw the actual_bkp vs identified_bkp plots
-```{r}
-par(mfrow=c(1,5))
-plot(simulation_30_70_output$identified_bkp,simulation_30_70_output$actual_bkp)
+
+
+##### scatter plots for the actual_bkp vs identified_bkp
+```{r echo=FALSE}
+par(mfrow=c(1,4))
+plot(simulation_30_70_output$identified_bkp,simulation_30_70_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="rec=30")
 abline(0,1,col="red")
-plot(simulation_40_60_output$identified_bkp,simulation_40_60_output$actual_bkp)
+plot(simulation_40_60_output$identified_bkp,simulation_40_60_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="rec=40")
 abline(0,1,col="red")
-plot(simulation_50_50_output$identified_bkp,simulation_50_50_output$actual_bkp)
+#plot(simulation_50_50_output$identified_bkp,simulation_50_50_output$actual_bkp)
 abline(0,1,col="red")
-plot(simulation_60_40_output$identified_bkp,simulation_60_40_output$actual_bkp)
+plot(simulation_60_40_output$identified_bkp,simulation_60_40_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="rec=60")
 abline(0,1,col="red")
-plot(simulation_70_30_output$identified_bkp,simulation_70_30_output$actual_bkp)
+plot(simulation_70_30_output$identified_bkp,simulation_70_30_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="rec=70")
 abline(0,1,col="red")
 ```
 
 
-#######################################################################
 
 
-```{r}
+```{r eval=FALSE, include=FALSE}
+# This chunk generat the figure for manuscript when rec proportion=50%
 #pdf(file="/Users/fengqian/Downloads/cabios-template/figures/bkp.pdf", height=4, width=8)
 par(mfrow=c(1,2))
 plot(simulation_50_50_output$identified_bkp,simulation_50_50_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint")
@@ -136,12 +147,10 @@ hist(abs(simulation_50_50_output$bkp_error),xlab="Absolute value of difference",
 
 
 
+\newpage
+#### Section 2 : Different mutation rates
 
-#######################################################################
-# Section 2 : mutations
-
-##read data into R
-```{r}
+```{r include=FALSE}
 mutation_0.2_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_mutation/results_all/simulation_50-50/jump_once_only/mutation_0.2_output_error.csv"
                             , header=FALSE
                             , data.table = FALSE)
@@ -176,33 +185,52 @@ colnames(mutation_4_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp
 colnames(mutation_5_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
 ```
 
-##
-```{r}
+
+##### histograms
+```{r echo=FALSE}
+par(mfrow=c(1,4))
+hist(abs(mutation_0.2_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="bm=0.2")
+hist(abs(mutation_0.4_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="bm=0.4")
+hist(abs(mutation_0.6_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="bm=0.6")
+hist(abs(mutation_0.8_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="bm=0.8")
+hist(abs(mutation_2_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="bm=2")
+hist(abs(mutation_3_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="bm=3")
+hist(abs(mutation_4_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="bm=4")
+hist(abs(mutation_5_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="bm=5")
+```
+
+##### scatter plots for the actual_bkp vs identified_bkp
+```{r echo=FALSE}
 par(mfrow=c(2,4))
-plot(mutation_0.2_output$identified_bkp,mutation_0.2_output$actual_bkp)
+plot(mutation_0.2_output$identified_bkp,mutation_0.2_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="bm=0.2")
 abline(0,1,col="red")
-plot(mutation_0.4_output$identified_bkp,mutation_0.4_output$actual_bkp)
+plot(mutation_0.4_output$identified_bkp,mutation_0.4_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="bm=0.4")
 abline(0,1,col="red")
-plot(mutation_0.6_output$identified_bkp,mutation_0.6_output$actual_bkp)
+plot(mutation_0.6_output$identified_bkp,mutation_0.6_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="bm=0.6")
 abline(0,1,col="red")
-plot(mutation_0.8_output$identified_bkp,mutation_0.8_output$actual_bkp)
+plot(mutation_0.8_output$identified_bkp,mutation_0.8_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="bm=0.8")
 abline(0,1,col="red")
-plot(mutation_2_output$identified_bkp,mutation_2_output$actual_bkp)
+plot(mutation_2_output$identified_bkp,mutation_2_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="bm=2")
 abline(0,1,col="red")
-plot(mutation_3_output$identified_bkp,mutation_3_output$actual_bkp)
+plot(mutation_3_output$identified_bkp,mutation_3_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="bm=3")
 abline(0,1,col="red")
-plot(mutation_4_output$identified_bkp,mutation_4_output$actual_bkp)
+plot(mutation_4_output$identified_bkp,mutation_4_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="bm=4")
 abline(0,1,col="red")
-plot(mutation_5_output$identified_bkp,mutation_5_output$actual_bkp)
+plot(mutation_5_output$identified_bkp,mutation_5_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="bm=5")
 abline(0,1,col="red")
 ```
 
-#######################################################################
 
-#######################################################################
-# Section 3 : indels
 
-```{r}
+
+
+
+
+
+\newpage
+#### Section 3: Different indel rates
+
+```{r echo=FALSE}
 indels_0_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_indels/results_all/simulation_50-50/jump_once_only/indels_0_output_error.csv"
                             , header=FALSE
                             , data.table = FALSE)
@@ -241,42 +269,59 @@ colnames(indels_q_0.4_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"b
 colnames(indels_q_0.5_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
 ```
 
-
-##
-```{r}
+##### histograms
+```{r echo=FALSE}
 par(mfrow=c(1,5))
-plot(indels_0_output$identified_bkp,indels_0_output$actual_bkp)
-abline(0,1,col="red")
-plot(indels_0.01_output$identified_bkp,indels_0.01_output$actual_bkp)
-abline(0,1,col="red")
-plot(indels_0.02_output$identified_bkp,indels_0.02_output$actual_bkp)
-abline(0,1,col="red")
-plot(indels_0.03_output$identified_bkp,indels_0.03_output$actual_bkp)
-abline(0,1,col="red")
-plot(indels_0.04_output$identified_bkp,indels_0.04_output$actual_bkp)
-abline(0,1,col="red")
-
+hist(abs(indels_0_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="r=0")
+hist(abs(indels_0.01_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="r=0.01")
+hist(abs(indels_0.02_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="r=0.02")
+hist(abs(indels_0.03_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="r=0.03")
+hist(abs(indels_0.04_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,250,5),col="black",border="white",main="r=0.04")
 ```
 
+##### scatter plots for the actual_bkp vs identified_bkp
+```{r echo=FALSE}
+par(mfrow=c(1,5))
+plot(indels_0_output$identified_bkp,indels_0_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="r=0")
+abline(0,1,col="red")
+plot(indels_0.01_output$identified_bkp,indels_0.01_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="r=0.01")
+abline(0,1,col="red")
+plot(indels_0.02_output$identified_bkp,indels_0.02_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="r=0.02")
+abline(0,1,col="red")
+plot(indels_0.03_output$identified_bkp,indels_0.03_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="r=0.03")
+abline(0,1,col="red")
+plot(indels_0.04_output$identified_bkp,indels_0.04_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="r=0.04")
+abline(0,1,col="red")
+```
 
-```{r}
+\newpage
+#### Section 4: Different indel sizes
+##### histograms
+```{r echo=FALSE}
 par(mfrow=c(1,4))
-plot(indels_q_0.1_output$identified_bkp,indels_q_0.1_output$actual_bkp)
+hist(abs(indels_q_0.1_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,300,5),col="black",border="white",main="q=0.1")
+hist(abs(indels_q_0.3_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="q=0.3")
+hist(abs(indels_q_0.4_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="q=0.4")
+hist(abs(indels_q_0.5_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="q=0.5")
+```
+
+##### scatter plots for the actual_bkp vs identified_bkp
+```{r echo=FALSE}
+par(mfrow=c(1,4))
+plot(indels_q_0.1_output$identified_bkp,indels_q_0.1_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="q=0.1")
 abline(0,1,col="red")
-plot(indels_q_0.3_output$identified_bkp,indels_q_0.3_output$actual_bkp)
+plot(indels_q_0.3_output$identified_bkp,indels_q_0.3_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="q=0.3")
 abline(0,1,col="red")
-plot(indels_q_0.4_output$identified_bkp,indels_q_0.4_output$actual_bkp)
+plot(indels_q_0.4_output$identified_bkp,indels_q_0.4_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="q=0.4")
 abline(0,1,col="red")
-plot(indels_q_0.5_output$identified_bkp,indels_q_0.5_output$actual_bkp)
+plot(indels_q_0.5_output$identified_bkp,indels_q_0.5_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="q=0.5")
 abline(0,1,col="red")
 ```
 
 
-#######################################################################
-
-#######################################################################
-# Section 4 : length
-```{r}
+\newpage
+#### Section 5 : Different sequence lengths
+```{r echo=FALSE}
 len_100_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_seq_length/results_all/simulation_50-50/jump_once_only/length_100_output_error.csv"
                             , header=FALSE
                             , data.table = FALSE)
@@ -296,21 +341,30 @@ colnames(len_250_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_er
 colnames(len_300_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
 ```
 
-
-```{r}
+##### histograms
+```{r echo=FALSE}
 par(mfrow=c(1,4))
-plot(len_100_output$identified_bkp,len_100_output$actual_bkp)
+hist(abs(len_100_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="len=100")
+hist(abs(len_150_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="len=150")
+hist(abs(len_250_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,250,5),col="black",border="white",main="len=250")
+hist(abs(len_300_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,300,5),col="black",border="white",main="len=300")
+```
+
+##### scatter plots for the actual_bkp vs identified_bkp
+```{r echo=FALSE}
+par(mfrow=c(1,4))
+plot(len_100_output$identified_bkp,len_100_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="len=100")
 abline(0,1,col="red")
-plot(len_150_output$identified_bkp,len_150_output$actual_bkp)
+plot(len_150_output$identified_bkp,len_150_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="len=150")
 abline(0,1,col="red")
-plot(len_250_output$identified_bkp,len_250_output$actual_bkp)
+plot(len_250_output$identified_bkp,len_250_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="len=250")
 abline(0,1,col="red")
-plot(len_300_output$identified_bkp,len_300_output$actual_bkp)
+plot(len_300_output$identified_bkp,len_300_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="len=300")
 abline(0,1,col="red")
 ```
 
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 cor(len_100_output$identified_bkp,len_100_output$actual_bkp)
 cor(len_150_output$identified_bkp,len_150_output$actual_bkp)
 cor(simulation_50_50_output$identified_bkp,simulation_50_50_output$actual_bkp)
@@ -319,11 +373,9 @@ cor(len_300_output$identified_bkp,len_300_output$actual_bkp)
 ```
 
 
-#######################################################################
-
-#######################################################################
-# Section 5 : AA models
-```{r}
+\newpage
+#### Section 6 : Different AA models
+```{r echo=FALSE}
 DAYHOFF_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_AA_models/results_all/simulation_50-50/jump_once_only/DAYHOFF_output_error.csv"
                             , header=FALSE
                             , data.table = FALSE)
@@ -346,18 +398,28 @@ colnames(AB_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error",
 colnames(MTMAM_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
 ```
 
-##
-```{r}
+##### histograms
+```{r echo=FALSE}
 par(mfrow=c(1,5))
-plot(DAYHOFF_output$identified_bkp,DAYHOFF_output$actual_bkp)
+hist(abs(DAYHOFF_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="DAYHOFF")
+hist(abs(JTT_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="JTT")
+hist(abs(LG_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="LG")
+hist(abs(AB_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="AB")
+hist(abs(MTMAM_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="MTMAM")
+```
+
+##### scatter plots for the actual_bkp vs identified_bkp
+```{r echo=FALSE}
+par(mfrow=c(1,5))
+plot(DAYHOFF_output$identified_bkp,DAYHOFF_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="DAYHOFF")
 abline(0,1,col="red")
-plot(JTT_output$identified_bkp,JTT_output$actual_bkp)
+plot(JTT_output$identified_bkp,JTT_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="JTT")
 abline(0,1,col="red")
-plot(LG_output$identified_bkp,LG_output$actual_bkp)
+plot(LG_output$identified_bkp,LG_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="LG")
 abline(0,1,col="red")
-plot(AB_output$identified_bkp,AB_output$actual_bkp)
+plot(AB_output$identified_bkp,AB_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="AB")
 abline(0,1,col="red")
-plot(MTMAM_output$identified_bkp,MTMAM_output$actual_bkp)
+plot(MTMAM_output$identified_bkp,MTMAM_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="MTMAM")
 abline(0,1,col="red")
 ```
 
