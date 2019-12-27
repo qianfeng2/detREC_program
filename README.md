@@ -94,6 +94,6 @@ python integrated_rec_det.py output_align.txt input.fasta output.csv
 [Test_files](https://github.com/qianfeng2/detREC_program/tree/master/Test_files) sub folder, as a toy example, provides a test input.fasta and all the middle and final output files.
 
 ### Reference
-- Martine M Zilversmit et al. "Hypervariable antigen genes in malaria have ancient roots". In: BMC evolutionary biology 13.1 (2013), p. 110.
+- Zilversmit, M. M., Chase, E. K., Chen, D. S., Awadalla, P., Day, K. P., & McVean, G. (2013). Hypervariable antigen genes in malaria have ancient roots. BMC evolutionary biology, 13(1), 110.
 - Fletcher, W., & Yang, Z. (2009). INDELible: a flexible simulator of biological sequence evolution. Molecular biology and evolution, 26(8), 1879-1888.
 - Spielman, S. J., & Wilke, C. O. (2015). Pyvolve: a flexible Python module for simulating sequences along phylogenies. PloS one, 10(9), e0139047.
