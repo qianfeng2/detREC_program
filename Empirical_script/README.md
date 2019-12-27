@@ -10,8 +10,12 @@ Initial del and eps are descirbed in 1nd__mosaic_est_par.sh, same setting with p
 A grid of numbers are used to get the optimal recombination par with maximum likelihood. The script is in Sup_ghana_2.Rmd
 
 
-### Step 3: Estimate recombination parameters
+### Step 3: Obtain the partial alignment results 
 mosaic_final_submit_qian.sh offers the script for final step to get maimum likelihood path for each target sequence with previously estimated parameters. 
+
+
+File Sup_ghana_3.Rmd provides the series of estimated del and eps from step 1 results, the process of getting final recombination parameter from step 2 results.
+
 
 ### Reference
 - Tonkin-Hill, G. Q. et al. (2019). Global structure of the var genes encoding the major variant surface antigen of Plasmodium falciparum. Nat. Commun., submitted.
