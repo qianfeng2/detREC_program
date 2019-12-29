@@ -1,4 +1,4 @@
-Mosaic Program to Detect Mosaic From Large Unaligned Sequences
+Mosaic Program to Detect Partial Alignments From Large Unaligned Sequences
 -----------------------
 
 ### Step 1: Estimate major parameters del and eps
