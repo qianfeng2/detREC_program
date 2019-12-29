@@ -10,7 +10,7 @@ After each iteration, the updated del and eps are porcessed by customed estimate
 Detailed implementation is showed in the following picture:
 
 <p align="center">
-<img src="https://github.com/gtonkinhill/pairsnp/blob/master/pairsnp.png" width="330" align="center">
+<img src="https://github.com/qianfeng2/detREC_program/blob/master/Empirical_script/actual_implementation_step1.jpg" width="330" align="center">
 </p>
 
 Sup_ghana_3.Rmd provides the series of finally estimated del and eps collected in this step.
