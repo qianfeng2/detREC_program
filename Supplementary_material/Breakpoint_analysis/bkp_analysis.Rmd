@@ -18,7 +18,8 @@ There are six biologically realistic senarios in the simulation datasets,
 3. different indel rates  
 4. different indel sizes  
 5. different sequence lengths  
-6. different amino acid models.
+6. different amino acid models
+7. different dataset size (the number of sequences per replicate).
 
 Breakpoints' accuracy evaluation for each scenario is summarized by two plots, one is scatter plot between identified breakpoint and real breakpoint positions, second is the histogram for the absolute values of the difference between identified breakpoint and real breakpoint positions. So there are two plots for each case. Manuscript only offers related results when recombination proportion is equal to 50\%. This file provides all the supplementary figures for the manuscript in terms of breakpoints' accuracy evaluation section.
 
@@ -423,3 +424,57 @@ plot(MTMAM_output$identified_bkp,MTMAM_output$actual_bkp,pch=20,xlab="Identified
 abline(0,1,col="red")
 ```
 
+
+
+\newpage
+#### Section 7 : Different dataset size
+```{r echo=FALSE}
+size50_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_dataset_size/results_all/simulation_50-50/jump_once_only/size_50_output_error.csv"
+                            , header=FALSE
+                            , data.table = FALSE)
+size100_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_dataset_size/results_all/simulation_50-50/jump_once_only/size_100_output_error.csv"
+                            , header=FALSE
+                            , data.table = FALSE)
+size150_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_dataset_size/results_all/simulation_50-50/jump_once_only/size_150_output_error.csv"
+                            , header=FALSE
+                            , data.table = FALSE)
+size200_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_dataset_size/results_all/simulation_50-50/jump_once_only/size_200_output_error.csv"
+                            , header=FALSE
+                            , data.table = FALSE)
+
+colnames(size50_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
+colnames(size100_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
+colnames(size150_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
+colnames(size200_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
+
+```
+
+##### histograms
+```{r echo=FALSE}
+par(mfrow=c(1,4))
+hist(abs(size50_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="size 50")
+hist(abs(size100_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="size 100")
+hist(abs(size150_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="size 150")
+hist(abs(size200_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="size200")
+
+```
+
+##### scatter plots for the actual_bkp vs identified_bkp
+```{r echo=FALSE}
+par(mfrow=c(1,4))
+plot(size50_output$identified_bkp,size50_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="size 50")
+abline(0,1,col="red")
+plot(size100_output$identified_bkp,size100_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="size 100")
+abline(0,1,col="red")
+plot(size150_output$identified_bkp,size150_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="size 150")
+abline(0,1,col="red")
+plot(size200_output$identified_bkp,size200_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="size 200")
+abline(0,1,col="red")
+```
+
+```{r eval=FALSE, include=FALSE}
+cor(size50_output$identified_bkp,size50_output$actual_bkp)
+cor(size100_output$identified_bkp,size100_output$actual_bkp)
+cor(size150_output$identified_bkp,size150_output$actual_bkp)
+cor(size200_output$identified_bkp,size200_output$actual_bkp)
+```
