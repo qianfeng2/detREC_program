@@ -441,27 +441,32 @@ size150_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorit
 size200_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_dataset_size/results_all/simulation_50-50/jump_once_only/size_200_output_error.csv"
                             , header=FALSE
                             , data.table = FALSE)
-
+size250_output <- fread("/Users/fengqian/Downloads/UniMelb_shared-master/algorithm_simulation/protein/snake_pipeline/final_results_dataset_size/results_all/simulation_50-50/jump_once_only/size_250_output_error.csv"
+                            , header=FALSE
+                            , data.table = FALSE)
 colnames(size50_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
 colnames(size100_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
 colnames(size150_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
 colnames(size200_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
-
+colnames(size250_output ) <- c("chunk","target","db1","db2",	"rec","sv",	"bkp_error","identified_bkp",	"actual_bkp","replicate")
 ```
 
 ##### histograms
 ```{r echo=FALSE}
-par(mfrow=c(1,4))
+#pdf(file="bkp_error.pdf", height=6, width=12)
+par(mfrow=c(1,5))
 hist(abs(size50_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="size 50")
 hist(abs(size100_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="size 100")
 hist(abs(size150_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="size 150")
 hist(abs(size200_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="size200")
-
+hist(abs(size250_output$bkp_error),xlab="Absolute value of difference",breaks=seq(0,200,5),col="black",border="white",main="size250")
+#dev.off()
 ```
 
 ##### scatter plots for the actual_bkp vs identified_bkp
 ```{r echo=FALSE}
-par(mfrow=c(1,4))
+#pdf(file="bkp_error_2.pdf", height=6, width=12)
+par(mfrow=c(1,5))
 plot(size50_output$identified_bkp,size50_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="size 50")
 abline(0,1,col="red")
 plot(size100_output$identified_bkp,size100_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="size 100")
@@ -470,6 +475,9 @@ plot(size150_output$identified_bkp,size150_output$actual_bkp,pch=20,xlab="Identi
 abline(0,1,col="red")
 plot(size200_output$identified_bkp,size200_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="size 200")
 abline(0,1,col="red")
+plot(size250_output$identified_bkp,size250_output$actual_bkp,pch=20,xlab="Identified breakpoint",ylab="Actual breakpoint",main="size 250")
+abline(0,1,col="red")
+#dev.off()
 ```
 
 ```{r eval=FALSE, include=FALSE}
@@ -477,4 +485,5 @@ cor(size50_output$identified_bkp,size50_output$actual_bkp)
 cor(size100_output$identified_bkp,size100_output$actual_bkp)
 cor(size150_output$identified_bkp,size150_output$actual_bkp)
 cor(size200_output$identified_bkp,size200_output$actual_bkp)
+cor(size250_output$identified_bkp,size250_output$actual_bkp)
 ```
