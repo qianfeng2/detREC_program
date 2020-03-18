@@ -76,7 +76,7 @@ df=do.call(rbind, bkp_data)
 df$rec<- as.factor(df$rec)
 df_once <- df[df$group=="jump_once",]
 p<-ggplot(df_once, aes(x=rec, y=bkp)) +
-  geom_violin()
+  geom_violin()+scale_y_continuous(breaks=seq(-20,20,by=5),limits=c(-20,20))
 p
 ```
 
@@ -487,3 +487,76 @@ cor(size150_output$identified_bkp,size150_output$actual_bkp)
 cor(size200_output$identified_bkp,size200_output$actual_bkp)
 cor(size250_output$identified_bkp,size250_output$actual_bkp)
 ```
+
+
+```{r}
+apply(simulation_70_30_output$bkp_error,mean)
+```
+
+```{r}
+getmode <- function(v) {
+uniqv <- unique(v)
+uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+Des_stat <- function(v){
+  temp=c(getmode(v),median(v),sum(v-median(v))/length(v),mean(v),sd(v))
+  return(temp)
+}
+Des_stat(simulation_30_70_output$bkp_error)
+Des_stat(simulation_40_60_output$bkp_error)
+Des_stat(simulation_50_50_output$bkp_error)
+Des_stat(simulation_60_40_output$bkp_error)
+Des_stat(simulation_70_30_output$bkp_error)
+cat("******************* \n")
+Des_stat(mutation_0.2_output$bkp_error)
+Des_stat(mutation_0.4_output$bkp_error)
+Des_stat(mutation_0.6_output$bkp_error)
+Des_stat(mutation_0.8_output$bkp_error)
+Des_stat(mutation_2_output$bkp_error)
+Des_stat(mutation_3_output$bkp_error)
+Des_stat(mutation_4_output$bkp_error)
+Des_stat(mutation_5_output$bkp_error)
+cat("******************* \n")
+Des_stat(indels_0.01_output$bkp_error)
+Des_stat(indels_0.02_output$bkp_error)
+Des_stat(indels_0.03_output$bkp_error)
+Des_stat(indels_0.04_output$bkp_error)
+Des_stat(indels_q_0.1_output$bkp_error)
+Des_stat(indels_q_0.3_output$bkp_error)
+Des_stat(indels_q_0.4_output$bkp_error)
+Des_stat(indels_q_0.5_output$bkp_error)
+cat("******************* \n")
+Des_stat(len_100_output$bkp_error)
+Des_stat(len_150_output$bkp_error)
+Des_stat(len_250_output$bkp_error)
+Des_stat(len_300_output$bkp_error)
+cat("******************* \n")
+Des_stat(AB_output$bkp_error)
+Des_stat(DAYHOFF_output$bkp_error)
+Des_stat(JTT_output$bkp_error)
+Des_stat(LG_output$bkp_error)
+Des_stat(MTMAM_output$bkp_error)
+cat("******************* \n")
+Des_stat(size50_output$bkp_error)
+Des_stat(size100_output$bkp_error)
+Des_stat(size150_output$bkp_error)
+Des_stat(size200_output$bkp_error)
+Des_stat(size250_output$bkp_error)
+```
+
+```{r}
+library(lattice)
+#rec_pro <- data.frame(bkp=c(simulation_30_70_output$bkp_error,simulation_40_60_output$bkp_error,simulation_50_50_output$bkp_error,simulation_60_40_output$bkp_error,simulation_70_30_output$bkp_error),name=c(rep(30,length(simulation_30_70_output$bkp_error)),rep(40,length(simulation_40_60_output$bkp_error)),rep(50,length(simulation_50_50_output$bkp_error)),rep(60,length(simulation_60_40_output$bkp_error)),rep(70,length(simulation_70_30_output$bkp_error))))
+
+#ggplot(rec_pro) + geom_density(aes(x = bkp), bw = 1) + facet_wrap(~name)+scale_x_continuous(breaks=seq(-30,30,by=5),limits=c(-30,30))+     geom_rug(data=rec_pro_sample, aes(x = bkp, y = 0), position = position_jitter(height = 0), inherit.aes = F)
+
+rec_pro_50 <- data.frame(bkp=simulation_50_50_output$bkp_error,name=rep("Default simulation dataset",length(simulation_50_50_output$bkp_error)))
+
+pdf(file="/Users/fengqian/Downloads/rec_paper_version3/figures/bkp.pdf",width=12,height=8,onefile=F)
+density_rec=ggplot(rec_pro_50) + geom_density(aes(x = bkp),adjust=2)+scale_x_continuous(breaks=seq(-30,30,by=5),limits=c(-30,30))+geom_rug( aes(x = bkp, y = 0), position = position_jitter(height = 0))+xlab("Difference of breakpoint locations")+ylab("Density")+theme(axis.title.x = element_text(size = 20), axis.title.y = element_text(size = 20))
+scatter_rec=ggplot(simulation_50_50_output, aes(x = identified_bkp, y = actual_bkp)) +
+    geom_point()+xlab("Identified breakpoint location")+ylab("True breakpoint location")+theme(axis.title.x = element_text(size = 20), axis.title.y = element_text(size = 20))+scale_x_continuous(expand = c(0, 0),breaks=seq(0,200,by=50),limits=c(0,200))+scale_y_continuous(expand = c(0, 0))
+ggarrange(scatter_rec, density_rec, ncol = 2, labels = c("A", "B"))
+dev.off()
+```
+
