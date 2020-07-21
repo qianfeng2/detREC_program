@@ -9,8 +9,8 @@ This program is a novel approach for detecting recombinant sequences and corresp
 ### Required softwares
 - MAFFT used to align one sequence to another two pre_aligned sequences (https://mafft.cbrc.jp/alignment/software/)
 - SeqKit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
-- Python  
--- Require modules for Python 2+ user:  
+- Python 2+ 
+-- Require Python modules:  
 mungo (`pip install git+https://github.com/PapenfussLab/Mungo`)  
 Bio  
 pandas  
