@@ -1,7 +1,7 @@
 ---
 title: "Supporting Figures about Breakpoints Accuracy"
 author: "Qian Feng"
-date: "11/12/2019"
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
 output: pdf_document
 ---
 
@@ -489,9 +489,7 @@ cor(size250_output$identified_bkp,size250_output$actual_bkp)
 ```
 
 
-```{r}
-apply(simulation_70_30_output$bkp_error,mean)
-```
+
 
 ```{r}
 getmode <- function(v) {
@@ -578,15 +576,25 @@ sum(abs(MTMAM_output$bkp_error)<=10)/length(MTMAM_output$bkp_error)
 library(lattice)
 #rec_pro <- data.frame(bkp=c(simulation_30_70_output$bkp_error,simulation_40_60_output$bkp_error,simulation_50_50_output$bkp_error,simulation_60_40_output$bkp_error,simulation_70_30_output$bkp_error),name=c(rep(30,length(simulation_30_70_output$bkp_error)),rep(40,length(simulation_40_60_output$bkp_error)),rep(50,length(simulation_50_50_output$bkp_error)),rep(60,length(simulation_60_40_output$bkp_error)),rep(70,length(simulation_70_30_output$bkp_error))))
 
-#ggplot(rec_pro) + geom_density(aes(x = bkp), bw = 1) + facet_wrap(~name)+scale_x_continuous(breaks=seq(-30,30,by=5),limits=c(-30,30))+     geom_rug(data=rec_pro_sample, aes(x = bkp, y = 0), position = position_jitter(height = 0), inherit.aes = F)
+
 
 rec_pro_50 <- data.frame(bkp=simulation_50_50_output$bkp_error,name=rep("Default simulation dataset",length(simulation_50_50_output$bkp_error)))
 
-pdf(file="/Users/fengqian/Downloads/rec_paper_version3/figures/bkp.pdf",width=12,height=8,onefile=F)
-density_rec=ggplot(rec_pro_50, aes(x=bkp)) + geom_density(adjust = 5)+geom_histogram(aes(y=..density..),colour="black", fill="gray")+scale_x_continuous(breaks=seq(-30,30,by=5),limits=c(-30,30))+xlab("Difference of breakpoint locations")+ylab("Density")+theme(axis.title.x = element_text(size = 20), axis.title.y = element_text(size = 20))
+pdf(file="/Users/fengqian/Downloads/rec_paper_version3/figures/bkp.pdf",height=8, width=12)
+#ggplot(rec_pro_50, aes(x=bkp)) + geom_histogram(aes(y=..density..),colour="black", fill="gray")+scale_x_continuous(breaks=seq(-50,50,by=5),limits=c(-30,30))+xlab("Difference of breakpoint locations")+ylab("Density")+theme(axis.title.x = element_text(size = 20), axis.title.y = element_text(size = 20))
 
-density_2d_rec=ggplot(simulation_50_50_output, aes(x = identified_bkp, y = actual_bkp) ) +geom_bin2d()+xlab("Identified breakpoint location")+ylab("True breakpoint location")+theme(axis.title.x = element_text(size = 20), axis.title.y = element_text(size = 20))+scale_x_continuous(expand = c(0, 0),breaks=seq(0,200,by=50),limits=c(0,200))+scale_y_continuous(expand = c(0, 0))
-ggarrange(density_2d_rec, density_rec, ncol = 2, labels = c("A", "B"))
+rec_pro_50=data.frame(bkp=simulation_50_50_output$bkp_error)
+p<-ggplot(rec_pro_50, aes(x=bkp)) + 
+  geom_histogram(color=I("black"), fill=I("black"),alpha=I(.4))+xlab("Breakpoint distance difference")+ylab( "Occurrence")+ theme_bw()+ theme(panel.grid.major = element_blank(),panel.grid.minor = element_blank())+theme(axis.text.x = element_text(size=10),axis.text.y = element_text(size=10),axis.title.y = element_text(size = 14),axis.title.x = element_text(size = 14))+scale_x_continuous(breaks=seq(-200,200,by=5),limits = c(-30,30))+scale_y_continuous(expand = c(0, 0),limits = c(0,3500))
+p
+#+geom_density(adjust = 5)
+#+scale_y_continuous(expand = c(0, 0),limits = c(0,3000))+scale_x_continuous(expand = c(-0.01, 0))
+,bins=30
+dev.off()
+
+pdf(file="/Users/fengqian/Downloads/supplementary_files_QianFeng/S4_bkp_density.pdf",onefile=F)
+ggplot(simulation_50_50_output, aes(x = identified_bkp, y = actual_bkp) ) +geom_bin2d()+xlab("Identified breakpoint location")+ylab("True breakpoint location")+theme(axis.title.x = element_text(size = 20), axis.title.y = element_text(size = 20))+scale_x_continuous(expand = c(0, 0),breaks=seq(0,200,by=50),limits=c(0,200))+scale_fill_continuous(type = "viridis")
+#ggarrange(density_2d_rec, density_rec, ncol = 2, labels = c("A", "B"))+scale_y_continuous(expand = c(0, 0))
 dev.off()
 ```
 
