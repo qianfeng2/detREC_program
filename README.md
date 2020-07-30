@@ -90,6 +90,12 @@ Each row records the chunk index in partial alignment result, target, db1 and db
 ### Run Example
 
 ```
+mkdir test
+
+cp Test_files/input.fasta Test_files/output_align.txt Test_files/integrated_rec_det.py test
+
+cd test
+
 python integrated_rec_det.py output_align.txt input.fasta output.csv
 ```
 [Test_files](https://github.com/qianfeng2/detREC_program/tree/master/Test_files) sub folder, as a toy example, provides a test input.fasta and all the middle and final output files.
