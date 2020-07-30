@@ -1,7 +1,7 @@
 Mosaic Program to Detect Partial Alignments From Large Unaligned Sequences
 -----------------------
 
-### Step 1: Estimate major parameters &delta and &epsilon.
+### Step 1: Estimate major parameters $$\delta$$ and $$\epsilon$$.
 Scripts for this step are shown in *_nd_mosaic_est_par.sh. 
 Initial del and eps are descirbed in 1nd__mosaic_est_par.sh, same setting with previous pipeline when dealing with DBLa sequences collected from 10 countries (Tonkin-Hill, unpublished). 
 
@@ -22,7 +22,7 @@ Detailed implementation is showed in the following picture:
 Sup_ghana_3.Rmd provides the series of finally estimated del and eps collected in this step.
 
 
-### Step 2: Estimate recombination parameter &rho.
+### Step 2: Estimate recombination parameter $$\rho$$.
 A grid of numbers are used to get the optimal recombination par with maximum likelihood. The script is in Sup_ghana_3.Rmd
 
 
