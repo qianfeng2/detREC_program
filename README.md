@@ -10,11 +10,9 @@ This program is a novel approach for detecting recombinant sequences and corresp
 - MAFFT used to align one sequence to another two pre_aligned sequences (https://mafft.cbrc.jp/alignment/software/)
 - SeqKit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
 - Python >=3.5
--- Require Python modules:   
-biopython  
-pandas  
-scipy  
-numpy  
+```
+pip install -r requirements.txt
+```
 
 
 ### Optional softwares (only used for simulation section)
