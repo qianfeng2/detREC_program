@@ -27,7 +27,7 @@ Sup_ghana_3.Rmd provides the series of finally estimated del and eps collected i
 A grid of numbers are used to get the optimal recombination par with maximum likelihood. The script is in Sup_ghana_3.Rmd
 
 
-### Step 3: Obtain the partial alignment results 
+### Step 3: Obtain the partial alignment results.
 mosaic_final_submit_qian.sh offers the script for final step to get maimum likelihood path for each target sequence with previously estimated parameters. 
 
 
