@@ -1,6 +1,6 @@
 A Program to Detect Recombinants From Unaligned Sequences
 -----------------------
-[![Python 2.7](https://img.shields.io/badge/python-2.7-blue.svg)](https://www.python.org/download/releases/2.7/)
+[![Python 3.6](https://img.shields.io/pypi/pyversions/Django)](https://www.python.org/downloads/release/python-360/)
 [![License: GPL-3.0](https://img.shields.io/cran/l/devtools)](https://opensource.org/licenses/GPL-3.0)
 ### About
 This program is a novel approach for detecting recombinant sequences and corresponding statistical support values from unaligned biological sequences. This framework develops on the basis of the paritial alignment results from jumping hidden markov model (JHMM, or mosaic), after that, by dividing them into multiple equal-length triples, on which we use a new distance-based procedure to identify recombinant from each triple. Statistical support values calculated from Bootstrap, the bigger the better, indicating the robustness of identified recombinants.
@@ -9,10 +9,9 @@ This program is a novel approach for detecting recombinant sequences and corresp
 ### Required softwares
 - MAFFT used to align one sequence to another two pre_aligned sequences (https://mafft.cbrc.jp/alignment/software/)
 - SeqKit used to concatenate the two segments for each triple (https://bioinf.shenwei.me/seqkit/download/)
-- Python 2+
--- Require Python modules:  
-mungo (`pip install git+https://github.com/PapenfussLab/Mungo`)  
-Bio  
+- Python >=3.5
+-- Require Python modules:   
+biopython  
 pandas  
 scipy  
 numpy  
@@ -29,8 +28,8 @@ csv
 - [Snakemake](https://snakemake.readthedocs.io/en/stable/) for reproducible research pipeline 
 
 ### Required Input Files 
-- Patial alignment produced by JHMM (please see [MZmosaic](https://github.com/qianfeng2/detREC_program/tree/master/MZmosaic) sub folder)
 - Input fasta format biological sequences, maximum length for identifiers length is 15 (Zilversmit et al., 2013)
+- Patial alignment produced by JHMM (please see [MZmosaic](https://github.com/qianfeng2/detREC_program/tree/master/MZmosaic) sub folder)
 
 ### Creating Input File
 
@@ -38,9 +37,13 @@ csv
 
 ```
 cd /Users/fengqian/MZmosaic
+
 ./mosaic -estimate -seq input.fasta  -rec 0 -aa -tag middle_file
+
 delta=$(grep -o 'Gap initiation: .*$' middle_file_align.txt | cut -c17-)
+
 epsl=$(grep -o 'Gap extension:  .*$' middle_file_align.txt | cut -c17-)
+
 ./mosaic -seq input.fasta -del $delta -eps $epsl -aa -tag output -grid 0.001 0.010 10 1
 ```
 
