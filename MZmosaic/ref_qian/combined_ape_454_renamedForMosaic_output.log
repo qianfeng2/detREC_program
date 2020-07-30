@@ -1,248 +1,0 @@
-
-
-*** Running MOSAIC ***
-
-A program for detecting mosaic gene structures
-
-Program returns (for each sequence) a maximum accuracy alignment path
-
-
-
-*** Reading input parameters and initialising ***
-
-
-Returning maximum accuracy alignment
-
-Groups identified: db	target	
-Target group: target
-Target identified as group 2Parameters
-
-Gap initiation: 0.01668
-Gap extension:  0.27331
-Termination:    0.00100
-Recombination:  0.01400
-fMatch:         0.75000
-
-State frequencies:
-?	0.04000
-A	0.04000
-R	0.04000
-N	0.04000
-D	0.04000
-C	0.04000
-Q	0.04000
-E	0.04000
-G	0.04000
-H	0.04000
-I	0.04000
-L	0.04000
-K	0.04000
-M	0.04000
-F	0.04000
-P	0.04000
-S	0.04000
-T	0.04000
-W	0.04000
-Y	0.04000
-V	0.04000
-B	0.04000
-Z	0.04000
-X	0.04000
-.	0.04000
-
-Emission probabilities:
-	?	A	R	N	D	C	Q	E	G	H	I	L	K	M	F	P	S	T	W	Y	V	B	Z	X	.	
-?	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	0.04000	
-A	0.04000	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-R	0.04000	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-N	0.04000	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-D	0.04000	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-C	0.04000	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-Q	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-E	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-G	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-H	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-I	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-L	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-K	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-M	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-F	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-P	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-S	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-T	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-W	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	
-Y	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	0.00652	
-V	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	0.00652	
-B	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	0.00652	
-Z	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	0.00652	
-X	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	0.00652	
-.	0.04000	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.00652	0.81000	
-
-
-
-*** Reading sequences from input file: combined_ape_454_renamedForMosaic.fasta ***
-
-
-
-Read 31982 sequences
-
-
-
-*** Computing alignment paths for each sequence ***
-
-
-
-*** Allocated memory for matrices (31946) ***
-
-Aligning sequence target_seq1 to rest using HMM
-Log likelihood from forward algorithm  = -181.68914
-Log likelihood from backward algorithm = -181.68914
-
-Aligning sequence target_seq2 to rest using HMM
-Log likelihood from forward algorithm  = -148.64331
-Log likelihood from backward algorithm = -148.64331
-
-Aligning sequence target_seq3 to rest using HMM
-Log likelihood from forward algorithm  = -165.12535
-Log likelihood from backward algorithm = -165.12535
-
-Aligning sequence target_seq4 to rest using HMM
-Log likelihood from forward algorithm  = -155.58549
-Log likelihood from backward algorithm = -155.58549
-
-Aligning sequence target_seq5 to rest using HMM
-Log likelihood from forward algorithm  = -192.70429
-Log likelihood from backward algorithm = -192.70429
-
-Aligning sequence target_seq6 to rest using HMM
-Log likelihood from forward algorithm  = -155.84611
-Log likelihood from backward algorithm = -155.84611
-
-Aligning sequence target_seq7 to rest using HMM
-Log likelihood from forward algorithm  = -150.03194
-Log likelihood from backward algorithm = -150.03194
-
-Aligning sequence target_seq8 to rest using HMM
-Log likelihood from forward algorithm  = -157.06748
-Log likelihood from backward algorithm = -157.06748
-
-Aligning sequence target_seq9 to rest using HMM
-Log likelihood from forward algorithm  = -204.93573
-Log likelihood from backward algorithm = -204.93573
-
-Aligning sequence target_seq10 to rest using HMM
-Log likelihood from forward algorithm  = -138.11394
-Log likelihood from backward algorithm = -138.11394
-
-Aligning sequence target_seq11 to rest using HMM
-Log likelihood from forward algorithm  = -168.92068
-Log likelihood from backward algorithm = -168.92068
-
-Aligning sequence target_seq12 to rest using HMM
-Log likelihood from forward algorithm  = -145.04924
-Log likelihood from backward algorithm = -145.04924
-
-Aligning sequence target_seq13 to rest using HMM
-Log likelihood from forward algorithm  = -176.35670
-Log likelihood from backward algorithm = -176.35670
-
-Aligning sequence target_seq14 to rest using HMM
-Log likelihood from forward algorithm  = -139.92924
-Log likelihood from backward algorithm = -139.92924
-
-Aligning sequence target_seq15 to rest using HMM
-Log likelihood from forward algorithm  = -224.63123
-Log likelihood from backward algorithm = -224.63123
-
-Aligning sequence target_seq16 to rest using HMM
-Log likelihood from forward algorithm  = -190.68260
-Log likelihood from backward algorithm = -190.68260
-
-Aligning sequence target_seq17 to rest using HMM
-Log likelihood from forward algorithm  = -184.10364
-Log likelihood from backward algorithm = -184.10364
-
-Aligning sequence target_seq18 to rest using HMM
-Log likelihood from forward algorithm  = -182.99608
-Log likelihood from backward algorithm = -182.99608
-
-Aligning sequence target_seq19 to rest using HMM
-Log likelihood from forward algorithm  = -222.69303
-Log likelihood from backward algorithm = -222.69303
-
-Aligning sequence target_seq20 to rest using HMM
-Log likelihood from forward algorithm  = -208.12158
-Log likelihood from backward algorithm = -208.12158
-
-Aligning sequence target_seq21 to rest using HMM
-Log likelihood from forward algorithm  = -205.13986
-Log likelihood from backward algorithm = -205.13986
-
-Aligning sequence target_seq22 to rest using HMM
-Log likelihood from forward algorithm  = -179.42180
-Log likelihood from backward algorithm = -179.42180
-
-Aligning sequence target_seq23 to rest using HMM
-Log likelihood from forward algorithm  = -199.37689
-Log likelihood from backward algorithm = -199.37689
-
-Aligning sequence target_seq24 to rest using HMM
-Log likelihood from forward algorithm  = -182.81845
-Log likelihood from backward algorithm = -182.81845
-
-Aligning sequence target_seq25 to rest using HMM
-Log likelihood from forward algorithm  = -155.02182
-Log likelihood from backward algorithm = -155.02182
-
-Aligning sequence target_seq26 to rest using HMM
-Log likelihood from forward algorithm  = -187.23504
-Log likelihood from backward algorithm = -187.23504
-
-Aligning sequence target_seq27 to rest using HMM
-Log likelihood from forward algorithm  = -188.70416
-Log likelihood from backward algorithm = -188.70416
-
-Aligning sequence target_seq28 to rest using HMM
-Log likelihood from forward algorithm  = -214.00750
-Log likelihood from backward algorithm = -214.00750
-
-Aligning sequence target_seq29 to rest using HMM
-Log likelihood from forward algorithm  = -181.22223
-Log likelihood from backward algorithm = -181.22223
-
-Aligning sequence target_seq30 to rest using HMM
-Log likelihood from forward algorithm  = -196.71893
-Log likelihood from backward algorithm = -196.71893
-
-Aligning sequence target_seq31 to rest using HMM
-Log likelihood from forward algorithm  = -197.71244
-Log likelihood from backward algorithm = -197.71244
-
-Aligning sequence target_seq32 to rest using HMM
-Log likelihood from forward algorithm  = -179.82892
-Log likelihood from backward algorithm = -179.82892
-
-Aligning sequence target_seq33 to rest using HMM
-Log likelihood from forward algorithm  = -167.45119
-Log likelihood from backward algorithm = -167.45119
-
-Aligning sequence target_seq34 to rest using HMM
-Log likelihood from forward algorithm  = -197.28298
-Log likelihood from backward algorithm = -197.28298
-
-Aligning sequence target_seq35 to rest using HMM
-Log likelihood from forward algorithm  = -197.95979
-Log likelihood from backward algorithm = -197.95979
-
-Aligning sequence target_seq36 to rest using HMM
-Log likelihood from forward algorithm  = -171.88119
-Log likelihood from backward algorithm = -171.88119
-
-
-
-*** Memory deallocated ***
-
-Combined log likelihood = -6495.010
-
-*** Program completed in 39872.920 secs CPU time! ***
-
