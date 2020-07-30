@@ -1,5 +1,5 @@
 #######################################################################
-# Copyright (C) 2019  Qian Feng
+# Copyright (C) 2020  Qian Feng
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,19 +15,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Usuage instruction
-# This code to generate a list of recombinants according to proposed novel algorithm from partial alignment results. 
+# This code to generate a list of recombinants according to proposed novel algorithm from mosaic representation results. 
 # Note that this code use all triples in jump # chunks(ont only jump once and twice chunks). 
 # Input are three files, 
 ## The first one is partial alignment from mosaic, eg.its name is ***_align.txt; 
 ## Second file is the original .fasta file
 ## Third file is the output csv file showing recombinants, its name is ***.csv
-# This is used in Python 2 (reason is that one of python modules "mungo" is only used for python 2)
-# Usage example: /Users/fengqian/anaconda2/bin/python /Users/fengqian/Desktop/replicate_76/codes/integrated_rec_det.py /Users/fengqian/Desktop/replicate_76/simulated_seqs_recombined_align.txt /Users/fengqian/Desktop/replicate_76/integrated_rec_det_results.csv
+# This is used in Python >= 3.5  
+# Usage example: python /Users/fengqian/Desktop/replicate_76/codes/integrated_rec_det.py /Users/fengqian/Desktop/replicate_76/simulated_seqs_recombined_align.txt /Users/fengqian/Desktop/replicate_76/integrated_rec_det_results.csv
 #######################################################################
 
 
-from __future__ import division
-from mungo.fasta import FastaReader
+
 from collections import defaultdict
 from collections import Counter
 from Bio.Phylo.TreeConstruction import DistanceCalculator
@@ -52,7 +51,7 @@ dir=os.getcwd();dir=dir+"/"
 # section1: mafft_prepared_all_real.py
 ### Step1: make new file folders.
 path = dir+"complement_chunks";os.makedirs(path)
-with open(input, 'rU') as infile:
+with open(input) as infile:
     unique_line_index = [];Par_line_index = 0;Chunk_count = 0
     for i, line in enumerate(infile.readlines()):
         line = line.strip().split()
@@ -75,8 +74,8 @@ for i in range(Chunk_count):
 ### Step2: extract each chunk's original segment pairs. 
 for i in range(Chunk_count):
     len_db=[];bkp=len_db;db_line_index=range(startline[i]+2,endline[i]+1)##note bkp include the last position of target seq
-    line_index=[startline[i]]+range(startline[i]+2,endline[i]+1)
-    with open(input, 'rU') as infile:
+    line_index=[*[startline[i]],*range(startline[i]+2,endline[i]+1)]
+    with open(input) as infile:
         for j, line in enumerate(infile.readlines()):           
             if j==startline[i]:
                 line_target=line.strip().split();s=line_target[1];h=line_target[0]
@@ -94,12 +93,12 @@ for i in range(Chunk_count):
     for k in range(mosaic_output_dbcount[i]):            
         with open(dir+"temp/chunk_"+str(i)+"/s"+str((k+1))+"/original.fasta","a+") as outfile:
             if k==0:
-                with open(dir+"temp/chunk_"+str(i)+"/original_chunk_db.txt","rU") as db_infile:
+                with open(dir+"temp/chunk_"+str(i)+"/original_chunk_db.txt") as db_infile:
                     for n, db_line in enumerate(db_infile.readlines()):
                         line1=db_line.strip().split();h1=line1[0];s1=line1[1]
                         if n==0: outfile.write(">"+h+"\n"+s[:bkp[k]]+"\n"+">"+h1+"\n"+s1+"\n")
             else: 
-                with open(dir+"temp/chunk_"+str(i)+"/original_chunk_db.txt","rU") as db_infile:
+                with open(dir+"temp/chunk_"+str(i)+"/original_chunk_db.txt") as db_infile:
                     for n, db_line in enumerate(db_infile.readlines()):
                         line1=db_line.strip().split();h1=line1[0];s1=line1[1]
                         if n==k: outfile.write(">"+h+"\n"+s[bkp[k-1]:bkp[k]]+"\n"+">"+h1+"\n"+s1+"\n")
@@ -111,12 +110,13 @@ for i in range(Chunk_count):
 ### Step3: add the part for mafft alignment. use replace not split.
 
 mapping_dict_seq_identifier = {}
-for h,s in FastaReader(input_fasta):
-    mapping_dict_seq_identifier[h]=s
+test = SeqIO.to_dict(SeqIO.parse(input_fasta, "fasta"))
+for k,v in test.items():
+    mapping_dict_seq_identifier[k]=str(v.seq)
 for i in range(Chunk_count):
-    db_line_index=range(startline[i]+2,endline[i]+1);line_index=[startline[i]]+range(startline[i]+2,endline[i]+1)
+    db_line_index=range(startline[i]+2,endline[i]+1);line_index=[*[startline[i]],*range(startline[i]+2,endline[i]+1)] 
     for k in range(mosaic_output_dbcount[i]-1):     
-        with open(input, 'rU') as infile:
+        with open(input) as infile:
             for j, line in enumerate(infile.readlines()):                 
                 if j == db_line_index[k]:
                     line1=line.strip().split()
@@ -126,7 +126,7 @@ for i in range(Chunk_count):
                         with open(dir+"temp/chunk_"+str(i)+"/s"+str((k+2))+"/add_up.fasta","w") as outfile:
                             if original_seq.find(s)!= -1 and original_seq.split(s)[1]!="": outfile.write(">"+h1+"\n"+original_seq.split(s)[1]+"\n")
     for m in range(1,mosaic_output_dbcount[i]):     
-        with open(input, 'rU') as infile:
+        with open(input) as infile:
             for j, line in enumerate(infile.readlines()):                 
                 if j == db_line_index[m]:
                     line1=line.strip().split()
@@ -185,7 +185,6 @@ for i in range(Chunk_count):
         if os.path.isfile(filename1) and os.path.isfile(filename2): 
             records_bkp = list(SeqIO.parse(filename1, "fasta"))
             bkp=len(str(records_bkp[1].seq))
-            #for h,s in FastaReader(filename1):bkp=len(s)
             cmd="seqkit concat "+filename1+" "+filename2+" > "+"complement_chunks/chunk"+str(i)+"_s"+str((k+1))+str((k+2))+"_"+str(bkp)+".fasta"
             os.system(cmd)
 
@@ -198,9 +197,8 @@ for i in range(Chunk_count):
 #### This function is used for returning the recombinant sequence by new method
 def main_new(fastafile,bkp):
     distance_name=["ab","ac","bc"];
-    seq_name=[]    
-    for h,s in FastaReader(fastafile):
-        seq_name.append(h)
+    temp = SeqIO.to_dict(SeqIO.parse(fastafile, "fasta"))    
+    seq_name = [*temp]
     aln = AlignIO.read(open(fastafile), 'fasta')
     calculator = DistanceCalculator('blosum62')
     segment_1 = calculator.get_distance(aln[:, :bkp])
@@ -224,8 +222,11 @@ for fasta_file in glob.glob(input+"/*.fasta"):
     #print initial
     mapping_dict={};seq_name=[] 
     pvalue=0;permutation=100;
-    for h,s in FastaReader(fasta_file):
-        mapping_dict[h]=s;seq_name.append(h);full_alignment_length=len(s)
+    test = SeqIO.to_dict(SeqIO.parse(fasta_file, "fasta"))
+    seq_name = [*test]
+    for k,v in test.items():
+        mapping_dict[k]=str(v.seq)
+    full_alignment_length=len(mapping_dict[k])
     for m in range(permutation):
         index_1 = np.random.choice(bkp, bkp, replace=True);shuffled_sequences_1=[]
         for n in [mapping_dict[seq_name[0]][0:bkp],mapping_dict[seq_name[1]][0:bkp],mapping_dict[seq_name[2]][0:bkp]]:
@@ -247,7 +248,7 @@ for fasta_file in glob.glob(input+"/*.fasta"):
             pvalue+=1/permutation
         os.remove(dir+"temp/shuffled_sequence"+str(m)+".fasta")
     #rec_onesetting.append(initial);pvalue_onesetting.append(pvalue)
-    result=[chunk,seq_name[0],seq_name[1],seq_name[2],initial,pvalue]#headers=["chunk","target","db1","db2","rec","sv"]
+    result=[chunk,seq_name[0],seq_name[1],seq_name[2],initial,"{:.2f}".format(pvalue)]#headers=["chunk","target","db1","db2","rec","sv"]
     with open(output, 'a+') as outfile:
         outfile.write(",".join([str(l) for l in result]) + "\n")
 

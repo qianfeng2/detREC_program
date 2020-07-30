@@ -1,1 +1,0 @@
-/Users/fengqian/anaconda2/bin/python integrated_rec_det.py output_align.txt input.fasta output.csv
