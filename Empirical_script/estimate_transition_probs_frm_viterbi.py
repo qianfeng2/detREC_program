@@ -63,13 +63,9 @@ def loadCounts(align_file, verbose):
       if not isAlignment: continue #we are not at the end of an alignment yet
 
       if len(line.strip().split())<1: #we have got to the end of the alignment
-        #assert len(target)==len(seq), "Lengths of target and seq do not match!"
-        if len(target)!= len(seq):
-          print(target)
-          pass
-        else:
-          alignments.append((target,seq))
-          isAlignment=False
+        assert len(target)==len(seq), "Lengths of target and seq do not match!"
+        alignments.append((target,seq))
+        isAlignment=False
 
   return alignments
 
@@ -164,9 +160,9 @@ def check_runs(number_runs, align_files, verbose):
 
   if verbose:
     print "Checking runs completed successfully..."
-
+  
   log_file_ext = align_files[0].split("_run")[0]
-
+  
   total_log_likelihood = 0.0
 
   for i in range(1, number_runs+1):
@@ -176,7 +172,7 @@ def check_runs(number_runs, align_files, verbose):
     with open(logfile, 'rU') as infile:
       finished=False
       for line in infile:
-        if "Combined log likelihood =" in line:
+        if "Maximum log-likelihood =" in line:
           total_log_likelihood+=float(line.split("=")[1].strip())
         if "Program completed in" in line:
           finished=True
@@ -200,13 +196,9 @@ def main():
     , help="location of output file."
     , required=True)
 
-  parser.add_argument('--logfiles', nargs='+'
-    , dest='align_files'
-    , help='location of log files from Mosaic Viterbi run.')
-
   parser.add_argument('--align', nargs='+'
-    , dest='align_txt'
-    , help='location of alignment file from Mosaic Viterbi run.')
+    , dest='align_files'
+    , help='location of alignment files from Mosaic Viterbi run.')
 
   parser.add_argument('--verbose', dest='verbose', action='store_true'
     , default=False
@@ -218,7 +210,7 @@ def main():
     , args.verbose)
 
   alignments=[]
-  for a in args.align_txt:
+  for a in args.align_files:
     alignments = alignments + loadCounts(a, args.verbose)
 
   prob_ins, prob_ext, insert_emission, match_emission = calculate_probabilities(alignments
