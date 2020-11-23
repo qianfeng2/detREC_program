@@ -1,0 +1,37 @@
+<!--#include file="files/top.html" -->
+  
+<h1>INDELible</h1>
+<h2>[PARTITIONS] block</h2>
+
+<p>
+This block type is used to set root lengths and to choose which models are used with which trees. 
+In addition it is used when simulating multi-partitioned datasets where different sections of the 
+simulated dataset are created with different trees and models. 
+
+<hr>
+<a name="top"><br><p><u><b>Example Usage:</u></b></p></a>  
+<pre>
+  [PARTITIONS] partitionname [treename name rootlength]
+
+  [PARTITIONS] pM		
+    [t1  m1  rootlength1]
+    [t2  m2  rootlength2] 
+    [t3  b3  rootlength3]
+    [t4  m4  rootlength4]
+    [t5  b5  rootlength5]
+</pre>
+<li><i>partitionname</i> is used to identify a particular [PARTITIONS] block in the <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/tree.shtml">[EVOLVE]</a> block.</li> 
+<li><i>treename</i> is the name of any previously defined <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/tree.shtml">[TREE]</a> block.</li> 
+<li><i>name</i> is the name of any previously defined <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/model.shtml">[MODEL]</a> or 
+<a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/branches.shtml">[BRANCHES]</a> block.</li>
+<li><i>rootlength</i> is the length of the root sequence that will be generated for this partition.</li>
+<br>
+<li>If using a <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/branches.shtml">[BRANCHES]</a> block instead of a <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/model.shtml">[MODEL]</a> block 
+then remember that the trees from the <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/tree.shtml">[TREE]</a> and the <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/branches.shtml">[BRANCHES]</a> block 
+must match.</li>
+<li>Because of this it is NOT permitted to use random trees with <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/branches.shtml">[BRANCHES]</a> blocks.</li>
+<br>
+<li><i>pM</i> is an example of how to define the [PARTITIONS] block when you want to generate multi-partitioned datasets.</li>
+<li>The tree, root length and model/branch class can be different in each and every partition and there is no limit on the number of partitions other than that imposed by computer memory.</li>
+<li>However the trees must all have the same number of taxa and branch-classes can not be used in the same partition as random trees.
+<!--#include file="files/bottom.html" -->

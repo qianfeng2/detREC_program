@@ -1,0 +1,62 @@
+<!--#include file="example_files/top.html" -->
+  
+<h1>INDELible</h1>
+<h2>Tutorial Section</h2>
+
+
+<p>
+<li>Below are example control files that introduce the different features available in INDELible.  </li>
+<li>Each example file is annotated with actual commands shown in <font color=red>red</font>.  </li>
+<li>At the beginning or end of most files there are some explanations of what is in the file.  </li>
+<li>This tutorial and text versions of all the control files are included in the download package. </li>
+<li>There is a lot of overlap with the manual section - which is designed to be a command reference guide that you can dip into when you want to 
+know about one command or block type.</li>
+<li>In contrast, this tutorial section includes real control files that gradually introduce new & more complex features in real settings.</li>
+<li>If you are new to INDELible then it is recommended to read the examples in order.</li>
+</p>
+<br>
+
+<hr>
+
+
+<ul>
+<br><p><u><b>Simple Examples:</u></b></p>
+<li><a href="example_files/basicnucleotide.shtml">This very simple control file</a> will show you the <font color=blue>basic format</font> of the INDELible control file for <font color=blue>nucleotide</font> simulations.</li>
+
+<li><a href="example_files/basicaminoacid.shtml">This very simple control file</a> will show you the <font color=blue>basic format</font> of the INDELible control file for <font color=blue>amino-acid</font> simulations.</li>
+<li><a href="example_files/basiccodon.shtml">This very simple control file</a> will show you the <font color=blue>basic format</font> of the INDELible control file for <font color=blue>codon</font> simulations.</li>
+
+
+<br><p><u><b>Evolutionary Models:</u></b></p>
+<li><a href="example_files/NUCLEOTIDE.shtml">This control file</a> will show you how to specify different <font color=blue>nucleotide substitution models</font>.</li>
+<li><a href="example_files/AMINOACID.shtml">This control file</a> will show you how to specify different <font color=blue>amino-acid substitution models</font>.</li>
+<li><a href="example_files/rates.shtml">This control file</a> will show you how to add <font color=blue>gamma rates</font> and/or a <font color=blue>proportion of 
+invariable sites</font>.</li>
+<li><a href="example_files/CODON.shtml">This control file</a> will show you how to specify <font color=blue>codon substitution models</font> & change the genetic code.</li>
+<li><a href="example_files/CODONsites.shtml">This control file</a> will show you how to specify different <font color=blue>codon site models</font>.</li>
+<li><a href="example_files/indels.shtml">This control file</a> will show you how to specify different <font color=blue>indel models</font>.</li>
+
+<br><p><u><b>Non-Homogenous Non-Stationary Models:</u></b></p>
+<li><a href="example_files/branch.shtml">This control file</a> will introduce you to letting models change across the tree, by showing 
+you how to implement <font color=blue>codon branch models</font> where <b>&omega;</b> can vary across the tree.</li>
+<li><a href="example_files/sitebranch.shtml">This control file</a> will show you how to implement <font color=blue>codon site-branch models</font>.</li>
+<li><a href="example_files/branch2.shtml">This control file</a> will go one step further and show you how <font color=blue>any aspect of a codon model can vary across the tree</font>, including 
+kappa, omega, the rates of insertion and deletion, and the insertion and deletion length distributions.</li>
+<li><a href="example_files/nucleotide-branch.shtml">This control file</a> will show you how to implement <font color=blue>changing models for nucleotide/amino-acid</font> simulations, including 
+changing stationary frequencies, substitution rates, levels of rate heterogeneity, indel rates and indel distributions.</li>
+<li><a href="example_files/multi-partitions.shtml">This control file</a> will show you how to generate <font color=blue>multi-partitioned</font> datasets</li>
+
+<br><p><u><b>Miscellaneous other examples</u></b></p>
+<li><a href="example_files/trees.shtml">This control file</a> will show you how to generate different kinds of <font color=blue>trees</font>.</li>
+<li><a href="example_files/settings.shtml">This control file</a> will show you how to change a number of non-essential <font color=blue>settings</font> such as seeds 
+for the random number generator, output file formats etc..</li>
+
+</ul>
+<br>
+
+
+
+
+
+
+<!--#include file="example_files/bottom.html" -->

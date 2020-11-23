@@ -1,0 +1,185 @@
+<!--#include file="files/top.html" -->
+
+<pre>
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - trees.txt                                       //
+//                                                                                 //
+//      How to define user trees and how to generate random trees...               //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+<font color=red>[TYPE] NUCLEOTIDE 1</font>	//  nucleotide simulation using algorithm from method 1
+
+
+<font color=red>[MODEL] mymodel  [submodel]  JC  </font>     
+
+
+  //  You will have already come across user-defined trees in the other examples. 
+  //  The following three trees are identical - "white space" of any kind is ignored.
+
+<font color=red>[TREE] t1 ((A:0.1,B:0.1):0.1,(C:0.1,D:0.1):0.1);</font>
+
+<font color=red>[TREE] t2 ( (A:0.1, B:0.1):0.1, (C:0.1, D:0.1):0.1 );</font>
+
+<font color=red>[TREE] t3 </font>
+<font color=red>    (         </font>    // trees can span any number of lines
+<font color=red>      (       </font>    // and include any amount of whitespace
+<font color=red>        A:0.1, </font>   // including new lines.
+<font color=red>        B:0.1  </font>  
+<font color=red>      ):0.1 ,  </font>   // comments within the tree will be ignored.
+<font color=red>     (C:0.1,D:0.1):0.1); </font>
+
+  //  But any tree can also be rescaled to be a certain tree length.
+  //  For example the two following trees are identical.
+<font color=red>
+[TREE] T1 ((A:0.1,B:0.2):0.3,(C:0.4,D:0.5):0.6);
+[treelength] 4.2
+
+[TREE] T2 ((A:0.2,B:0.4):0.6,(C:0.8,D:1.0):1.2);
+</font>
+  
+   //  Random rooted & unrooted trees can also be created by INDELible. 
+   //  A different tree will be generated for each replicate.
+   //  Explanation of these commands follow the examples...
+<font color=red>
+[TREE] tree1
+  [unrooted] 10 2.4 1.1 0.2566 0.34  </font>// ntaxa birth death sample mut
+<font color=red>
+[TREE] tree2
+  [unrooted] 10 2.4 1.1 0.2566 0.34  </font>// ntaxa birth death sample mut
+  <font color=red>[seed] 2381242     </font>                
+ <font color=red>
+[TREE] tree3
+  [rooted] 15 6.7 2.5 0.234 0.31     </font>// ntaxa birth death sample mut
+  <font color=red>[treedepth] 0.4</font></font>
+<font color=red>
+[TREE] tree4
+  [rooted] 15 6.7 2.5 0.234 0.31     </font>// ntaxa birth death sample mut
+  <font color=red>[treelength] 8</font></font>
+
+/*
+  * Random trees always have taxa names that are numbers. 
+    e.g. (1:0.1,2:0.1,(3:0.1,4:0.1):0.1);
+
+  * <font color=blue>tree1</font> and <font color=blue>tree2</font> will be unrooted random trees.
+  * <font color=blue>tree3</font> and <font color=blue>tree4</font> will be rooted random trees. 
+
+  * Every time that INDELible is run <font color=blue>tree2</font> will produce the same sequence 
+    of random trees, until the number after the <font color=blue>[seed]</font> command is changed. 
+  * The others (<font color=blue>tree1</font>, <font color=blue>tree3</font> and <font color=blue>tree4</font>) will always produce different trees.
+  * Please note that the <font color=blue>[seed]</font> command overrules the <font color=blue>[randomseed]</font> 
+    command from a <font color=blue>[SETTINGS]</font> block, for a random tree.
+
+  * <font color=blue>tree4</font> will produce random trees that are always rescaled to have a tree 
+    length of 8, and <font color=blue>tree3</font> will produce random trees that are always rescaled 
+    to have a depth (root to tip) of 0.4, whilst the other two (<font color=blue>tree1</font> and 
+    <font color=blue>tree2</font>) will always produce random trees with different tree lengths/depths.
+
+  * The numbers that come after the <font color=blue>[unrooted]</font> and <font color=blue>[rooted]</font> commands are 
+    the same in both cases.  The first number is the number of taxa 
+    (10 for tree1 and tree2, 15 for tree3 and tree4).
+  * The next  four are the parameters used in the birth-death process to 
+    create the random trees. In order, from left to right, these are the 
+    <font color=blue>birth-rate</font>, <font color=blue>death-rate</font>, <font color=blue>sampling fraction</font> and <font color=blue>mutation rate</font>. 
+    Further details on these parameters can be found in this paper: 
+    <a href="http://abacus.gene.ucl.ac.uk/ziheng/pdf/1997YangRannalaMBEv14p717.pdf" target="_blank">http://abacus.gene.ucl.ac.uk/ziheng/pdf/1997YangRannalaMBEv14p717.pdf</a>
+
+  * Trees (random or user) that are used during the simulation will be output 
+    by INDELible in a file <a href="trees.txt" target="_blank">like this</a>.
+
+  * One last point to remember about random trees is that they CANNOT be 
+    used when you want the evolutionary model to be permitted to change 
+    over the tree. i.e. they CANNOT be used with [BRANCHES] blocks.
+   
+*/
+
+
+   //  For a given topology INDELible can also create branch lengths. 
+   //  This is done by using the command [branchlengths]
+   //  Further explanation of the four examples is given below
+
+<font color=red>
+<a name="branchlengths"></a>
+[TREE] EQUAL-TREE
+ </font> // No branch lengths need to be provided<font color=red>  
+  ((((A,B),(C,D)),((E,F),(G,H))),(((I,J),(K,L)),((M,N),(O,P))));
+       
+  [branchlengths] EQUAL </font>// All branch lengths will be equal
+  <font color=red>[treedepth] 0.1</font>       // Root-to-longest-tip distance of 0.1
+<font color=red>
+[TREE] EQUAL-TREE2
+</font>  // If branch lengths are provided, they are ignored<font color=red>
+  ((((A:0.2,B:0.1):0.4,(C:0.3,D:0.1):0.6):0.1,
+  ((E:0.1,F:0.1):0.1,(G:0.2,H:0.1):0.1):0.3):0.1,
+  (((I:0.1,J:0.6):0.1,(K:0.1,L:0.1):0.1):0.1,
+  ((M:0.4,N:0.1):0.1,(O:0.6,P:0.1):0.1):0.1):0.1); 
+
+  [branchlengths] EQUAL </font>// Again, all branch lengths will be equal
+  <font color=red>[treedepth] 0.1</font>       // Root-to-longest-tip distance of 0.1
+ <font color=red>
+[TREE] ULTRAMETRIC-TREE
+ </font> // No branch lengths need to be provided<font color=red>  
+  ((((A,B),(C,D)),((E,F),(G,H))),(((I,J),(K,L)),((M,N),(O,P))));
+
+  [branchlengths] ULTRAMETRIC </font>// All branch lengths will be equal
+  <font color=red>[treedepth] 0.1</font>             // Root-to-longest-tip distance of 0.1
+<font color=red>
+[TREE] NON-ULTRAMETRIC-TREE
+ </font> // No branch lengths need to be provided<font color=red>  
+  ((((A,B),(C,D)),((E,F),(G,H))),(((I,J),(K,L)),((M,N),(O,P))));
+
+  [branchlengths] NON-ULTRAMETRIC </font>// All branch lengths will be equal
+  <font color=red>[maxdistance] 0.2</font>               // Maximum pairwise distance of 0.2
+
+
+  
+/*
+  * <font color=blue>[treedepth] 0.1</font> rescales the tree to have a maximum root-to-tip distance of 0.1
+  * After using the <font color=blue>[branchlengths]</font> command you should use <font color=blue>[treelength]</font> or 
+    <font color=blue>[treedepth]</font>, or <font color=blue>[maxdistance]</font> to rescale your tree.
+
+  * <font color=blue>[branchlengths] EQUAL</font> will make every branch on the tree equal to 0.1.
+  * <font color=blue>[branchlengths] NON-ULTRAMETRIC</font> gives every branch a random length between 0 and 1.
+  * <font color=blue>[branchlengths] ULTRAMETRIC</font> gives every branch a random length between 0 and 1, 
+    but will also extend the terminal branches so that the root-to-tip distance is 
+    the same for every tip.
+
+  * If the <font color=blue>[branchlengths]</font> command is used then the tree toplogy can be specified 
+    with or without branch lengths. It does not matter. Any branch lengths will be ignored.
+    i.e. the trees EQUAL-TREE and EQUAL-TREE2 will be identical.
+
+  * Examples of the trees produced above can be seen <a href="random_branch_length_trees.JPG">here</a>.
+  
+  * All trees in the image are rescaled to have a maximum tree-depth of 0.1. 
+    This means that the root-to-tip distance for taxon G is equal to 0.1 in all 3 trees.
+
+  * N.B. For ultrametric trees <font color=blue>[maxdistance] 0.2</font> is equivalent to <font color=blue>[treedepth] 0.1</font>
+    For the non-ultrametric tree they are not the same.
+    <font color=blue>[maxdistance] 0.2</font> on the non-ultrametric tree scales the tree such that the sum of 
+    the branch lengths in between (in <a href="random_branch_length_trees.JPG">this</a> case) taxons G and N would be 0.2
+
+*/
+
+
+<font color=red>[PARTITIONS] Pname1  [t1 mymodel 1000]</font>   // tree t1, model mymodel, root length 1000
+<font color=red>[PARTITIONS] Pname2  [t2 mymodel 1000]</font>   // tree t2, model mymodel, root length 1000
+<font color=red>[PARTITIONS] Pname3  [t3 mymodel 1000]</font>   // tree t3, model mymodel, root length 1000
+<font color=red>[PARTITIONS] Pname4  [T1 mymodel 1000]</font>   // tree T1, model mymodel, root length 1000
+<font color=red>[PARTITIONS] Pname5  [T2 mymodel 1000]</font>   // tree T2, model mymodel, root length 1000
+
+
+ 
+<font color=red>[EVOLVE]     Pname1  10  outputname1</font>     // 10 replicates generated from partition Pname1
+<font color=red>             Pname2  10  outputname2</font>     // 10 replicates generated from partition Pname2
+<font color=red>             Pname3  10  outputname3</font>     // 10 replicates generated from partition Pname3
+<font color=red>             Pname4  10  outputname4</font>     // 10 replicates generated from partition Pname4
+<font color=red>             Pname5  10  outputname5</font>     // 10 replicates generated from partition Pname5
+
+</pre>
+<br><hr><br>
+Please click <a href="http://abacus.gene.ucl.ac.uk/software/indelible/tutorial/">here</a> to return to the tutorial menu page for more examples.
+
+
+<!--#include file="files/bottom.html" -->

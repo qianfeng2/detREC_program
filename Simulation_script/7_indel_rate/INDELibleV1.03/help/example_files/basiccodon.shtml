@@ -1,0 +1,51 @@
+<!--#include file="files/top.html" -->
+
+<pre>
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - basiccodon.txt                                  //
+//                                                                                 //
+//      A basic introduction to the structure of the INDELible control file.       //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+// It is useful to know that anything on a line after two forward slashes is ignored.
+
+/*
+   Another useful thing to know is that anything after a forward slash and star
+   is ignored until INDELible sees a star followed by a forward slash later on.
+*/     
+
+<font color=red>[TYPE] CODON 1     </font>	//  EVERY control file must begin with a [TYPE] command.
+			//  The number after "CODON" can be 1 or 2 and chooses the 
+			//  algorithm that INDELible uses (see manuscript). Both give 
+			//  identical results but in some cases one is quicker.
+			//  Other blocks and commands following this statement
+			//  can come in any order you like.
+
+<font color=red>[MODEL]    modelname</font>          //  Evolutionary models are defined in [MODEL] blocks.
+<font color=red>  [submodel]     2.5  0.5   </font>  //  Substitution model is M0 with kappa=2.5, omega=0.5
+<font color=red>  [insertmodel]  POW  1.7 500</font> //  Power law insertion length distribution (a=1.7, M=500)
+<font color=red>  [deletemodel]  POW  1.8 500</font> //  Power law deletion length distribution (a=1.8, M=500)
+<font color=red>  [indelrate]    0.1 </font>         //  insertion rate = deletion rate = 0.1
+<font color=red>                     </font>         //  relative to average substitution rate of 1.   
+
+
+<font color=red>[TREE] treename  (A:0.1,B:0.1);</font>        //  User trees are defined here
+
+<font color=red>[PARTITIONS] partitionname  </font>           //  [PARTITIONS] blocks say which models go with
+<font color=red>  [treename modelname 1000]</font>            //  which trees and define the length of the
+                                       //  sequence generated at the root (1000 here).
+
+<font color=red>[EVOLVE] partitionname 100 outputname</font>  //  This will generate 100 replicate datasets 
+                                       //  from the [PARTITIONS] block named above.
+
+// The true alignment will be output in a file named outputname_TRUE.phy
+// The unaligned sequences will be output in a file named outputname.fas
+// To learn how to implement more complicated simulations (or different 
+// models) please consult the manual or the other example control files.
+
+</pre>
+
+
+<!--#include file="files/bottom.html" -->

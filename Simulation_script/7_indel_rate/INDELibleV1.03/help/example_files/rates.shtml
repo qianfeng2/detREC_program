@@ -1,0 +1,69 @@
+<!--#include file="files/top.html" -->
+
+<pre>
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - rates.txt                                       //
+//                                                                                 //
+//      Adding proportion of invariable sites or gamma rate heterogeneity.         //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+/*
+  Nucleotide models are used as an example but the principle is exactly the 
+  same for amino-acid models. You just add the [rates] command to a model:
+
+    <font color=blue>[rates]  pinv  alpha  ngamcat</font>
+
+  This command has no effect in <i>CODON</i> simulations.
+
+  * <i>pinv</i> is the proportion of invariable sites (0<=<i>pinv</i><=1).
+  * <i>alpha</i> is the shape parameter for the gamma distribution (<i>alpha</i>>0).
+  * If <i>alpha</i>=0 then there will be no gamma rate variation.</li>
+  * <i>ngamcat</i> is the number of categories to use in the discrete gamma approximation.
+  * If <i>ngamcat</i>=0 then continuous gamma distribution will be used for rate variation.
+  * If the command [rates] is not specified all rates will be constant.
+
+*/
+
+
+<font color=red>[TYPE] NUCLEOTIDE 1</font>	//  nucleotide simulation using algorithm from method 1
+
+
+<font color=red>[MODEL] mymodel1  [submodel]  JC  </font>       //   JC69 with pinv=0.2 and no gamma
+<font color=red>                  [rates]     0.2 0 0  </font>     
+ 									
+<font color=red>[MODEL] mymodel2  [submodel]  JC  </font>       //   JC69 with no proportion invariable,
+<font color=red>                  [rates]     0 2 0  </font>    //   continuous gamma with alpha=2     
+
+<font color=red>[MODEL] mymodel3  [submodel]  JC  </font>       //   JC69 with no proportion invariable,
+<font color=red>                  [rates]     0 1 10  </font>   //   10 category discrete gamma with alpha=1
+                                                                    
+<font color=red>[MODEL] mymodel4  [submodel]  JC  </font>       //   JC69 with pinv=0.2 
+<font color=red>                  [rates]     0.2 0.5 0  </font>//   continuous gamma with alpha=0.5     
+
+<font color=red>[MODEL] mymodel5  [submodel]  JC  </font>       //   JC69 with pinv=0.1
+<font color=red>                  [rates]     0.1 1.5 5  </font>//   5 category discrete gamma with alpha=1.5
+
+
+<font color=red>[TREE] T1  (A:0.1,B:0.1);</font>             
+
+
+<font color=red>[PARTITIONS] Pname1  [T1 mymodel1 1000]</font>   // tree T1, model mymodel1, root length 1000
+<font color=red>[PARTITIONS] Pname2  [T1 mymodel2 1000]</font>   // tree T1, model mymodel2, root length 1000
+<font color=red>[PARTITIONS] Pname3  [T1 mymodel3 1000]</font>   // tree T1, model mymodel3, root length 1000
+<font color=red>[PARTITIONS] Pname4  [T1 mymodel4 1000]</font>   // tree T1, model mymodel4, root length 1000
+<font color=red>[PARTITIONS] Pname5  [T1 mymodel5 1000]</font>   // tree T1, model mymodel5, root length 1000
+
+
+
+ 
+<font color=red>[EVOLVE]     Pname1  10  outputname1</font>     // 10 replicates generated from partition Pname1
+<font color=red>             Pname2  10  outputname2</font>     // 10 replicates generated from partition Pname2
+<font color=red>             Pname3  10  outputname3</font>     // 10 replicates generated from partition Pname3
+<font color=red>             Pname4  10  outputname4</font>     // 10 replicates generated from partition Pname4
+<font color=red>             Pname5  10  outputname5</font>     // 10 replicates generated from partition Pname5
+
+</pre>
+
+<!--#include file="files/bottom.html" -->

@@ -1,0 +1,75 @@
+<!--#include file="files/top.html" -->
+
+<pre>
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - sitebranches.txt                                //
+//                                                                                 //
+//      Implementing codon site-branch models using the [BRANCHES] command         //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+  /* 
+    Site-branch models are defined just like branch models except the individual models 
+    have more site classes (i.e. omega categories). Different models can be defined for 
+    every branch on the tree if desired and there is no limit on the number of site 
+    classes that can be defined. However, it is important to remember that the number 
+    of site classes (and their relative proportions) cannot change on the tree.
+
+    Also, the genetic code is not permitted to change but everything else is, including:
+    kappa, omega, stationary frequencies, and the indel rates and length distributions. 
+    The examples below will only show omega changing amongst models.
+  */ 
+
+<font color=red>[TYPE] CODON 1    </font>                
+
+  /* Notice that the number of classes and proportions do not change below. */
+
+                   // Kap p0  p1  w0  w1  w2     (p2=1-p1-p0=0.5) 
+<font color=red>[MODEL] x1 [submodel] 2.5 0.2 0.3 0.0 0.5 1.0</font> 
+<font color=red>[MODEL] x2 [submodel] 2.5 0.2 0.3 0.1 1.0 3.0</font>  
+<font color=red>[MODEL] x3 [submodel] 2.5 0.2 0.3 0.2 2.0 6.0</font>  
+                            
+  /* 
+     Like before, to get a correctly formatted [BRANCHES] block from a [TREE] block
+     simply cut and paste the tree and change the branch lengths to model names.
+     The stationary frequencies of the model at the root are used to generate the
+     root sequence and this model defines the number of site categories used.
+  */
+
+<font color=red>[TREE]     t1  ((A:1.0, B:1.0):1.0,(C:1.0, D:1.0):1.0);  </font>
+
+<font color=red>[BRANCHES] b1  ((A #x1, B #x2) #x1,(C #x1, D #x3) #x1)#x1;  </font>
+
+
+          
+<font color=red>[PARTITIONS] Pname  [t1 b1 1000]</font>    // tree t1, branchclass b1, root length 1000
+
+<font color=red>[EVOLVE]     Pname  10  outputname</font>  // 10 replicates generated from partition Pname
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+/*
+   If (instead of model names) we write omega values after the # symbol
+   on branches in a tree then the branches class b1 above is the same 
+   as saying that different sites will evolve according to the following:
+    
+      <font color=blue>0.2   ( (A #0.0, B#0.1) #0.0,(C #0.0, D #0.2) #0.0); </font>
+      <font color=blue>0.3   ( (A #0.5, B#1.0) #0.5,(C #0.5, D #2.0) #0.5); </font>
+      <font color=blue>0.5   ( (A #1.0, B#3.0) #1.0,(C #1.0, D #6.0) #1.0); </font>
+
+    i.e. 20% of sites will evolve with omega=0 except on the branch to B 
+           where omega = 0.1 and on the branch to D where omega = 0.2,
+         30% of sites will evolve with omega=0.5 except on the branch to B 
+           where omega = 1 and on the branch to D where omega = 2,
+         50% of sites will evolve with omega=1.0 except on the branch to B 
+           where omega = 3 and on the branch to D where omega = 6.
+
+    A format similar to above is used by Evolver in the PAML suite for simulating
+    under branch-site codon models. However, the method implemented in INDELible 
+    also allows for kappa, stationary frequencies and indel parameters to change too.
+ 
+    Also, see extra relevant notes at the end of the file branch.txt <a href="http://abacus.gene.ucl.ac.uk/software/indelible/tutorial/branch.shtml">here</a>
+*/
+</pre>
+<!--#include file="files/bottom.html" -->

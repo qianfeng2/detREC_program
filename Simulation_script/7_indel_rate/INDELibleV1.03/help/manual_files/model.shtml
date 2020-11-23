@@ -1,0 +1,249 @@
+<!--#include file="files/top.html" -->
+  
+<h1>INDELible</h1>
+<h2>[MODEL] block</h2>
+
+<p><ul>
+<li>These blocks are used to specify the evolutionary models used during simulation. </li>
+<li>There are a variety of commands available for specifying different substitution models and indel models as well as rates of insertion and deletion to substitution etc. </li>
+<li>Each model block in the control file must be given a name (e.g. "mymodelname" below). This is used to refer to the model elsewhere in the control file.</li>
+<li>It does not matter whether the "white space" (between commands and values) is spaces, tabs or new lines.</li>
+<li>If a command is not specified the default value is used. Default values are listed in the description of each command.
+<li>Please click on any of the commands to learn more about them.</li>
+</ul></p>
+<hr>
+<a name="top"><br><p><u><b>Example Usage:</u></b></p></a>  
+
+<pre>
+[MODEL] mymodelname    
+  <a href="#[submodel1]"   >[submodel]</a>      HKY 2.5             //  HKY with kappa of 2.5
+  <a href="#[indelmodel]"  >[indelmodel]</a>    LAV 1.7  541        //  specifies the indel length distribution
+  <a href="#[indelrate]"   >[indelrate]</a>     0.1                 //  rates of insertion and deletion are both 0.1
+  <a href="#[geneticcode]" >[geneticcode]</a>   2                   //  only used in CODON simulations
+  <a href="#[rates]"       >[rates]</a>         0.25 0.50 10        //  pinv alpha ngamcat
+  <a href="#[statefreq]"   >[statefreq]</a>     0.4  0.3  0.2  0.1  //  frequencies for T C A G
+</pre>								
+
+</ul><hr><pre><a name="[submodel1]">[submodel]    for NUCLEOTIDE simulations</a></pre><ul>
+<li>Follow the links for information about this command for <a href="#[submodel2]">AMINOACID</a> or <a href="#[submodel3]">CODON</a> simulations.</li>
+<li>Most substitution models implemented in INDELible are variations of the following general matrix:</li>
+<pre>
+                   <img src="symQmatrix.gif">
+</pre>
+<li> The different models are specified using the commands listed below in blue (the names correspond to those used by <a href="http://darwin.uvigo.es/software/modeltest.html" target="_blank">Modeltest</a>):</li>
+<pre>
+  +-----+----------------------------------+----------------------------------+
+  | <b> N </b> |    <b>Usage </b>                        |  <b>Notes  </b>                         |
+  +-----+----------------------------------+----------------------------------+
+  |  0  |  <font color=blue> [submodel] JC                </font>  |  a=b=c=d=e=f=1                   |
+  |  1  |  <font color=blue> [submodel] F81               </font>  |  a=b=c=d=e=f=1                   |
+  +-----+----------------------------------+----------------------------------+
+  |  2  |  <font color=blue> [submodel] K80    a          </font>  |  a=f=kappa, b=c=d=e=1            |
+  |  3  |  <font color=blue> [submodel] HKY    a          </font>  |  a=f=kappa, b=c=d=e=1            |
+  +-----+----------------------------------+----------------------------------+
+  |  4  |  <font color=blue> [submodel] TrNef  a f        </font>  |  a=kappa1, f=kappa2, b=c=d=e=1   |
+  |  5  |  <font color=blue> [submodel] TrN    a f       </font>   |  a=kappa1, f=kappa2, b=c=d=e=1   |
+  +-----+----------------------------------+----------------------------------+
+  |  6  |  <font color=blue> [submodel] K81    b c        </font>  |  b=e, c=d, a=f=1                 |
+  |  7  |  <font color=blue> [submodel] K81uf  b c        </font>  |  b=e, c=d, a=f=1                 |
+  +-----+----------------------------------+----------------------------------+
+  |  8  |  <font color=blue> [submodel] TIMef  a b c      </font>  |  b=e, c=d, f=1                   |
+  |  9  |  <font color=blue> [submodel] TIM    a b c      </font>  |  b=e, c=d, f=1                   |
+  +-----+----------------------------------+----------------------------------+
+  |  10 |  <font color=blue> [submodel] TVMef  b c d e    </font>  |  a=f=1                           |
+  |  11 |  <font color=blue> [submodel] TVM    b c d e    </font>  |  a=f=1                           |
+  +-----+----------------------------------+----------------------------------+
+  |  12 |  <font color=blue> [submodel] SYM    a b c d e  </font>  |  f=1                             |
+  |  13 |  <font color=blue> [submodel] GTR    a b c d e  </font>  |  f=1                             |
+  +-----+----------------------------------+----------------------------------+
+  |  14 |  <font color=blue> [submodel] F84ef  k   </font>         |  b=c=d=e=1, a=(1+k/Y), f=(1+k/R) |
+  |  15 |  <font color=blue> [submodel] F84    k   </font>         |  b=c=d=e=1, a=(1+k/Y), f=(1+k/R) |
+  +-----+----------------------------------+--------------------------+-------+
+  |  16 |  <font color=blue> [submodel] UNREST TC TA TG CT CA CG AT AC AG GT GC</font>        |  GA=1 |
+  +-----+-------------------------------------------------------------+-------+
+
+  N.B. <i>N</i> can be substituted for the model name.  
+  e.g. <font color=blue>[submodel] 0</font> instead of <font color=blue>[submodel] JC</font> 
+</pre>
+
+
+<li>For F84: Y=&pi;<sub>T</sub>+&pi;<sub>C</sub> and R=&pi;<sub>A</sub>+&pi;<sub>G</sub></li>
+<li>For the models with odd  <i>N</i> (1-15) the base frequencies &pi;<sub>T</sub>, &pi;<sub>C</sub>, &pi;<sub>A</sub>, &pi;<sub>G</sub> are given in <a href="#[statefreq]">[statefreq]</a>.</li>
+<li>For the models with even <i>N</i> (0-16) the base frequencies need not be given in <a href="#[statefreq]">[statefreq]</a> and are set automatically.</li>
+
+
+<li><a name="[submodel2]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[submodel]    for AMINOACID simulations</pre><ul>
+<li>Follow the links for information about this command for <a href="#[submodel1]">NUCLEOTIDE</a> or <a href="#[submodel3]">CODON</a> simulations.</li>
+<li>This command is quite simple in this case. Usage is just: <font color=blue><i>[submodel] value</i>  </li></font>
+<li><i>value</i> is just an integer <i>N</i> or a <i>code</i> used to pick the amino-acid substitution model as defined below (references from paper given where appropriate):</li>
+<pre>
+  +-----+---------------+-------------------------------+
+  |  <b>N</b>  | <b>code</b>          | <b>Reference</b>                     |
+  +-----+---------------+-------------------------------+
+  |  0  | Poisson       |  n/a                          |
+  |  1  | JTT           |  Jones et al,. 1992           |
+  |  2  | JTT-dcmut     |  Kosiol and Goldman, 2005     |
+  |  3  | Dayhoff       |  Dayhoff et al., 1978         |
+  |  4  | Dayhoff-dcmut |  Kosiol and Goldman, 2005     |
+  |  5  | WAG           |  Whelan and Goldman, 2001     |
+  |  6  | mtMAM         |  Yang et al., 1998            |
+  |  7  | mtART         |  Abascal et al., 2007         |
+  |  8  | mtREV         |  Adachi and Hasegawa, 1996    |
+  |  9  | rtREV         |  Dimmic et al., 2002          |
+  |  10 | cpREV         |  Adachi, 2000                 |
+  |  11 | Vt            |  Muller and Vingron, 2000     |
+  |  12 | Blosum        |  Henikoff and Henikoff, 1992  |
+  |  13 | LG            |  Le and Gascuel, 2008         |
+  |  14 | HIVb          |  Nickle et al., 2007          |
+  |  15 | HIVw          |  Nickle et al., 2007          |
+  |  16 | USER          |  n/a                          |
+  +-----+---------------+-------------------------------+
+</pre>
+<li>For the user defined substitution model the number <i>16</i> or the code <i>USER</i> should be followed by a filename containing the rate matrix Q. For example:
+<br><i><font color=blue>[submodel] USER userAAmodel.txt</font></i></li>
+<li>This file should be in the same directory as the INDELible executable.</li>
+<li>The formatting of this file follows the PAML convention. e.g. for the Dayhoff-dcmut model the file should be formatted like <a href="userAAmodel.txt" target="_blank">this</a>.
+<li><i>+F</i> versions of these models are specified by defining stationary frequencies using the <a href="#[statefreq]">[statefreq]</a> command.
+<li>If the <a href="#[statefreq]">[statefreq]</a> is not specified the stationary frequencies from the model are used..
+<li><a name="[submodel3]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[submodel]    for CODON simulations</pre><ul>
+<li>Follow the links for information about this command for  <a href="#[submodel1]">NUCLEOTIDE</a> or <a href="#[submodel2]">AMINOACID</a> simulations.</li>
+<li>This command is <font color=blue> [submodel] ECMunrest  </font> for the empirical unrestricted model.</li>
+<li>This command is <font color=blue> [submodel] ECMrest  </font> for the empirical restricted model.</li>
+<li>Otherwise a codon model with <font color=blue> K </font> discrete omega categories is defined using the commands below in blue:</li>
+<pre>
+  // M3 (discrete)                       // p<sub>(K-1)</sub>=1-p<sub>(K-2)</sub>-...-p<sub>1</sub>-p<sub>0</sub>
+ <font color=blue> [submodel]  kappa</font>
+ <font color=blue>             p<sub>0</sub>  p<sub>1</sub>  ...  p<sub>(K-2)</sub>   <sub>     </sub>  </font>// proportions
+ <font color=blue>             &omega;<sub>0</sub>  &omega;<sub>1</sub>  ...  &omega;<sub>(K-2)</sub>  &omega;<sub>(K-1)</sub> </font> // omegas
+</pre>
+<li>All other models from M0-M13 can be represented in this M3 format. For example:</li>
+<pre>
+  // M0 (one-ratio) 
+  <font color=blue>[submodel]  kappa  &omega<sub>0</sub>                   </font>//  p<sub>0</sub>=1
+ 
+  // M1 (neutral)   
+  <font color=blue>[submodel]  kappa  p<sub>0</sub>  &omega;<sub>0</sub>  1           </font> //  &omega;<sub>1</sub>=1;  p<sub>1</sub>=1-p<sub>0</sub>
+
+  // M2 (selection)  
+  <font color=blue>[submodel]  kappa  p<sub>0</sub>  p<sub>1</sub>  &omega;<sub>0</sub>  1   &omega;<sub>2</sub>   </font>//  &omega;<sub>1</sub>=1;  p<sub>2</sub>=1-p<sub>1</sub>-p<sub>0</sub>
+   
+  // M4 (freqs) with K=5  
+  <font color=blue>[submodel]  kappa  </font>
+  <font color=blue>            p<sub>0</sub>  p<sub>1</sub>         p<sub>2</sub>         p<sub>3</sub>   <sub> </sub>  </font>//  p<sub>4</sub>=1-p<sub>3</sub>-p<sub>2</sub>-p<sub>1</sub>-p<sub>0</sub>
+  <font color=blue>            0<sub> </sub>  0.333333<sub> </sub>  0.666666<sub> </sub>  1<sub> </sub>  3<sub> </sub>  </font>//  &omega;<sub>0</sub>,  &omega;<sub>1</sub>,  &omega;<sub>2</sub>,  &omega;<sub>3</sub>,  &omega;<sub>4</sub> 
+</pre>
+<li>A script (named "M5-13") is provided with INDELible to calculate the discrete values for this command from the parameters used in models M5-M13.</li>
+<li><a name="[indelmodel]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[indelmodel]</pre><ul>
+<li>This sets the insertion and deletion length distributions to be the same with four possible choices:</li>
+<pre>
+   (1)  <font color="blue">[indelmodel]  NB   q  r</font>               //  Negative Binomial Distribution
+   (2a) <font color="blue">[indelmodel]  POW  a</font>                  //  Zipfian Distribution 
+   (2b) <font color="blue">[indelmodel]  POW  a  M</font>               //  Zipfian Distribution 
+   (3)  <font color="blue">[indelmodel]  LAV  a  M</font>               //  Lavalette Distribution
+   (4)  <font color="blue">[indelmodel]  USER mylengthmodel.txt</font>  //  User-Defined Distribution
+</pre>
+<li>(1)  This specifies a Pascal (negative binomial) distribution where <font color=blue>q</font> is a decimal (<font color=blue>0<=q<=1</font>) and <font color=blue>r</font> is an integer (<font color=blue>r>0</font>).</li>
+<li>(2a) This specifies a Zipfian (power law) distribution where <font color=blue>a</font> is a decimal (<font color=blue>a>1</font>).</li>
+<li>(2b) This also specifies a Zipfian distribution where <font color="blue">a</font> is a decimal (<font color="blue">a&gt;1</font>).
+         However with this format indels longer than length <font color="blue">M</font> are not permitted.
+         This format is highly recommended for small values of <font color="blue">a</font> because of the fat-tailed shape of the distribution.</li>
+<li>(3)  This specifies a Lavalette distribution where <font color=blue>a</font> is a decimal (<font color=blue>a>1</font>) and <font color=blue>M</font> is an integer (<font color=blue>M>1</font>) representing the maximum indel length.</li>
+<li>(4)  This specifies a user-defined indel length distribution. The file <font color=blue>mylengthmodel.txt</font> should be in the same directory as the INDELible executable and contain a list of 
+relative frequencies (in order of increasing indel length) separated by white space, like <a href="mylengthmodel.txt" target="_blank">this</a>.
+<li>If you want to specify different length distributions for insertions and deletions then do not use <font color=blue>[indelmodel]</font>.</li>
+<li>In this case use the commands <font color=blue>[insertmodel]</font> and <font color=blue>[deletemodel]</font> instead. The format of these two commands is the same as for <font color=blue>[indelmodel]</font>.</li>
+<li><a name="[indelrate]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[indelrate]</pre><ul>
+<li>This sets the insertion and deletion rates to both be equal to whatever value is given.</li>
+<li>Both rates are relative to an average substitution rate of 1.
+<li>N.B. This means that <i>insertionrate = indelrate</i> and <i>deletionrate = indelrate</i>.</li>
+<li>This is not the same as <i>insertionrate + deletionrate = indelrate</i>.</li>
+<li>To specify different rates for insertions and deletions then do not use <font color=blue>[indelrate]</font>.</li>
+<li>In this case use the commands <font color=blue>[insertrate]</font> and <font color=blue>[deleterate]</font> instead.  The values for each command are the rates relative to an average substitution rate of 1.</li>
+<li><a name="[geneticcode]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[geneticcode]</pre><ul>
+<li>This command can only be used in <i>CODON</i> simulations.</li>
+<li>The value should be an integer 1 to 6, 9 to 16, or 21 to 24, corresponding to the genetic codes listed on Genbank.</li>
+<li>The value 1 (corresponding to the universal genetic code) is the default setting if the command is not specified.</li>
+<li>These genetic codes determine which codons are stop codons and therefore not simulated by INDELible.</li>
+<li>They are also used to translate codons to amino-acids for output if <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/settings.shtml#[printcodonsasaminoacids]">that option</a> is chosen.</li>
+<li>The codes listed at <a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi">Genbank</a> (in Oct. 2008) are given below (* represents a stop codon).</li>
+<li>Please note some codes are identical and differ only in terms of Starts. Please see Genbank for more info.</li>
+<pre>
+       1  - The Standard Code
+       FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG
+       2  - The Vertebrate Mitochondrial Code
+       FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIMMTTTTNNKKSS**VVVVAAAADDEEGGGG
+       3  - The Yeast Mitochondrial Code
+       FFLLSSSSYY**CCWWTTTTPPPPHHQQRRRRIIMMTTTTNNKKSSRRVVVVAAAADDEEGGGG
+       4  - The Mold, Protozoan, and Coelenterate Mitochondrial
+            Code and the Mycoplasma/Spiroplasma Code
+       FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG
+       5  - The Invertebrate Mitochondrial Code
+       FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIMMTTTTNNKKSSSSVVVVAAAADDEEGGGG
+       6  - The Ciliate, Dasycladacean and Hexamita Nuclear Code
+       FFLLSSSSYYQQCC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG
+       9  - The Echinoderm and Flatworm Mitochondrial Code
+       FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIIMTTTTNNNKSSSSVVVVAAAADDEEGGGG
+       10 - The Euplotid Nuclear Code
+       FFLLSSSSYY**CCCWLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG
+       11 - The Bacterial and Plant Plastid Code
+       FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG
+       12 - The Alternative Yeast Nuclear Code
+       FFLLSSSSYY**CC*WLLLSPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG
+       13 - The Ascidian Mitochondrial Code
+       FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIMMTTTTNNKKSSGGVVVVAAAADDEEGGGG
+       14 - The Alternative Flatworm Mitochondrial Code
+       FFLLSSSSYYY*CCWWLLLLPPPPHHQQRRRRIIIMTTTTNNNKSSSSVVVVAAAADDEEGGGG
+       15 - The Blepharisma Nuclear Code
+       FFLLSSSSYY*QCC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG
+       16 - The Chlorophycean Mitochondrial Code
+       FFLLSSSSYY*LCC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG
+       21 - The Trematode Mitochondrial Code 
+       FFLLSSSSYY**CCWWLLLLPPPPHHQQRRRRIIMMTTTTNNNKSSSSVVVVAAAADDEEGGGG
+       22 - The Scenedesmus obliquus mitochondrial Code 
+       FFLLSS*SYY*LCC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG
+       23 - The Thraustochytrium Mitochondrial Code
+       FF*LSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG
+
+Base1: TTTTTTTTTTTTTTTTCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGG
+Base2: TTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGGTTTTCCCCAAAAGGGG
+Base3: TCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAGTCAG
+
+</pre>
+
+<li><a name="[rates]"><a href="#top">Return to example usage.</a></a></li>
+
+
+</ul><hr>
+<pre>[rates]</pre><ul>
+<li>This command has no effect in <i>CODON</i> simulations.
+<li>The 3 entries in this command are (from left to right): <i>pinv</i>, <i>alpha</i> and <i>ngamcat</i>.</li>
+<li><i>pinv</i> is the proportion of invariable sites (should be a number between 0 and 1).</li>
+<li><i>alpha</i> is the shape parameter for the gamma distribution (should be a positive number).</li>
+<li>If <i>alpha</i>=0 then there will be no gamma rate variation.</li>
+<li><i>ngamcat</i> is the number of categories to use in the discrete gamma approximation.</li>
+<li>If <i>ngamcat</i>=0 then continuous gamma distribution will be used for rate variation.</li>
+<li><a name="[statefreq]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[statefreq]</pre><ul>
+<li>This command is used to specify the stationary frequencies used in the model by listing them separated by white space.</li>
+<li>If the command is not specified in a [MODEL] block then all stationary frequencies will be set to be equal.</li>
+<li>If the list of numbers does not add up to 1 then they will be rescaled so that they do.</li>
+<li>For <i>NUCLEOTIDE</i> simulations this must be a list of 4 numbers representing the frequencies for the different nucleotides (in the order <font color=red>T C A G</font>).</li>
+<li>For <i>AMINOACID</i> simulations this must be a list of 20 numbers representing the frequencies for the different amino-acids (in the order <font color=red>A R N D C Q E G H I L K M F P S T W Y V</font>). 
+This will change the stationary frequencies from those defined in by the substitution model specified in <a href="#[submodel2]">[submodel]</a> (i.e. INDELible will simulate under a +F variant).</li>
+<li>For <i>CODON</i> simulations this must be a list of 64 numbers representing the frequencies for the different codons (in the order <font color=red>TTT TTC TTA TTG TCT TCC TCA .... GGA GGG</font>). </li>
+<li>Care should be taken that the stationary frequencies corresponding to any stop codons in your chosen genetic code are equal to zero. If your input contradicts this then INDELible will inform you.</li>
+<li><a name="[istatefreq]"><a href="#top">Return to example usage.</a></a></li>
+
+
+<!--#include file="files/bottom.html" -->

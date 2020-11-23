@@ -1,0 +1,74 @@
+<!--#include file="files/top.html" -->
+
+<pre>
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - branch.txt                                      //
+//                                                                                 //
+//      Using models that change across the tree to implement codon branch models  //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+<font color=red>[TYPE] CODON 1    </font>                //  codon simulation using algorithm from method 1
+
+
+<font color=red>[MODEL] mA    [submodel] 2.5 2.0</font>  //  M0 with kappa=2.5, omega=2.0
+<font color=red>[MODEL] mB    [submodel] 2.5 3.0</font>  //  M0 with kappa=2.5, omega=3.0
+<font color=red>[MODEL] mC    [submodel] 2.5 0.5</font>  //  M0 with kappa=2.5, omega=0.5
+<font color=red>[MODEL] mD    [submodel] 2.5 1.5</font>  //  M0 with kappa=2.5, omega=1.5
+<font color=red>[MODEL] mAB   [submodel] 2.5 2.5</font>  //  M0 with kappa=2.5, omega=2.5
+<font color=red>[MODEL] mCD   [submodel] 2.5 0.0</font>  //  M0 with kappa=2.5, omega=0.0
+<font color=red>[MODEL] mROOT [submodel] 2.5 1.0</font>  //  M0 with kappa=2.5, omega=1.0
+
+/*
+  In the same way that lengths of branches are listed after a <font color=blue>:</font> symbol in a [TREE]
+  block, model names on branches are listed after a <font color=blue>#</font> symbol in a [BRANCHES] block. 
+  N.B. The structure of the tree & order of taxa is the same (see notes at end of file).
+*/
+
+<font color=red>[TREE]     t1 ( (A:1.0, B:1.0):1.0,(C:1.0, D:1.0):1.0);  </font>
+
+<font color=red>[BRANCHES] b1 ( (A #mA, B#mB) #mAB,(C #mC, D #mD) #mCD)#mROOT;  </font>
+
+          
+  /* [BRANCHES] blocks are included in [PARTITIONS] blocks in the same way as models */
+
+<font color=red>[PARTITIONS] Pname  [t1 b1 1000]</font>    // tree t1, branchclass b1, root length 1000
+
+<font color=red>[EVOLVE]     Pname  10  outputname</font>  // 10 replicates generated from partition Pname
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+/*
+  It is important that the order of the taxa and structure of the tree remains
+  unchanged between [TREE] and [BRANCHES] blocks (like in this example) because
+  taxa names and branch lengths are ignored. <b>i.e. b1a, b1b, b1c are identical to b1.
+  but b2a, b2b and b2c are NOT even though the underlying trees are still "correct".</b>
+
+<font color=blue>
+  [BRANCHES] b1a ((A:1.0#mA,B:1.0#mB):1.0 #mAB, (C:1.0 #mC, D:1.0#mD):1.0 #mCD)#mROOT;
+
+  [BRANCHES] b1b ( (#mA, #mB) #mAB,(#mC,  #mD) #mCD)#mROOT;
+
+  [BRANCHES] b1c   </font>
+  <font color=blue>     (   </font>
+  <font color=blue>        (           </font>              // like [TREE] blocks, [BRANCHES] trees 
+  <font color=blue>          A #mA, B#mB     </font>        // can contain any amount of white space
+  <font color=blue>        ) #mAB            </font>        // or comments between the first ( and 
+  <font color=blue>      ,                    </font>       // the ; at the end.
+  <font color=blue>        (C #mC, D #mD)   </font>
+  <font color=blue>      #mCD)#mROOT;  </font>
+
+<font color=blue>
+  [BRANCHES] b2a ( (B #mB, A#mA) #mAB,(C #mC, D #mD) #mCD)#mROOT;  
+
+  [BRANCHES] b2b ( (C #mC, D #mD) #mCD, (A #mA, B#mB) #mAB)#mROOT;
+
+  [BRANCHES] b2c ( (#mA, #mB) #mAB,(#mD, #mC) #mCD)#mROOT;
+</font>
+*/
+</pre>
+
+
+<!--#include file="files/bottom.html" -->

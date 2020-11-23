@@ -1,0 +1,92 @@
+rule all:
+    input:
+      "data/simulated_tree.txt",
+      "data/simulated_seqs.fasta",
+      "data/simulated_seqs_recombined.fasta",
+      "simulated_seqs_recombined_indel_align.txt",
+      "simulated_seqs_recombined_align.txt",
+      "mosaic_analysis_output.txt",
+      "mafft_prepared_all.done",
+      "results/result_all.csv"
+
+#####################################################################################################################
+rule msprime_tree:
+  input: "data/Protein_translateable_pilot_upper_centroids.fasta"
+  output: "data/simulated_tree.txt"
+  shell:
+    "python codes/msprime_tree.py {output}" 
+
+rule simulated_seqs:
+  input: "data/simulated_tree.txt","data/Protein_translateable_pilot_upper_centroids.fasta"
+  output: "data/simulated_seqs.fasta"
+  shell:
+    "singularity exec ~/container/ python codes/simulated_seqs.py data/Protein_translateable_pilot_upper_centroids.fasta data/simulated_tree.txt {output}"
+
+
+rule recombine_seqs:
+  input: "data/simulated_seqs.fasta"
+  output: "data/simulated_seqs_recombined.fasta"
+  shell:
+    "singularity exec ~/container/ python codes/recombined_seqs.py 0 100 0 {input}" 
+#####################################################################################################################
+
+
+
+
+
+#####################################################################################################################
+rule mosaic_seqs_indel:
+  input: "data/simulated_seqs_recombined.fasta"
+  output: "simulated_seqs_recombined_indel_align.txt"
+  shell:
+    "/data/cephfs/punim0609/qian_feng/MZmosaic/mosaic -estimate -seq {input}  -rec 0 -aa -tag simulated_seqs_recombined_indel" 
+
+
+
+rule mosaic_seqs_rec:  
+  input: "data/simulated_seqs_recombined.fasta","simulated_seqs_recombined_indel_align.txt"
+  output: "simulated_seqs_recombined_align.txt"
+  shell:
+    """
+    delta=$(grep -o 'Gap initiation: .*$' simulated_seqs_recombined_indel_align.txt | cut -c17-)
+    epsl=$(grep -o 'Gap extension:  .*$' simulated_seqs_recombined_indel_align.txt | cut -c17-)
+    /data/cephfs/punim0609/qian_feng/MZmosaic/mosaic -seq data/simulated_seqs_recombined.fasta -del $delta -eps $epsl -aa -tag simulated_seqs_recombined -grid 0.001 0.100 100 1
+    """
+
+
+rule mosaic_analysis:
+  input: "simulated_seqs_recombined_align.txt"
+  output: "mosaic_analysis_output.txt"
+  shell:
+    "python codes/mosaic_analysis.py {input} {output}" 
+
+#####################################################################################################################
+
+
+
+#####################################################################################################################
+rule mafft_prepared:
+  input: "simulated_seqs_recombined_align.txt","mosaic_analysis_output.txt"
+  output:touch("mafft_prepared_all.done")
+  shell:
+    """
+    singularity exec ~/container/ python codes/mafft_prepared_all.py simulated_seqs_recombined_align.txt
+
+    python codes/mafft_concat_all.py simulated_seqs_recombined_align.txt
+
+    """     
+#####################################################################################################################
+
+
+
+
+#####################################################################################################################
+rule algorithm_rec_detection:
+  input:touch("mafft_prepared_all.done")
+  output:"results/result_all.csv"
+  shell:
+    "singularity exec ~/container/ python codes/algorithm_rec_detection_all.py"
+#####################################################################################################################
+
+
+

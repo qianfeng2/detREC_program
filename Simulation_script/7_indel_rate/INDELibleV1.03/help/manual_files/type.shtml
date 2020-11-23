@@ -1,0 +1,24 @@
+<!--#include file="files/top.html" -->
+  
+<h1>INDELible</h1>
+<h2>[TYPE] block</h2>
+
+<p><ul>
+<li>This block tells INDELible whether it is simulating under nucleotide, amino-acid or codon models and whether to use <i>method 1</i> or <i>method 2</i> (see paper).</li>
+<li>Both methods give identical results but in some situations one will be faster than the other.</li>
+<li>It is important that this block comes first in the control file because it is used to check all subsequent input in that file for user typos.</li>
+</ul></p>
+<br>
+<p><u><b>Example Usage:</u></b></p>
+
+
+<p><ul>
+<li><pre>[TYPE] NUCLEOTIDE 1<pre></li>
+<li><pre>[TYPE] NUCLEOTIDE 2<pre></li>
+<li><pre>[TYPE] AMINOACID 1<pre></li>
+<li><pre>[TYPE] AMINOACID 2<pre></li>
+<li><pre>[TYPE] CODON 1<pre></li>
+<li><pre>[TYPE] CODON 2<pre></li>
+</ul></p>
+
+<!--#include file="files/bottom.html" -->

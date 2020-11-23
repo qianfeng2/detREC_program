@@ -1,0 +1,119 @@
+<!--#include file="files/top.html" -->
+
+<pre>
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - NUCLEOTIDE.txt                                  //
+//                                                                                 //
+//      An introduction to different nucleotide substitution models.               //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+  /* Again - the control file must begin with the [TYPE] statement */
+
+<font color=red>[TYPE] NUCLEOTIDE 2</font>	//  nucleotide simulation using algorithm from method 2.
+
+  /* Many different models can be defined in a single control file */
+
+<font color=red>[MODEL]    JCexample</font>
+<font color=red>  [submodel]  JC                     </font>	//  JC69
+
+<font color=red>[MODEL]    HKYexample</font>
+<font color=red>  [submodel]  HKY 2.5                </font>	//  HKY with a=f=kappa=2.5, b=c=d=e=1
+<font color=red>  [statefreq] 0.4 0.3 0.2 0.1        </font>	//  pi_T=0.4, pi_C=0.3, pi_A=0.2, pi_G=0.1
+
+<font color=red>[MODEL]    K81example</font>
+<font color=red>  [submodel]  K81 1.5 2.5            </font>	//  K81 with b=e=1.5, c=d=2.5, a=f=1
+
+<font color=red>[MODEL]    GTRexample</font>
+<font color=red>  [submodel]  GTR 0.2 0.4 0.6 0.8 1.2</font>	//  GTR: a=0.2, b=0.4, c=0.6, d=0.8, e=1.2, f=1
+<font color=red>  [statefreq] 0.1 0.2 0.3 0.4        </font>	//  pi_T=0.1, pi_C=0.2, pi_A=0.3, pi_G=0.4
+
+  /* Many different trees can be defined in a single control file */
+
+<font color=red>[TREE] t1  (A:0.1,B:0.1);</font> 
+<font color=red>[TREE] t2  ( (A:0.1, B:0.1):0.1, (C:0.3, D:0.3):0.5 );</font>   
+<font color=red>[TREE] t3  ( species1:0.1, species2:0.1, (species3:0.2, species4:0.2):0.01 );</font>      
+<font color=red>[TREE] t4  
+ (((1:0.1,2:0.1):0.1,(3:0.1,4:0.1):0.1):0.1,((5:0.1,6:0.1):0.1,(7:0.1,8:0.1):0.1):0.1);</font> 
+
+  /* Many different partition groupings can be defined in a single control file */
+
+<font color=red>[PARTITIONS] pJC   [t1 JCexample 1600]</font> //  tree t1, model JCexample, root length of 1600
+<font color=red>[PARTITIONS] pHKY  [t2 HKYexample 500]</font> //  tree t2, model HKYexample, root length of 500
+<font color=red>[PARTITIONS] pK81  [t3 K81example 988]</font> //  tree t3, model K81example, root length of 988
+<font color=red>[PARTITIONS] pGTR  [t4 GTRexample 754]</font> //  tree t4, model GTRexample, root length of 754
+
+  /* The [EVOLVE] statement is then used to list all the simulations you want to do */
+
+<font color=red>[EVOLVE] </font>
+  <font color=red>pJC 500 JCout</font>   //  500 replicates generated from partition pJC in file JCout.fas etc
+  <font color=red>pHKY 50 HKYout</font>  //  50 replicates generated from partition pHKY in file HKYout.fas etc
+  <font color=red>pK81 25 K81out</font>  //  25 replicates generated from partition pK81 in file K81out.fas etc
+  <font color=red>pGTR 10 GTRout</font>  //  10 replicates generated from partition pGTR in file GTRout.fas etc
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+/*
+     All nucleotide substitution models (apart from UNREST) are specified in 
+     relation to this general substitution rate matrix:
+                                                                               
+                                    TO                                      
+               ---------------------------------------------            
+         FROM ||     T    |    C     |    A     |    G                  
+        ------++----------+----------+----------+-----------            
+          T   ||     -    |  a Pi_C  |  b Pi_A  |  c Pi_G                
+          C   ||  a Pi_T  |     -    |  d Pi_A  |  e Pi_G                
+          A   ||  b Pi_T  |  d Pi_C  |     -    |  f Pi_G                
+          G   ||  c Pi_T  |  e Pi_C  |  f Pi_A  |     -                   
+	
+     where Pi_T, Pi_C, Pi_A, Pi_G are the stationary base frequencies.
+
+     The different models are specified using the commands listed below in blue 
+     (the names correspond to those used by <a href="http://darwin.uvigo.es/software/modeltest.html" target="_blank">Modeltest</a>):</li>
+
+       
+    +-----+----------------------------------+----------------------------------+
+    | <b> N </b> |    <b>Usage </b>                        |  <b>Notes  </b>                         |
+    +-----+----------------------------------+----------------------------------+
+    |  0  |  <font color=blue> [submodel] JC                </font>  |  a=b=c=d=e=f=1                   |
+    |  1  |  <font color=blue> [submodel] F81               </font>  |  a=b=c=d=e=f=1                   |
+    +-----+----------------------------------+----------------------------------+
+    |  2  |  <font color=blue> [submodel] K80    a          </font>  |  a=f=kappa, b=c=d=e=1            |
+    |  3  |  <font color=blue> [submodel] HKY    a          </font>  |  a=f=kappa, b=c=d=e=1            |
+    +-----+----------------------------------+----------------------------------+
+    |  4  |  <font color=blue> [submodel] TrNef  a f        </font>  |  a=kappa1, f=kappa2, b=c=d=e=1   |
+    |  5  |  <font color=blue> [submodel] TrN    a f       </font>   |  a=kappa1, f=kappa2, b=c=d=e=1   |
+    +-----+----------------------------------+----------------------------------+
+    |  6  |  <font color=blue> [submodel] K81    b c        </font>  |  b=e, c=d, a=f=1                 |
+    |  7  |  <font color=blue> [submodel] K81uf  a b c d e  </font>  |  b=e, c=d, a=f=1                 |
+    +-----+----------------------------------+----------------------------------+
+    |  8  |  <font color=blue> [submodel] TIMef  a b c      </font>  |  b=e, c=d, f=1                   |
+    |  9  |  <font color=blue> [submodel] TIM    a b c      </font>  |  b=e, c=d, f=1                   |
+    +-----+----------------------------------+----------------------------------+
+    |  10 |  <font color=blue> [submodel] TVMef  b c d e    </font>  |  a=f=1                           |
+    |  11 |  <font color=blue> [submodel] TVM    b c d e    </font>  |  a=f=1                           |
+    +-----+----------------------------------+----------------------------------+
+    |  12 |  <font color=blue> [submodel] SYM    a b c d e  </font>  |  f=1                             |
+    |  13 |  <font color=blue> [submodel] GTR    a b c d e  </font>  |  f=1                             |
+    +-----+----------------------------------+----------------------------------+
+    |  14 |  <font color=blue> [submodel] F84ef  k   </font>         |  b=c=d=e=1, a=(1+k/Y), f=(1+k/R) |
+    |  15 |  <font color=blue> [submodel] F84    k   </font>         |  b=c=d=e=1, a=(1+k/Y), f=(1+k/R) |
+    |     |                                  |  N.B. Y=pi_T+pi_C , R=pi_A+pi_G  | 
+    +-----+----------------------------------+--------------------------+-------+
+    |  16 |  <font color=blue> [submodel] UNREST TC TA TG CT CA CG AT AC AG GT GC</font>        |  GA=1 |
+    +-----+-------------------------------------------------------------+-------+
+
+    N.B. <i>N</i> can be substituted for the model name.  
+    e.g. <font color=blue>[submodel] 0</font> instead of <font color=blue>[submodel] JC</font> 
+
+     For the models with even N (0-16) the base frequencies are set automatically.
+
+     For models with odd N (1-15) the base frequencies are given using the command: 
+
+       <font color=blue>[statefreq] Pi_T Pi_C Pi_A Pi_G</font>
+*/ 
+</pre>
+
+
+<!--#include file="files/bottom.html" -->

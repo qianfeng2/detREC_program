@@ -1,0 +1,26 @@
+<!--#include file="files/top.html" -->
+  
+<h1>INDELible</h1>
+<h2>[EVOLVE] block</h2>
+
+<p>
+This block basically defines the queue of jobs that INDELible must complete. It tells INDELible how many replicates to generate from each <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/partitions.shtml">[PARTITIONS]</a> block and what the output files should be named. 
+<hr>
+<a name="top"><br><p><u><b>Example Usage:</u></b></p></a>  
+<pre>
+  [EVOLVE] 
+    p1 100 outputname1
+    p2 100 outputname2
+    p3 100 outputname3
+    p4 100 outputname4
+    p5 100 outputname5
+    p6 100 outputname6
+    p7 100 outputname7
+    p8 100 outputname8
+</pre>
+<li><i>p1</i> etc refers to the name of previously defined <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/partitions.shtml">[PARTITIONS]</a> blocks.</li> 
+<li><i>100</i> is the number of replicates that will be generated for each job.</li> 
+<li><i>outputname1</i> etc will be used in the filenames of the generated datasets.
+<li>Each control file must contain exactly <b>one</b> of these blocks.
+
+<!--#include file="files/bottom.html" -->

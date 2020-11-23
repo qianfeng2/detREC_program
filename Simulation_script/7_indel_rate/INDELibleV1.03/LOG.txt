@@ -1,0 +1,78 @@
+********************************************************************************
+INDELible V1.03 by Will Fletcher : Simulation began at: Thu Aug  8 18:14:48 2019
+********************************************************************************
+
+  Actual Insertion : Deletion Ratio  1.0 : 0.0	(Total indel rate = 1)
+  Actual average insertion length    54
+  Actual average deletion length     -nan
+  Number of insertion events         1
+  Number of deletion events          0
+
+  * Block 1 was completed in 0 seconds.
+
+********************************************************************************
+
+  * Simulation completed. Whole batch took: 0 seconds.
+
+INDELible V1.03 Simulations completed at: Thu Aug  8 18:14:48 2019
+
+********************************************************************************
+
+
+ Original Control File 
+
+-----------------------
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - basic.txt                                       //
+//                                                                                 //
+//      A basic introduction to the structure of the INDELible control file.       //
+//                                                                                 //
+//      There are other examples in the file examples.html in the help folder      //
+//      Any one of those examples will work if cut and paste into a control file.  //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+// It is useful to know that anything on a line after two forward slashes is ignored.
+
+/*
+   Another useful thing to know is that anything after a forward slash and star
+   is ignored until INDELible sees a star followed by a forward slash later on.
+*/     
+
+[TYPE] AMINOACID 1	//  EVERY control file must begin with a [TYPE] command.
+			//  The word can be NUCLEOTIDE, AMINOACID or CODON depending 
+			//  on what kind of simulation you want to do but must be in 
+			//  upper case. The number can be 1 or 2 and chooses the 
+			//  algorithm that INDELible uses (see manuscript). Both give 
+			//  identical results but in some cases one is quicker.
+			//  Other blocks and commands following this statement
+			//  can come in any order you like.
+
+[MODEL]    qian_model  	//  Evolutionary models are defined in [MODEL] blocks.
+[submodel] WAG         	//  Here the substitution model is simply set as WAG.
+  [statefreq]                                         // list of 20 numbers 
+      0.045683  0.071501  0.069977  0.098464  0.029744  // A R N D C  
+      0.042826  0.060029  0.071867  0.013208  0.049337  // Q E G H I 
+      0.059830  0.107431  0.003445  0.035329  0.029682  // L K M F P 
+      0.029312  0.058016  0.024771  0.062034  0.037511  // S T W Y V
+[insertmodel]  POW 1.7 100  // Power law insertion length distribution (a=1.7, M=10)
+[deletemodel]  POW 1.7 100  // Power law deletion length distribution (a=1.7, M=10)
+[insertrate]   0.01          // insertion rate = 0.1 relative to substitution rate of 1
+[deleterate]   0.01          // deletion rate = 0.1 relative to substitution rate of 1                      
+  
+[TREE] treename  (A:0.1,B:0.1);        //  User trees are defined here
+
+[PARTITIONS] partitionname             //  [PARTITIONS] blocks say which models go with
+  [treename qian_model 200]            //  which trees and define the length of the
+                                       //  sequence generated at the root (200 here).
+
+[EVOLVE] partitionname 1 qian  //  This will generate 2 replicate datasets 
+                                       //  from the [PARTITIONS] block named above.
+
+// The true alignment will be output in a file named outputname_TRUE.phy
+// The unaligned sequences will be output in a file named outputname.fas
+
+

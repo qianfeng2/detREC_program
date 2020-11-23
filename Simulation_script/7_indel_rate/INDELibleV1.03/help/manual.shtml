@@ -1,0 +1,57 @@
+<!--#include file="files/top.html" -->
+  
+<h1>INDELible</h1>
+<h2>Manual</h2>
+<p><font color=red>
+This manual is not designed as a tutorial. It is a command reference guide and is meant to be something to refer to when you want to 
+know about one command or block type. A <b>quicker</b> and <b>easier</b> way 
+to <b>learn</b> about INDELible for the first time would be to look the through the examples in the tutorial section. </font>
+<ul>
+<li>The INDELible control file is made up of 7 different "block" types as described below.</li>
+<li>It does not matter what order commands are specified inside a block.</li>
+<li>It does not matter what order blocks are specified in the control file except that the file must begin with a [TYPE] block.</li>
+<li>Control files must contain at least one [MODEL], [TREE] and [PARTITIONS] block and exactly one [EVOLVE] block. There are no other restrictions.</li>
+<li>INDELible tries to get instructions from a file named <i>control.txt</i> which must be located in the same directory as the INDELible executable.</li>
+<li>If no file named <i>control.txt</i> is found then you will be prompted to give the full filename of a suitable file for INDELible to parse.</li>
+<li>White space (e.g. tabs, spaces and new lines) is used to separate different commands and settings in the control file so it does not matter if commands or values span multiple lines.</li>
+<li>When INDELible sees <b>//</b> on a line then anything else on that line is ignored and when INDELible sees <b>/*</b> all text is ignored until after the next <b>*/</b>.</li>
+</ul></p>
+
+<br><hr><br>
+
+More information on the commands for each block can be found by following the links.<br>
+<br><pre><a href="manual_files/type.shtml">[TYPE]</a></pre>
+This block tells INDELible whether it is simulating under nucleotide, amino-acid or codon models and which algorithm to use.
+
+<br><pre><a href="manual_files/settings.shtml">[SETTINGS]</a></pre>
+This block specifies non-essential user preferences such as output file types and formats, seeds for the random number generator, and whether to output detailed reports.
+
+<br><pre><a href="manual_files/model.shtml">[MODEL]</a></pre>
+These blocks are used to specify all aspects of the evolutionary models used during simulation. There are a variety of commands available for specifying different 
+substitution models and indel models as well as rates of insertion and deletion to substitution etc. Codon site-models are defined here.
+
+<br><pre><a href="manual_files/tree.shtml">[TREE]</a></pre>
+These blocks can be used to set the parameters that control random rooted and unrooted guide tree generation or to define user-specified guide trees.
+
+<br><pre><a href="manual_files/branches.shtml">[BRANCHES]</a></pre>
+These blocks are used to simulate non-stationary and non-homogenous processes.  Different models from different [MODEL] blocks can be specified on different branches of the guide-tree 
+allowing branches to have different models of substitution, indel length distribution, rate heterogeneity, base composition etc.
+
+<br><pre><a href="manual_files/partitions.shtml">[PARTITIONS]</a></pre>
+This block type is used to set root lengths and to choose which models are used with which trees. In addition it is used when simulating multi-partitioned datasets where different sections 
+of the simulated dataset are created with different trees and models.
+
+<br><pre><a href="manual_files/evolve.shtml">[EVOLVE]</a></pre>
+This block tells INDELible how many replicates to generate from each [PARTITIONS] block and what the output files should be named.
+
+
+
+
+
+
+
+<br>
+
+
+
+<!--#include file="files/bottom.html" -->

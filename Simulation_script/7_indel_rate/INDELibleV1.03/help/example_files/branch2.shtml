@@ -1,0 +1,100 @@
+<!--#include file="files/top.html" -->
+
+<pre>
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - branch2.txt                                     //
+//                                                                                 //
+//      Using models that change across the tree to implement codon branch models  //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+  /* 
+     Any aspect of a codon model can change over different branches, including:
+     kappa, omega, stationary frequencies, indel rates and length distributions.
+     However, the number of site classes and the genetic code canNOT change.
+     The example below is arbitrary and not meant to be biologically realistic!
+  */
+
+<font color=red>[TYPE] CODON 1    </font>                //  codon simulation using algorithm from method 1
+
+<font color=red>[MODEL] mA    </font>
+<font color=red>  [submodel]    3.0 1.0</font>  // kappa=3.0, omega=1.0, frequencies equal, no insertions
+<font color=red>  [deletemodel] NB 0.2 4</font> // Pascal deletion length distribution (q=0.2, r=4)
+<font color=red>  [deleterate]  0.13   </font>  // rate of deletion compared to substitution rate of 1
+
+<font color=red>[MODEL] mB    </font>
+<font color=red>  [submodel]    1.0 3.0</font>       // kappa=1.0, omega=3.0, frequencies equal, no deletions
+<font color=red>  [insertmodel] POW 1.8 500</font>   // Power-Law insertion length distribution (a=1.8, M=500)
+<font color=red>  [insertrate]  0.08   </font>       // rate of insertion compared to substitution rate of 1
+
+<font color=red>[MODEL] mAB    </font>
+<font color=red>  [submodel]    2.0 2.0</font>  // kappa=2.0, omega=2.0, frequencies different, no indels
+<font color=red>  [statefreq]  </font>
+<font color=red>    0.016133 0.014626 0.012261 0.019123  </font>  //  TTT  TTC  TTA  TTG
+<font color=red>    0.008365 0.007583 0.006357 0.009915  </font>  //  TCT  TCC  TCA  TCG 
+<font color=red>    0.013290 0.012048 0        0         </font>  //  TAT  TAC  TAA  TAG
+<font color=red>    0.009947 0.009018 0        0.011790  </font>  //  TGT  TGC  TGA  TGG
+<font color=red>    0.019297 0.017494 0.014665 0.022873  </font>  //  CTT  CTC  CTA  CTG 
+<font color=red>    0.010005 0.009070 0.007604 0.011859  </font>  //  CCT  CCC  CCA  CCG 
+<font color=red>    0.015896 0.014410 0.012080 0.018841  </font>  //  CAT  CAC  CAA  CAG 
+<font color=red>    0.011898 0.010786 0.009042 0.014102  </font>  //  CGT  CGC  CGA  CGG 
+<font color=red>    0.030728 0.027857 0.023353 0.036422  </font>  //  ATT  ATC  ATA  ATG  
+<font color=red>    0.015932 0.014443 0.012108 0.018884  </font>  //  ACT  ACC  ACA  ACG  
+<font color=red>    0.025312 0.022947 0.019236 0.030002  </font>  //  AAT  AAC  AAA  AAG  
+<font color=red>    0.018945 0.017175 0.014398 0.022456  </font>  //  AGT  AGC  AGA  AGG 
+<font color=red>    0.024518 0.022227 0.018633 0.029061  </font>  //  GTT  GTC  GTA  GTG 
+<font color=red>    0.012712 0.011524 0.009661 0.015068  </font>  //  GCT  GCC  GCA  GCG  
+<font color=red>    0.020196 0.018309 0.015349 0.023938  </font>  //  GAT  GAC  GAA  GAG  
+<font color=red>    0.015117 0.013704 0.011488 0.017919  </font>  //  GGT  GGC  GGA  GGG
+               
+
+<font color=red>[MODEL] mC    </font>
+<font color=red>  [insertrate]  0.15   </font>      // rate of insertion compared to substitution rate of 1
+<font color=red>  [submodel]    2.5 0.5</font>      // kappa=2.5, omega=0.5, frequencies equal
+<font color=red>  [indelmodel]  POW 2.2 500</font>  // Power Law insertion AND deletion distribution (a=2.2)
+<font color=red>  [deleterate]  0.05   </font>      // rate of deletion compared to substitution rate of 1
+
+<font color=red>[MODEL] mD    </font>
+<font color=red>  [insertmodel] POW 1.9 500</font>  // Power-Law insertion length distribution (a=1.9, M=500)
+<font color=red>  [deletemodel] POW 1.7 600</font>  // Power-Law deletion length distribution (a=1.7, M=600)
+<font color=red>  [submodel]    2.5 1.5</font>      // kappa=2.5, omega=1.5, frequencies equal
+<font color=red>  [indelrate]   0.1   </font>       // rate of insertion AND deletion compared to 
+<font color=red>                      </font>       // substitution rate of 1
+
+<font color=red>[MODEL] mCD   </font>
+<font color=red>  [submodel]    2.5 1.0</font>      // kappa=2.5, omega=1.0, frequencies different, no indels
+<font color=red>  [insertmodel] POW 1.9 400</font>  // Power-Law insertion length distribution (a=1.9, M=400)
+<font color=red>  [insertrate]  0.03   </font>      // rate of insertion compared to substitution rate of 1
+<font color=red>  [deletemodel] POW 1.7 700</font>  // Power-Law deletion length distribution (a=1.7, M=700)
+<font color=red>  [deleterate]  0.17   </font>      // rate of deletion compared to substitution rate of 1
+
+<font color=red>[MODEL] mROOT   </font>         // Whichever model is defined in the root, that model is only
+<font color=red>  [submodel]    0.0 1.0</font>  // used in generation of the root sequence and setting
+<font color=red>                       </font>  // up the number of site classes across the tree.
+
+/*
+  In the same way that lengths of branches are listed after a <font color=blue>:</font> symbol in a [TREE]
+  block, model names on branches are listed after a <font color=blue>#</font> symbol in a [BRANCHES] block. 
+  N.B. The structure of the tree & order of taxa is the same (see notes at end of file).
+*/
+
+<font color=red>[TREE]     t1 ( (A:1.0, B:1.0):1.0,(C:1.0, D:1.0):1.0);  </font>
+
+<font color=red>[BRANCHES] b1 ( (A #mA, B#mB) #mAB,(C #mC, D #mD) #mCD)#mROOT;  </font>
+
+          
+  /* [BRANCHES] blocks are included in [PARTITIONS] blocks in the same way as models */
+
+<font color=red>[PARTITIONS] Pname  [t1 b1 1000]</font>    // tree t1, branchclass b1, root length 1000
+
+<font color=red>[EVOLVE]     Pname  10  outputname</font>  // 10 replicates generated from partition Pname
+
+/////////////////////////////////////////////////////////////////////////////////////
+/*
+    See extra relevant notes at the end of the file branch.txt <a href="http://abacus.gene.ucl.ac.uk/software/indelible/tutorial/branch.shtml">here</a>
+*/
+</pre>
+
+
+<!--#include file="files/bottom.html" -->

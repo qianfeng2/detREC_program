@@ -1,0 +1,112 @@
+<!--#include file="files/top.html" -->
+
+<pre>
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - nucleotide-branch.txt                           //
+//                                                                                 //
+//      Models that change across the tree in nucleotide/amino-acid simulations    //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+  /* 
+     Any aspect of a nucleotide/amino-acid model can change over different branches, 
+     including: the substitution model, the stationary frequencies, the rates of 
+     insertion and deletion and the insertion/deletion length distributions.
+     The number of categories in the discrete gamma approximation canNOT change.
+     The examples below is arbitrary and not meant to be biologically realistic!
+  */
+
+<font color=red>[TYPE] NUCLEOTIDE 1    </font>          // nucleotide simulation using algorithm from method 1
+
+<font color=red>[MODEL] mHKY1    </font>                // no insertions, no gamma
+<font color=red>  [submodel]    HKY 2.5</font>          // HKY with kappa=2.5
+<font color=red>  [statefreq]   0.1 0.2 0.3 0.4</font>  // frequencies for T C A G
+<font color=red>  [deletemodel] NB 0.2 4</font>         // Pascal deletion distribution (q=0.2, r=4)
+<font color=red>  [deleterate]  0.13   </font>          // rate of deletion (substitution rate = 1)
+
+
+<font color=red>[MODEL] mHKY2    </font>                // no deletions, no gamma
+<font color=red>  [submodel]    HKY 5.0</font>          // HKY with kappa=5.0
+<font color=red>  [statefreq]   0.4 0.3 0.2 0.1</font>  // frequencies for T C A G
+<font color=red>  [insertmodel] POW 1.8 500</font>      // Power-Law insertion distribution (a=1.8, M=500)
+<font color=red>  [insertrate]  0.08   </font>          // rate of insertion (substitution rate = 1)
+
+<font color=red>[MODEL] mGTR1    </font>                     //  no indels, continuous gamma
+<font color=red>  [submodel]  GTR 0.2 0.4 0.6 0.8 1.2</font> //  GTR: a=0.2, b=0.4, c=0.6, d=0.8, e=1.2, f=1
+<font color=red>  [statefreq] 0.2 0.1 0.4 0.3        </font> //  frequencies for T C A G
+<font color=red>  [rates]     0   1.0 0              </font> //  continuous gamma with alpha = 1.0
+               
+/*
+  In the same way that lengths of branches are listed after a <font color=blue>:</font> symbol in a [TREE]
+  block, model names on branches are listed after a <font color=blue>#</font> symbol in a [BRANCHES] block. 
+  N.B. The structure of the tree & order of taxa is the same (see notes at end of file).
+*/
+
+<font color=red>[TREE]     t1 ( (A:1.0, B:1.0):1.0,(C:1.0, D:1.0):1.0);  </font>
+
+<font color=red>[BRANCHES] b1 ( (A #mHKY1, B#mHKY2) #mGTR1,(C #mHKY1, D #mHKY2) #mGTR1)#mGTR1;  </font>
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+<font color=red>[MODEL] mHKY3    </font>                // no insertions, discrete gamma
+<font color=red>  [submodel]    HKY 2.5</font>          // HKY with kappa=2.5
+<font color=red>  [statefreq]   0.1 0.2 0.3 0.4</font>  // frequencies for T C A G
+<font color=red>  [deletemodel] NB 0.2 4</font>         // Pascal deletion length distribution (q=0.2, r=4)
+<font color=red>  [deleterate]  0.13   </font>          // rate of deletion (substitution rate = 1)
+<font color=red>  [rates]       0  2.0 10  </font>      // 10 category discrete gamma, alpha=2.0
+
+<font color=red>[MODEL] mHKY4    </font>                // no deletions, discrete gamma
+<font color=red>  [submodel]    HKY 5.0</font>          // HKY with kappa=5.0
+<font color=red>  [statefreq]   0.4 0.3 0.2 0.1</font>  // frequencies for T C A G
+<font color=red>  [insertmodel] POW 1.8 600</font>      // Power-Law insertion length distribution (a=1.8, M=600)
+<font color=red>  [insertrate]  0.08   </font>          // rate of insertion (substitution rate = 1)
+<font color=red>  [rates]       0  0.5 10  </font>      // 10 category discrete gamma, alpha=0.5
+
+
+<font color=red>[MODEL] mGTR2    </font>                        //insertions and deletions, discrete gamma
+<font color=red>  [insertrate]  0.15   </font>                  // rate of insertion (substitution rate = 1)
+<font color=red>  [statefreq]   0.26 0.24 0.2 0.3</font>        // frequencies for T C A G
+<font color=red>  [submodel]    GTR 0.2 0.4 0.6 0.8 1.2</font>  // a=0.2, b=0.4, c=0.6, d=0.8, e=1.2, f=1
+<font color=red>  [indelmodel]  POW 2.2 500</font>              // Power Law indel distribution (a=2.2, M=500)
+<font color=red>  [deleterate]  0.05   </font>                  // rate of deletion (substitution rate = 1)
+<font color=red>  [rates]       0  1.0 10  </font>              // 10 category discrete gamma, alpha=1.0
+
+<font color=red>[MODEL] mGTR3    </font>                        // insertions and deletions, no gamma
+<font color=red>  [insertmodel] POW 1.9 900</font>              // Power-Law insertion distribution (a=1.9, M=900)
+<font color=red>  [deletemodel] POW 1.7 1000</font>             // Power-Law deletion distribution (a=1.7, M=1000)
+<font color=red>  [submodel]    GTR 1.2 1.0 0.8 0.6 0.4</font>  // a=1.2, b=1.0, c=0.8, d=0.6, e=0.4, f=1
+<font color=red>  [statefreq]   0.6 0.1 0.15 0.15</font>        // frequencies for T C A G
+<font color=red>  [indelrate]   0.1   </font>                   // rate of insertion AND deletion compared 
+<font color=red>                      </font>                   // to substitution rate of 1
+               
+/*
+  In the same way that lengths of branches are listed after a <font color=blue>:</font> symbol in a [TREE]
+  block, model names on branches are listed after a <font color=blue>#</font> symbol in a [BRANCHES] block. 
+  N.B. The structure of the tree & order of taxa is the same (see notes at end of file).
+*/
+
+<font color=red>[TREE]     t2 ( A:1.0, B:1.0, (C:1.0, D:1.0):1.0);  </font>
+
+<font color=red>[BRANCHES] b2 ( A #mGTR2, B#mGTR3, (C #mHKY3, D #mHKY4) #mHKY1)#mHKY3;  </font>
+
+//////////////////////////////////////////////////////////////////////////////////////
+         
+  /* [BRANCHES] blocks are included in [PARTITIONS] blocks in the same way as models */
+
+<font color=red>[PARTITIONS] Pname1  [t1 b1 1000]</font>   // tree t1, branchclass b1, root length 1000
+<font color=red>[PARTITIONS] Pname2  [t2 b2 1000]</font>   // tree t2, branchclass b2, root length 1000
+
+<font color=red>[EVOLVE]     </font>
+<font color=red>  Pname1  10  outputname1</font>           // 10 replicates generated from partition Pname1
+<font color=red>  Pname2  10  outputname2</font>           // 10 replicates generated from partition Pname2
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+/*
+    See extra relevant notes at the end of the file branch.txt <a href="http://abacus.gene.ucl.ac.uk/software/indelible/tutorial/branch.shtml">here</a>
+*/
+</pre>
+
+<!--#include file="files/bottom.html" -->

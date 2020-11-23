@@ -1,0 +1,42 @@
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - nucleotide-branch.txt                           //
+//                                                                                 //
+//      Models that change across the tree in nucleotide/amino-acid simulations    //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+  /* 
+     Any aspect of a nucleotide/amino-acid model can change over different branches, 
+     including: the substitution model, the stationary frequencies, the rates of 
+     insertion and deletion and the insertion/deletion length distributions.
+     The number of categories in the discrete gamma approximation canNOT change.
+     The examples below is arbitrary and not meant to be biologically realistic!
+  */
+
+[TYPE] NUCLEOTIDE 1              // nucleotide simulation using algorithm from method 1
+
+[MODEL] mGTR1                         //  no indels, continuous gamma
+  [submodel]  GTR 0.2 0.4 0.6 0.8 1.2 //  GTR: a=0.2, b=0.4, c=0.6, d=0.8, e=1.2, f=1
+  [statefreq] 0.2 0.1 0.4 0.3         //  frequencies for T C A G
+  [rates]     0   1.0 5               //  continuous gamma with alpha = 1.0
+
+[MODEL] mGTR2                         //  no indels, continuous gamma
+  [submodel]  GTR 0.2 0.4 0.6 0.8 1.2 //  GTR: a=0.2, b=0.4, c=0.6, d=0.8, e=1.2, f=1
+  [statefreq] 0.1 0.2 0.3 0.4         //  frequencies for T C A G
+  [rates]     0   1.0 5               //  continuous gamma with alpha = 1.0
+               
+/*
+  In the same way that lengths of branches are listed after a : symbol in a [TREE]
+  block, model names on branches are listed after a # symbol in a [BRANCHES] block. 
+  N.B. The structure of the tree & order of taxa is the same (see notes at end of file).
+*/
+
+[TREE]     t1 ( (A:1.0, B:1.0):1.0,(C:1.0, D:1.0):1.0);  
+
+[BRANCHES] b1 ( (A #mGTR1, B#mGTR2) #mGTR1,(C #mGTR1, D #mGTR2) #mGTR1)#mGTR1;  
+
+[EVOLVE]
+
+
+//////////////////////////////////////////////////////////////////////////////////////

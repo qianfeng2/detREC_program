@@ -1,0 +1,46 @@
+<!--#include file="files/top.html" -->
+
+<pre>
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - basic.txt                                       //
+//                                                                                 //
+//      A basic introduction to the structure of the INDELible control file.       //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+// It is useful to know that anything on a line after two forward slashes is ignored.
+
+/*
+   Another useful thing to know is that anything after a forward slash and star
+   is ignored until INDELible sees a star followed by a forward slash later on.
+*/     
+
+<font color=red>[TYPE] NUCLEOTIDE 1</font>	//  EVERY control file must begin with a [TYPE] command.
+			//  The word can be NUCLEOTIDE, AMINOACID or CODON depending 
+			//  on what kind of simulation you want to do but must be in 
+			//  upper case. The number can be 1 or 2 and chooses the 
+			//  algorithm that INDELible uses (see manuscript). Both give 
+			//  identical results but in some cases one is quicker.
+			//  Other blocks and commands following this statement
+			//  can come in any order you like.
+
+<font color=red>[MODEL]    modelname</font>  	//  Evolutionary models are defined in [MODEL] blocks.
+<font color=red>[submodel] JC         </font>	//  Here the substitution model is simply set as JC69.
+                      	//  No indel model has been given so no indels will occur. 
+  
+<font color=red>[TREE] treename  (A:0.1,B:0.1);</font>        //  User trees are defined here
+
+<font color=red>[PARTITIONS] partitionname  </font>           //  [PARTITIONS] blocks say which models go with
+<font color=red>  [treename modelname 1000]</font>            //  which trees and define the length of the
+                                       //  sequence generated at the root (1000 here).
+
+<font color=red>[EVOLVE] partitionname 100 outputname</font>  //  This will generate 100 replicate datasets 
+                                       //  from the [PARTITIONS] block named above.
+
+// The true alignment will be output in a file named outputname_TRUE.phy
+// The unaligned sequences will be output in a file named outputname.fas
+
+</pre>
+
+<!--#include file="files/bottom.html" -->

@@ -1,0 +1,117 @@
+<!--#include file="files/top.html" -->
+
+<pre>
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  INDELible V1.03 control file - indels.txt                                      //
+//                                                                                 //
+//      Adding indels to a nucleotide, amino-acid or codon substitution model      //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+
+<font color=red>[TYPE] AMINOACID 2</font>            //  amino-acid simulation using algorithm from method 2
+
+
+<font color=red>[MODEL] mymodel1  </font>            // this is identical to mymodel2
+<font color=red>  [submodel]     WAG </font>         
+<font color=red>  [insertmodel]  POW 1.7 500</font>  // Power law insertion length distribution (a=1.7, M=500)
+<font color=red>  [deletemodel]  POW 1.7 500</font>  // Power law deletion length distribution (a=1.7, M=500)
+<font color=red>  [insertrate]   0.1 </font>         // insertion rate = 0.1 relative to substitution rate of 1
+<font color=red>  [deleterate]   0.1 </font>         // deletion rate = 0.1 relative to substitution rate of 1
+
+
+<font color=red>[MODEL] mymodel2  </font>            // this is identical to mymodel1
+<font color=red>  [submodel]     WAG </font>         
+<font color=red>  [indelmodel]   POW  1.7 500</font> // Power law insertion/deletion length distribution (a=1.7)
+<font color=red>  [indelrate]    0.1 </font>         // insertion rate = deletion rate = 0.1
+<font color=red>                     </font>         // relative to average substitution rate of 1.   
+ 				
+					
+<font color=red>[MODEL] mymodel3  </font>            // insertion/deletion lengths and rates can be different.
+<font color=red>  [submodel]     WAG </font>         
+<font color=red>  [insertmodel]  NB  0.2 4</font>    // Pascal insertion length distribution (q=0.2, r=4)
+<font color=red>  [deletemodel]  LAV 1.8 500</font>  // Lavalette deletion length distribution (a=1.8, M=500)
+<font color=red>  [insertrate]   0.1 </font>         // insertion rate = 0.1 relative to substitution rate of 1
+<font color=red>  [deleterate]   0.2 </font>         // deletion rate = 0.2 relative to substitution rate of 1
+			
+						
+<font color=red>[MODEL] mymodel4  </font>            // insertion/deletion lengths and rates can be different.
+<font color=red>  [submodel]     JTT </font>         
+<font color=red>  [insertmodel]  NB  0.4 1</font>    // Geometric insertion length distribution (q=0.4, r=1)
+<font color=red>  [insertrate]   0.1 </font>         // insertion rate = 0.1 relative to substitution rate of 1
+<font color=red>                     </font>         // deletion rate = 0 relative to substitution rate of 1
+
+
+
+<font color=red>[TREE] t1  (A:0.1,B:0.1);</font>             
+
+
+<font color=red>[PARTITIONS] Pname1 [t1 mymodel1 1000]</font> // tree t1, model mymodel1, root length 1000
+<font color=red>[PARTITIONS] Pname2 [t1 mymodel2 1000]</font> // tree t1, model mymodel2, root length 1000
+<font color=red>[PARTITIONS] Pname3 [t1 mymodel3 1000]</font> // tree t1, model mymodel3, root length 1000
+<font color=red>[PARTITIONS] Pname4 [t1 mymodel4 1000]</font> // tree t1, model mymodel4, root length 1000
+
+<font color=red>[EVOLVE]     Pname1 10 outputname1</font>     // 10 replicates generated from partition Pname1
+<font color=red>             Pname2 10 outputname2</font>     // 10 replicates generated from partition Pname2
+<font color=red>             Pname3 10 outputname3</font>     // 10 replicates generated from partition Pname3
+<font color=red>             Pname4 10 outputname4</font>     // 10 replicates generated from partition Pname4
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+/*
+   New commands that are relevant to insertions and deletions (indels) are:
+
+   <font color="blue">[insertrate]</font> 
+   Sets the rate of insertion relative to an average substitution rate of 1.
+   
+   <font color="blue">[deleterate]</font> 
+   Sets the rate of insertion relative to an average substitution rate of 1.
+   
+   <font color="blue">[indelrate]</font> 
+   Sets the rate of insertion AND deletion to be equal. It is equivalent 
+   to specifying <font color="blue">[insertrate]</font> and <font color="blue">[deleterate]</font> to have the same value.
+   
+   If <font color="blue">[insertrate]</font> & <font color="blue">[indelrate]</font> are not specified then rate of insertion is zero.
+   If <font color="blue">[deleterate]</font> & <font color="blue">[indelrate]</font> are not specified then rate of deletion is zero.
+
+   <font color="blue">[insertmodel]</font>
+   Works the same as <font color="blue">[indelmodel]</font> but only sets the insertion length distribution.
+
+   <font color="blue">[deletemodel]</font>
+   Works the same as <font color="blue">[indelmodel]</font> but only sets the deletion length distribution.
+
+   <font color="blue">[indelmodel]</font>
+   This sets the insertion and deletion length distributions at the same time. 
+   It is equivalent to specifying the commands <font color="blue">[insertmodel]</font> and <font color="blue">[deletemodel]</font> 
+   to have the same value.  Options for this command are:
+   
+   (1)  <font color="blue">[indelmodel]  NB   q  r</font>               //  Negative Binomial Distribution
+   (2a) <font color="blue">[indelmodel]  POW  a</font>                  //  Zipfian Distribution 
+   (2b) <font color="blue">[indelmodel]  POW  a  M</font>               //  Zipfian Distribution 
+   (3)  <font color="blue">[indelmodel]  LAV  a  M</font>               //  Lavalette Distribution
+   (4)  <font color="blue">[indelmodel]  USER mylengthmodel.txt</font>  //  User-Defined Distribution
+
+   (1)  This specifies a Pascal (negative binomial) distribution where <font color="blue">q</font> is a 
+        decimal (<font color="blue">0&lt;=q&lt;=1</font>) and <font color="blue">r</font> is an integer (<font color="blue">r&gt;0</font>).
+
+   (2a) This specifies a Zipfian (power law) distribution where <font color="blue">a</font> is a decimal (<font color="blue">a&gt;1</font>).
+
+   (2b) This also specifies a Zipfian distribution where <font color="blue">a</font> is a decimal (<font color="blue">a&gt;1</font>).
+        However with this format indels longer than length <font color="blue">M</font> are not permitted.
+        This format is highly recommended for small values of <font color="blue">a</font> because 
+        of the fat-tailed shape of the resulting distribution.
+
+   (3)  This specifies a Lavalette distribution where <font color="blue">a</font> is a decimal (<font color="blue">a&gt;1</font>) and <font color="blue">M</font> is 
+        an integer (<font color="blue">M&gt;1</font>) representing the maximum indel length.
+
+   (4)  This specifies a user-defined indel length model. The file <font color="blue">mylengthmodel.txt</font> 
+        should be in the same directory as the INDELible executable and contain a 
+        list of relative frequencies (in order of increasing indel length) 
+        separated by white space, like <a href="http://abacus.gene.ucl.ac.uk/software/indelible/tutorial/mylengthmodel.txt" target="_blank">this</a>.
+*/
+</pre>
+
+<!--#include file="files/bottom.html" -->

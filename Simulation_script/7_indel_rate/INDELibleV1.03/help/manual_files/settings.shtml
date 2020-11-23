@@ -1,0 +1,99 @@
+<!--#include file="files/top.html" -->
+  
+<h1>INDELible</h1>
+<h2>[SETTINGS] block</h2>
+
+<p><ul>
+<li>This block specifies non-essential user preferences such as output file types and formats, seeds for the random number generator, and whether to output detailed reports.</li>
+<li>If a command is not specified in the [SETTINGS] block then it will have the default value shown below in the example usage. The only exception to this is <a href="#[randomseed]">[randomseed]</a> whose value will be randomly chosen if not specified.</li>
+<li>If no [SETTINGS] block is specified all commands will have these default values.</li>
+<li>Please click on any of the commands to learn more about them.</li>
+</ul></p>
+<hr>
+<a name="top"><br><p><u><b>Example Usage:</u></b></p></a>  
+
+<pre>
+[SETTINGS]    
+  <a href="#[ancestralprint]"         >[ancestralprint]</a>           FALSE     // NEW, SAME or FALSE
+  <a href="#[output]"                 >[output]</a>                   PHYLIP    // FASTA, NEXUS, PHYLIP or PHYLIPT
+  <a href="#[phylipextension]"        >[phylipextension]</a>          phy       // any alpha-numeric string
+  <a href="#[nexusextension]"         >[nexusextension]</a>           nex       // any alpha-numeric string
+  <a href="#[fastaextension]"         >[fastaextension]</a>           fas       // any alpha-numeric string
+  <a href="#[randomseed]"             >[randomseed]</a>               1568746   // any integer
+  <a href="#[printrates]"             >[printrates]</a>               FALSE     // FALSE or TRUE
+  <a href="#[insertaslowercase]"      >[insertaslowercase]</a>        TRUE      // FALSE or TRUE
+  <a href="#[markdeletedinsertions]"  >[markdeletedinsertions]</a>    FALSE     // FALSE or TRUE
+  <a href="#[printcodonsasaminoacids]">[printcodonsasaminoacids]</a>  FALSE     // FALSE or TRUE
+  <a href="#[fileperrep]"             >[fileperrep]</a>               FALSE     // FALSE or TRUE
+</pre>
+<hr>
+
+<pre><a name="[ancestralprint]">[ancestralprint]</a></pre><ul>
+<li><i>NEW</i> will print ancestral sequences in a separate file to leaf sequences.</li>
+<li><i>SAME</i> prints ancestral sequences in the same file as the leaf sequences.</li>
+<li><i>FALSE</i> will not print any ancestral sequences.</li>
+<li>It should be noted that if you used different guide trees for different partitions in a partitioned (multi-gene) analysis then only the root sequence will be printed in SAME/NEW file specified in the last command.</li>
+<li><a name="[output]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[output]</pre><ul>
+<li><i>FASTA</i>, <i>NEXUS</i>, <i>PHYLIP</i> will print out sequences to file in either fasta, nexus, or phylip format respectively. </li>
+<li>FASTA is used by NCBI and accepted by most sequence alignment programs.  NEXUS is used by e.g. MacClade, Mesquite, ModelTest, MrBayes and PAUP*.  PHYLIP is used by PHYLIP and PAML.</li>
+<li><i>PHYLIPT</i> gives PHYLIP format with filenames truncated to 8 characters. </li>
+<li>Unaligned sequences are always output in FASTA format as e.g. filename.fas</li>
+<li>This command sets the output type for the true alignment and prints it to a file named e.g. filename_TRUE.phy</li>
+<li>For more details about different output files see the examples section.</li>
+<li><a name="[phylipextension]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[phylipextension]</pre><ul>
+<li>This command sets the file extension for true alignments in phylip format so they are e.g. filename.phy or whatever you choose them to be.</li>
+<li><a name="[nexusextension]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[nexusextension]</pre><ul>
+<li>This command sets the file extension for true alignments in nexus format so they are e.g. filename.nex or whatever you choose them to be.</li>
+<li><a name="[fastaextension]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[fastaextension]</pre><ul>
+<li>This command sets the file extension for fasta formatted output files so they are e.g. filename.fas or whatever you choose them to be.</li>
+<li><a name="[randomseed]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[randomseed]</pre><ul>
+<li>This must be an integer value and is used to seed the random number generator.</li>
+<li>Running simulations with the same random seed value (and the same control file) will produce identical datasets.</li>
+<li><a name="[printrates]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[printrates]</pre><ul>
+<li><i>TRUE</i> will print out a detailed output file for each replicate of each block that lists what the site-classes or 
+relative rates of substitution are.</li>
+<li><i>FALSE</i> will not print any rates information.</li>
+<li>Follow these links for examples of the output for <a href="nucleotide_RATES.txt" target="_blank";>NUCLEOTIDE / AMINOACID</a> simulations, or for <a href="codon_RATES.txt" target="_blank";>CODON</a> simulations.</li>
+<li><a name="[markdeletedinsertions]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[markdeletedinsertions]</pre><ul>
+<li><i>TRUE</i> will output inserted bases/residues that have been subsequently been deleted as * rather than - for easy identification.</li>
+<li><i>FALSE</i> will output all deletions as "-".</li>
+<li><a name="[insertaslowercase]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[insertaslowercase]</pre><ul>
+<li><i>TRUE</i> will output inserted bases/residues in lower case letters for easy identification.</li>
+<li><i>FALSE</i> will output all bases/residues as upper case letters.</li>
+<li><a name="[printcodonsasaminoacids]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[printcodonsasaminoacids]</pre><ul>
+<li><i>TRUE</i> will output codon datasets as amino-acids - how they are translated will depend on the genetic code specified in the model.</li>
+<li><i>FALSE</i> will print codons as nucleotide triplets.</li>
+<li><a name="[fileperrep]"><a href="#top">Return to example usage.</a></a></li>
+
+</ul><hr><pre>[fileperrep]</pre><ul>
+<li><i>TRUE</i> will output each replicate dataset in a separate file. <br>
+Unaligned sequences will go in e.g. filename_1.fas, filename_2.fas, etc. <br>
+The true alignment will go in e.g. filename_TRUE_1.phy, filename_TRUE_2.phy, etc</li>
+<li><i>FALSE</i> will print all replicates in a single file. <br>
+Unaligned sequences for each dataset will all go in e.g. filename.fas.  <br>
+All the true alignments will go in e.g. filename_TRUE.phy</li>
+<li>If a file called paupstart.txt (or paupend.txt) exists in the same directory as INDELible then it will be copied to the beginning (or end) of each output file. </li>
+<li>If a file called paupmiddle.txt exists in the same directory as INDELible then it will be copied to e.g. filename_TRUE.phy after each replicate datset.</li>
+<li>These features are useful if you want to include PAUP or MrBayes blocks in your files.</li>
+
+<li><a href="#top">Return to example usage.</a></li>
+</ul>
+<!--#include file="files/bottom.html" -->

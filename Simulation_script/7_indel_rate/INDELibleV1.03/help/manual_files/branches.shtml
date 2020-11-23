@@ -1,0 +1,44 @@
+<!--#include file="files/top.html" -->
+  
+<h1>INDELible</h1>
+<h2>[BRANCHES] block</h2>
+
+<p>
+These blocks are used to simulate non-stationary and non-homogenous processes. Different models from different 
+<a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/model.shtml">[MODEL]</a> blocks can be specified on 
+different branches of the guide-tree allowing branches to have different models of substitution, indel length distribution, rate heterogeneity, base composition etc. 
+
+<hr>
+<a name="top"><br><p><u><b>Example Usage:</u></b></p></a>  
+<pre>
+  [TREE]     t1 ( (A:0.1, B:0.1):0.1,(C:0.1, D:0.1):0.1);
+
+  [BRANCHES] b1 ( (A #mA, B#mB) #mAB,(C #mC, D #mD) #mCD)#mROOT;
+</pre>
+<li> The easiest way to format a <font color=blue>[BRANCHES]</font> block is to cut and paste a tree from a tree block (<font color=blue>t1</font> in this case) and 
+replace the branch lengths with model names from previously defined <a href="http://abacus.gene.ucl.ac.uk/software/indelible/manual/model.shtml">[MODEL]</a> blocks (
+<font color=blue>mA</font>, <font color=blue>mB</font> ,... etc)</li>
+<li>In a similar way that branch lengths are given after a ":" symbol, here model names are given after a "#" symbol.</li>
+<li>A model must also be added at the root of the tree also (<font color=blue>mROOT</font> here) and will be used in creation of the initial sequence at the root.</li>
+<li>Branch lengths and taxa names can be included or omitted at the user's convenience as they are ignored by INDELible - <font color=red>it is only the model names and their position in the parentheses that has any effect</font>. 
+e.g. the following four examples will produce identical results.</li>
+
+<pre>
+  [BRANCHES] b1a ((A:0.1#mA,B:0.1#mB):0.1 #mAB, (C:0.1 #mC, D:0.1#mD):0.1 #mCD)#mROOT;
+
+  [BRANCHES] b1b ( (A #mA, B#mB) #mAB,(C #mC, D #mD) #mCD)#mROOT;
+
+  [BRANCHES] b1c ( (#mA, #mB) #mAB,(#mC,  #mD) #mCD)#mROOT;
+
+  [BRANCHES] b1d 
+     ( 
+        (                       // like [TREE] blocks, [BRANCHES] trees 
+          A #mA, B#mB           // can contain any amount of white space
+        ) #mAB                  // or comments between the first ( and 
+      ,                         // the ; at the end.
+        (C #mC, D #mD) 
+      #mCD)#mROOT;
+</pre>
+
+<li>For more examples please see the tutorial section.</li>
+<!--#include file="files/bottom.html" -->
