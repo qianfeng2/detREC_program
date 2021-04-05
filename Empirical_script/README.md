@@ -3,7 +3,8 @@ Mosaic Program to Detect Partial Alignments From Large Unaligned Sequences
 -----------------------
 This folder provides specific scripts of running mosaic program for a [dataset](https://github.com/qianfeng2/detREC_program/tree/master/Empirical_script/Ghana_dataset) of DBLa sequences from a cross-sectional study in Ghana. 
 
-This entire pipeline we adopted are from an accepted paper: Tonkin-Hill et al. (2020), where they managed to handle a larger dataset. If you aim to get partial alignments results for your own large dataset, please take a look at their detailed pipeline (https://github.com/gtonkinhill/global_var_manuscript), also please cite: Tonkin-Hill G, Ruybal-Pesántez S, Tiedje KE, Rougeron V, Zakeri S, Pumpaibool T, et al. Global structure of the var genes encoding the major variant surface antigen of *Plasmodium falciparum*. PLoS Genetics. 2020. Forthcoming.
+This entire pipeline we adopted are from an accepted paper: Tonkin-Hill et al. (2021), where they managed to handle a larger dataset. If you aim to get partial alignments results for your own large dataset, please take a look at their detailed pipeline (https://github.com/gtonkinhill/global_var_manuscript), also please cite: Tonkin-Hill G, Ruybal-Pesántez S, Tiedje KE, Rougeron V, Duffy MF, Zakeri S,et al. Evolutionary analyses of the major variant surface antigen-encoding genesreveal population structure of *Plasmodium falciparum* within and between continents. PLoS Genetics. 2021;17(2):e1009269.
+
 
 If you only want to reproduce the results in our related manuscript (https://www.biorxiv.org/content/10.1101/2020.11.18.389262v1), please follow the instructions below:
 
@@ -27,7 +28,7 @@ python estimate_transition_probs_frm_viterbi.py --num_runs 578 --out iter1.txt -
 ```
 Please note that:
 
-(1) This python script is from Tonkin-Hill et al. (2020), and was written by Python 2. 
+(1) This python script is from Tonkin-Hill et al. (2021), and was written by Python 2. 
 
 (2) After each iteration, you will get a log file and align.txt file per fasta file. In order for you to run this script smoothly, please put all log files and align.txt files into the same directory. Make sure the prefix of log and align files are the same. 
 
@@ -44,4 +45,5 @@ mosaic_final_submit_qian.sh offers the script for final step to get maimum likel
 
 
 ### Reference
-- Tonkin-Hill G, Ruybal-Pesántez S, Tiedje KE, Rougeron V, Zakeri S, Pumpaibool T, et al. Global structure of the var genes encoding the major variant surface antigen of *Plasmodium falciparum*. PLoS Genetics. 2020. Forthcoming.
+- Tonkin-Hill G, Ruybal-Pesántez S, Tiedje KE, Rougeron V, Duffy MF, Zakeri S,et al. Evolutionary analyses of the major variant surface antigen-encoding genesreveal population structure of *Plasmodium falciparum* within and between continents. PLoS Genetics. 2021;17(2):e1009269.
+
